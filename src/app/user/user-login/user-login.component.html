@@ -1,1 +1,30 @@
-<p>user-login works!</p>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <form class="form-signin" [formGroup]='loginForm'>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input formControlName='email' type="email" id="inputEmail" class="form-control" 
+                [ngClass]="{'is-invalid': !loginForm.get('email')?.valid && loginForm.get('email')?.dirty, 'is-valid': loginForm.get('email')?.valid}"
+                placeholder="Email address" required autofocus>
+                <small class="invalid-feedback">
+                    xxx@xxx.xxx
+                </small>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Sign in</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+              </form>
+
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
