@@ -7,13 +7,28 @@
                 <div class="form-group row mt-5">
                   <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
                   <div class="col-sm-9">
-                    <input formControlName='pseudo' type="text" class="form-control" id="pseudo" placeholder="Pseudo" required>
+                    <input formControlName='pseudo' type="text" class="form-control" id="pseudo" 
+                    [ngClass]="{'is-invalid': submitted && form.pseudo.errors , 'is-valid' : submitted && !form.pseudo.errors}" 
+                    placeholder="Pseudo" required>
+                    <div *ngIf="submitted && form.pseudo.errors" class="invalid-feedback">
+                      <div *ngIf="form.pseudo.errors.required">Pseudo required</div>
+                      <div *ngIf="form.pseudo.errors.minlength">Pseudo must be at least 2 characters</div>
+                      <div *ngIf="form.pseudo.errors.maxlength">Pseudo can't exceed 50 characters</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="firstName" class="col-sm-3 col-form-label">FirstName *</label>
                   <div class="col-sm-9">
-                    <input formControleName='firstName' type="text" class="form-control" id="firstName" placeholder="Prenom" required>
+                    <input formControleName='firstName' type="text" class="form-control" id="firstName"
+                    [ngClass]="{'is-invalid': submitted && form.firstName.errors , 'is-valid' : submitted && !form.firstName.errors}"
+                    placeholder="Prenom" required>
+                    <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="form.firstName.errors.required">Pseudo required</div>
+                      <div *ngIf="form.firstName.errors.minlength">Pseudo must be at least 2 characters</div>
+                      <div *ngIf="form.firstName.errors.maxlength">Pseudo can't exceed 50 characters</div>
+                      <div *ngIf="form.firstName.errors.pattern">Pseudo can only contains letters - _ or space</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -62,12 +77,8 @@
                 <div class="form-group row">
                   <label for="password" class="col-sm-3 col-form-label">Password *</label>
                   <div class="col-sm-9">
-                    <input formControleName='password' type="password" class="form-control" id="password" [ngClass]="{'is-invalid': submitted && form.password.errors , 'is-valid': !form.password.errors}" placeholder="Password">
-                    <div *ngIf=" submitted && form.password.errors" class="invalid-feedback">
-                      <div *ngIf="form.password.errors.required">Password is required</div>
-                      <div *ngIf="form.password.errors.minlength">Password must be at least 8 characters</div>
-                      <div *ngIf="form.password.errors.maxlength">Password must be at least 36 characters</div>
-                  </div>
+                    <input formControleName='password' type="password" class="form-control" id="password"  placeholder="Password">
+                    
                   </div>
                 </div>
                 <div class="form-group row">

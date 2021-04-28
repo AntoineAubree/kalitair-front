@@ -21,6 +21,17 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
+      pseudo: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+      ]],
+      firstName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        Validators.pattern('^([a-zA-Z0-9-_\s]{2,50})$')
+      ]],
       email: ['', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -47,7 +58,7 @@ export class UserCreateComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.createForm.invalid) {
-        console.log(this.form.email)
+      console.log(this.form.firstName)
     }
 
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))
