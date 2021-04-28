@@ -5,24 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ForumAcceuilComponent } from './forum-acceuil/forum-acceuil.component';
-import { ForumRubriqueComponent } from './forum-rubrique/forum-rubrique.component';
-import { ForumCategoryComponent } from './forum-category/forum-category.component';
-import { ForumDiscussionComponent } from './forum-discussion/forum-discussion.component';
-import { IndicztorAcceuilComponent } from './indicztor-acceuil/indicztor-acceuil.component';
-import { IndicatorAcceuilComponent } from './indicator-acceuil/indicator-acceuil.component';
-import { IndicatorResultComponent } from './indicator-result/indicator-result.component';
+import { ForumAcceuilComponent } from './forum/forum-acceuil/forum-acceuil.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ForumAcceuilComponent,
-    ForumRubriqueComponent,
-    ForumCategoryComponent,
-    ForumDiscussionComponent,
-    IndicztorAcceuilComponent,
-    IndicatorAcceuilComponent,
-    IndicatorResultComponent
+    ForumAcceuilComponent
   ],
   imports: [
     AppRoutingModule,
