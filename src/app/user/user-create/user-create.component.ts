@@ -30,7 +30,19 @@ export class UserCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern('^([a-zA-Z0-9-_\s]{2,50})$')
+        Validators.pattern('^([a-zA-Z0-9-_\s]+)$')
+      ]],
+      lastName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        Validators.pattern('^([a-zA-Z0-9-_\s]+)$')
+      ]],
+      streetNumber: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(8),
+        Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
       ]],
       email: ['', [
         Validators.required,
@@ -58,7 +70,10 @@ export class UserCreateComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.createForm.invalid) {
+      console.log(this.form.pseudo)
       console.log(this.form.firstName)
+      console.log(this.form.lastName)
+      console.log(this.form.streetNumber)
     }
 
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))

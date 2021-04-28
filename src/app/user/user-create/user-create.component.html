@@ -20,45 +20,61 @@
                 <div class="form-group row">
                   <label for="firstName" class="col-sm-3 col-form-label">FirstName *</label>
                   <div class="col-sm-9">
-                    <input formControleName='firstName' type="text" class="form-control" id="firstName"
-                    [ngClass]="{'is-invalid': submitted && form.firstName.errors , 'is-valid' : submitted && !form.firstName.errors}"
-                    placeholder="Prenom" required>
+                    <input formControlName="firstName" type="text" class="form-control" id="firstName" 
+                    [ngClass]="{'is-invalid': submitted && form.firstName.errors, 'is-valid': submitted && !form.firstName.errors}"
+                    placeholder="FirstName" required>
                     <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
-                      <div *ngIf="form.firstName.errors.required">Pseudo required</div>
-                      <div *ngIf="form.firstName.errors.minlength">Pseudo must be at least 2 characters</div>
-                      <div *ngIf="form.firstName.errors.maxlength">Pseudo can't exceed 50 characters</div>
-                      <div *ngIf="form.firstName.errors.pattern">Pseudo can only contains letters - _ or space</div>
+                      <div *ngIf="form.firstName.errors.required">FirstName required</div>
+                      <div *ngIf="form.firstName.errors.minlength">FirstName must be at least 2 characters</div>
+                      <div *ngIf="form.firstName.errors.maxlength">FirstName can't exceed 50 characters</div>
+                      <div *ngIf="form.firstName.errors.pattern">FirstName must contains only letters - _ or spaces </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="lastName" class="col-sm-3 col-form-label">LastName *</label>
                   <div class="col-sm-9">
-                    <input formControleName='lastName' type="text" class="form-control" id="lastName" placeholder="Nom" required>
+                    <input formControlName="lastName" type="text" class="form-control" id="lastName"
+                    [ngClass]="{'is-invalid': submitted && form.lastName.errors, 'is-valid': submitted && !form.lastName.errors}"
+                    placeholder="Nom" required>
+                    <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="form.lastName.errors.required">Last Name required</div>
+                      <div *ngIf="form.lastName.errors.minlength">Last Name must be at least 2 characters</div>
+                      <div *ngIf="form.lastName.errors.maxlength">Last Name can't exceed 50 characters</div>
+                      <div *ngIf="form.lastName.errors.pattern">Last Name must contains only letters - _ or spaces </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="streetNumber" class="col-sm-3 col-form-label">Street number *</label>
                   <div class="col-sm-9 ">
-                    <input formControleName='streetNumber' type="number" class="form-control " id="streetNumber" placeholder="28" required>
+                    <input formControlName="streetNumber" type="text" class="form-control " id="streetNumber"
+                    [ngClass]="{'is-invalid': submitted && form.streetNumber.errors, 'is-valid' : submitted && !form.streetNumber.errors}"                    
+                    placeholder="28, 1000bis, 1000ter ...." required>
+                    <div *ngIf="submitted && form.streetNumber.errors" class="invalid-feedback">
+                      <div *ngIf="form.streetNumber.errors.required">Street number required</div>
+                      <div *ngIf="form.streetNumber.errors.minlength">Street number must be at least 1 characters</div>
+                      <div *ngIf="form.streetNumber.errors.maxlength">Street number can't exceed 8 characters</div>
+                      <div *ngIf="form.streetNumber.errors.pattern">Street number can only been a 4/less digits number or 4 digits number bis/ter </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="streetName" class="col-sm-3 col-form-label">Street name *</label>
                   <div class="col-sm-9">
-                    <input formControleName='streetName' type="text" class="form-control" id="streetName" placeholder="Rue du Maréchal" required>
+                    <input  type="text" class="form-control" id="streetName" placeholder="Rue du Maréchal" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="zipCode" class="col-sm-3 col-form-label">Zip Code *</label>
                   <div class="col-sm-9">
-                    <input formControleName='zipCode' type="number" class="form-control" id="zipCode" placeholder="58947" required>
+                    <input  type="number" class="form-control" id="zipCode" placeholder="58947" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="town" class="col-sm-3 col-form-label">Town *</label>
                   <div class="col-sm-9">
-                    <select formControleName='town' class="custom-select mr-sm-2" id="town" required>
+                    <select class="custom-select mr-sm-2" id="town" required>
                         <option *ngFor="let town of towns" value={{town.name}}>{{town.name}}</option>
                       </select>
                   </div>
@@ -77,14 +93,14 @@
                 <div class="form-group row">
                   <label for="password" class="col-sm-3 col-form-label">Password *</label>
                   <div class="col-sm-9">
-                    <input formControleName='password' type="password" class="form-control" id="password"  placeholder="Password">
+                    <input type="password" class="form-control" id="password"  placeholder="Password">
                     
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="confirmPassword" class="col-sm-3 col-form-label">Password Confirmation</label>
                   <div class="col-sm-9 d-flex align-items-center">
-                    <input formControleName='confirmPassword' type='password' class="form-control" id="confirmPassword" required>
+                    <input type='password' class="form-control" id="confirmPassword" required>
                   </div>
                 </div>
                 <div class="form-group row">
