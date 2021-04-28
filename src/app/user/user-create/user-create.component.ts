@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Town } from 'src/app/model/town';
 import { TownService } from 'src/app/web-service/town/town.service';
+
+import {MustMatch } from './confirm.validator'
 
 @Component({
   selector: 'app-user-create',
@@ -10,26 +12,26 @@ import { TownService } from 'src/app/web-service/town/town.service';
 })
 export class UserCreateComponent implements OnInit {
 
-  createForm = new FormGroup({
-    pseudo: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    streetNumber: new FormControl('', Validators.required),
-    streetName: new FormControl('', Validators.required),
-    zipCode: new FormControl('', Validators.required),
-    town: new FormControl('', Validators.required),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
-    password: new FormControl('', Validators.required)
-  })
+  createForm: FormGroup = new FormGroup({});
+  submitted : boolean = false;
 
   towns: Town[] = [];
 
-  constructor(private TownService : TownService) { }
+  constructor(private TownService : TownService, private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+    this.createForm = this.formBuilder.group({
+      email: ['', [
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ]]
+        	
+    });
+    console.log(this.form)
+  }
+
+  get form() {
+    return this.createForm.controls;
   }
 
   findByZipCode() {
@@ -39,5 +41,16 @@ export class UserCreateComponent implements OnInit {
       }
     })
   }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.createForm.invalid) {
+        console.log(this.form.email)
+    }
+
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))
+}
 
 }
