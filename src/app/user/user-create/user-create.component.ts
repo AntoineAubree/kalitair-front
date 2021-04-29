@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Town } from 'src/app/model/town';
 import { TownService } from 'src/app/web-service/town/town.service';
+import { UserService } from 'src/app/web-service/user/user.service';
 import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
 
 @Component({
@@ -17,7 +20,13 @@ export class UserCreateComponent implements OnInit {
   towns: String[] = ['Paris', 'Marseille', 'Nantes'];
 
 
-  constructor(private TownService : TownService, private formBuilder : FormBuilder) { }
+  constructor(
+    private TownService: TownService,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router : Router,
+  ) { }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -92,11 +101,23 @@ export class UserCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
     // stop here if form is invalid
     if (this.createForm.invalid) {
       return
+    }
+    //Check du pseudo
+    //Check du mail
+    if (!this.form.pseudo.errors?.pseudoTaken && !this.form.email.errors?.emailTaken) {
+      this.userService.create(this.createForm.value).subscribe(res => {
+        if (res) {
+          this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 3 sec');
+          setTimeout(() => {
+            this.router.navigate(['home']);
+        }, 5000);  //5s
+        }
+      })
+    } else {
+      this.toastr.error('Your account hasn\'t been created','Please try again');
     }
 
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))
@@ -107,8 +128,6 @@ export class UserCreateComponent implements OnInit {
       onlySelf : true
     }
     )
-    console.log('form',this.createForm)
-    console.log('control',this.form)
   }
 
 }
