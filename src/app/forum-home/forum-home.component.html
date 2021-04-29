@@ -5,6 +5,10 @@
       <div class="inner-sidebar">
         <!-- Inner sidebar header -->
         <div class="inner-sidebar-header justify-content-center">
+         <h1 class ="text-center">FORUM</h1>
+         <h3 class='text-center'>Welcome to Kalitair's Forum</h3>
+        </div>
+        <div class="inner-sidebar-header justify-content-center">
           <button class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
             data-target="#threadModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -13,23 +17,20 @@
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            NEW DISCUSSION
+          New Section
           </button>
-        </div>
 
           <!-- Forum List -->
           <div class="inner-main-body p-2 p-sm-3  forum-content show">
-            <div class="card mb-2" *ngFor="let message of messages">
+            <div class="card mb-2" *ngFor =' let section of sections' (click)='getSectionById()'>
               <div class="card-body p-2 p-sm-3">
                 <div class="media forum-item">
-                  <a data-target=".forum-content"><img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                      class="mr-3 rounded-circle" width="50" alt="User" /></a>
+                  <a data-target=".forum-content"><img src="https://cdn.icon-icons.com/icons2/936/PNG/512/group-profile-users_icon-icons.com_73540.png"
+                      class="mr-3 rounded-circle" width="50" alt="category" /></a>
                   <div class="media-body">
-                    <h6>{{message.user.pseudo}}</h6>
-                    <h6>{{message.date}}</h6>
-                    <p class="text-secondary">
-                      {{message.content}}
-                    </p>
+                    <h6> {{section.title}}</h6>
+                    <button (click)="editSection()">Edit</button>
+                    <button (click)="deleteSection(section.id)">Delete</button>
                   </div>
                 </div>
               </div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForumCategoryComponent } from './forum-category.component';
+import { DeleteSectionComponent } from './delete-section.component';
 
-describe('ForumCategoryComponent', () => {
-  let component: ForumCategoryComponent;
-  let fixture: ComponentFixture<ForumCategoryComponent>;
+describe('DeleteSectionComponent', () => {
+  let component: DeleteSectionComponent;
+  let fixture: ComponentFixture<DeleteSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForumCategoryComponent ]
+      declarations: [ DeleteSectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForumCategoryComponent);
+    fixture = TestBed.createComponent(DeleteSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,4 @@
 import {User} from './user';
-import { DiscussionThread } from "./discussionThread";
 
 export interface Message{
 
@@ -7,6 +6,6 @@ export interface Message{
   content : String;
   date : Date;
   user : User;
-  discussion_thread : DiscussionThread;
+  idDiscussionThread : Number;
 
 }
