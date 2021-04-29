@@ -6,9 +6,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
-
 @NgModule({
   declarations: [
     UserCreateComponent,

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Town } from 'src/app/model/town';
 import { TownService } from 'src/app/web-service/town/town.service';
-
-import {MustMatch } from './confirm.validator'
+import { confirmPasswordValidator } from './confirmPassword.directive';
 
 @Component({
   selector: 'app-user-create',
@@ -15,7 +14,7 @@ export class UserCreateComponent implements OnInit {
   createForm: FormGroup = new FormGroup({});
   submitted : boolean = false;
 
-  towns: Town[] = [];
+  towns: String[] = ['Paris','Marseille','Nantes'];
 
   constructor(private TownService : TownService, private formBuilder : FormBuilder) { }
 
@@ -30,13 +29,13 @@ export class UserCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern('^([a-zA-Z0-9-_\s]+)$')
+        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
       ]],
       lastName: ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern('^([a-zA-Z0-9-_\s]+)$')
+        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
       ]],
       streetNumber: ['', [
         Validators.required,
@@ -44,23 +43,49 @@ export class UserCreateComponent implements OnInit {
         Validators.maxLength(8),
         Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
       ]],
+      streetName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(80),
+        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+      ]],
+      zipCode: ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),
+        Validators.pattern('([0-9])+')
+      ]],
+      town: ['', Validators.required],
       email: ['', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]]
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(36),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
+      ]],
+      confirmPassword: ['', Validators.required]
         	
+    },
+      {
+      validators : confirmPasswordValidator
     });
-    console.log(this.form)
   }
 
   get form() {
     return this.createForm.controls;
   }
 
+  get town() {
+    return this.createForm.get('town');
+  }
+
   findByZipCode() {
     return this.TownService.findByZipCode(this.createForm.get('zipCode')?.value).subscribe(res => {
       if (res) {
-        this.towns = res
+        //this.towns = res
       }
     })
   }
@@ -70,13 +95,19 @@ export class UserCreateComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.createForm.invalid) {
-      console.log(this.form.pseudo)
-      console.log(this.form.firstName)
-      console.log(this.form.lastName)
-      console.log(this.form.streetNumber)
+      return
     }
 
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))
-}
+  }
+
+  changeCity(e : any) {
+    this.town?.setValue(e.target.value, {
+      onlySelf : true
+    }
+    )
+    console.log('form',this.createForm)
+    console.log('control',this.form)
+  }
 
 }
