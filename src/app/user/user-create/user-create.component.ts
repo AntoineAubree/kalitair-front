@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Town } from 'src/app/model/town';
 import { TownService } from 'src/app/web-service/town/town.service';
-import { confirmPasswordValidator } from './confirmPassword.directive';
+import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
 
 @Component({
   selector: 'app-user-create',
@@ -14,7 +14,8 @@ export class UserCreateComponent implements OnInit {
   createForm: FormGroup = new FormGroup({});
   submitted : boolean = false;
 
-  towns: String[] = ['Paris','Marseille','Nantes'];
+  towns: String[] = ['Paris', 'Marseille', 'Nantes'];
+
 
   constructor(private TownService : TownService, private formBuilder : FormBuilder) { }
 
