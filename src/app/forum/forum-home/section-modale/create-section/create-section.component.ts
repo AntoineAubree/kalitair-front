@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Section } from '../../../model/section';
-import { SectionService } from '../../../web-service/section.service';
+import { Section } from '../../../../model/section';
+import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
   selector: 'app-create-section',

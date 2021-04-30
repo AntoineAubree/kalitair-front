@@ -1,8 +1,8 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteSectionComponent } from '../section/delete-section/delete-section.component';
-import { EditSectionComponent } from '../section/edit-section/edit-section.component';
+import { DeleteSectionComponent } from './section-modale/delete-section/delete-section.component';
+import { EditSectionComponent } from './section-modale/edit-section/edit-section.component';
 import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
 

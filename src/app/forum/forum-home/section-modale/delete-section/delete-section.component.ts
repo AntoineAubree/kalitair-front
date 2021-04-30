@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SectionService } from '../../../web-service/section.service';
+import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
   selector: 'app-delete-section',

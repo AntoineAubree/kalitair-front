@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Section } from '../../../model/section';
-import { SectionService } from '../../../web-service/section.service';
+import { Section } from '../../../../model/section';
+import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
   selector: 'app-edit-section',
