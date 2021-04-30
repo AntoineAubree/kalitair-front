@@ -15,6 +15,9 @@
                       <div *ngIf="form.pseudo.errors.minlength">Pseudo must be at least 2 characters</div>
                       <div *ngIf="form.pseudo.errors.maxlength">Pseudo can't exceed 50 characters</div>
                     </div>
+                    <div *ngIf="errorHttpMessage == '1' " class="invalid-feedback">
+                      <small>This pseudo is already used</small>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -78,7 +81,7 @@
                   <div class="col-sm-9">
                     <input formControlName="postCodeCode" type="text" class="form-control" id="zipCode" 
                     [ngClass]="{'is-invalid': !form.postCodeCode.valid && form.postCodeCode.dirty, 'is-valid' : form.postCodeCode.valid}"
-                    placeholder="58947" required>
+                    placeholder="58947" (input)="findByZipCode()" required>
                     <div *ngIf="form.postCodeCode.errors" class="invalid-feedback">
                       <div *ngIf="form.postCodeCode.errors.required">zipCode required</div>
                       <div *ngIf="form.postCodeCode.errors.minlength">zipCode can't be less than a 5 digits number</div>
@@ -93,7 +96,7 @@
                     [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
                     required>
                         <option disabled>Choose your town</option>
-                        <option *ngFor="let town of towns" value={{town}}>{{town}}</option>
+                        <option *ngFor="let town of towns" value={{town}}>{{town.name}}</option>
                     </select>
                     <div *ngIf="form.townName.errors" class="invalid-feedback">
                       <div *ngIf="form.townName.errors.required">Town required</div>
@@ -109,6 +112,9 @@
                     <small class="invalid-feedback">
                         xxx@xxx.xxx
                     </small>
+                    <div *ngIf="errorHttpMessage == '2' " class="invalid-feedback">
+                      <small>This pseudo is already used</small>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
