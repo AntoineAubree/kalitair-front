@@ -106,18 +106,15 @@ export class UserCreateComponent implements OnInit {
   onSubmit() {
     // stop here if form is invalid
     console.log(this.createForm.value)
-    if (!this.form.pseudo.errors?.pseudoTaken && !this.form.email.errors?.emailTaken) {
-      this.userService.create(this.createForm.value).subscribe(res => {
-        if (res) {
-          this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 3 sec');
-          setTimeout(() => {
-            this.router.navigate(['home']);
-        }, 5000);  //5s
-        }
-      })
-    } else {
-      this.toastr.error('Your account hasn\'t been created','Please try again');
-    }
+    this.userService.create(this.createForm.value).subscribe(res => {
+      console.log(res)
+      if (res) {
+        this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 3 sec');
+        setTimeout(() => {
+          this.router.navigate(['home']);
+      }, 5000);  //5s
+      }
+    })
     /* if (this.createForm.invalid) {
       return
     }
