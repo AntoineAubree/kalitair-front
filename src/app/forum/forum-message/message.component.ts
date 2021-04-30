@@ -5,10 +5,10 @@ import {User} from '../../model/user'
 
 @Component({
   selector: 'app-forum-discussion',
-  templateUrl: './forum-discussion.component.html',
-  styleUrls: ['./forum-discussion.component.scss']
+  templateUrl: './message.component.html',
+  styleUrls: ['./message.component.scss']
 })
-export class ForumDiscussionComponent implements OnInit {
+export class MessageComponent implements OnInit {
 
   messages : Message[] = [];
 

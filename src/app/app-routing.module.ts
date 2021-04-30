@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForumHomeComponent } from './forum-home/forum-home.component';
-import { ForumSectionComponent } from './forum-section/forum-section.component';
-import { ForumDiscussionComponent } from './forum/forum-discussion/forum-discussion.component';
+import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
+import { ForumSectionComponent } from './forum/forum-section/forum-section.component';
+import { MessageComponent } from './forum/message/message.component';
 
 const routes: Routes = [
-
-  {path:"forum/messages" , component : ForumDiscussionComponent},
-
-  {path:"forum/section" , component : ForumSectionComponent},
-
-  {path:"forum/home" , component : ForumHomeComponent}
 
 
 ];

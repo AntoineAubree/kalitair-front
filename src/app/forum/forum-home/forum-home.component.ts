@@ -1,9 +1,10 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteSectionComponent } from '../delete-section/delete-section.component';
-import { Section } from '../model/section';
-import { SectionService } from '../web-service/section.service';
+import { DeleteSectionComponent } from '../section/delete-section/delete-section.component';
+import { EditSectionComponent } from '../section/edit-section/edit-section.component';
+import { Section } from '../../model/section';
+import { SectionService } from '../../web-service/section.service';
 
 @Component({
   selector: 'app-forum-home',
@@ -33,7 +34,10 @@ export class ForumHomeComponent implements OnInit {
     modale.componentInstance.sectionId = id;
   }
 
-  editSection(){
+  editSection( id : number){
+
+    let modale = this.modalService.open(EditSectionComponent)
+    modale.componentInstance.sectionId = id
 
   }
 }

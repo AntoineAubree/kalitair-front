@@ -37,5 +37,10 @@ export class SectionService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + id);
   }
+
+  update( section : Section) {
+
+    return this.http.put(this.baseUrl + section.id, section)
+  }
 }
 

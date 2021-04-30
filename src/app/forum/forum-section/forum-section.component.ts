@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscussionThreadService } from '../web-service/discussionThread.service';
-import { DiscussionThread } from '../model/discussionThread';
+import { DiscussionThreadService } from '../../web-service/discussionThread.service';
+import { DiscussionThread } from '../../model/discussionThread';
 
 
 @Component({
