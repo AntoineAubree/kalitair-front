@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Town } from 'src/app/model/town';
 import { User } from 'src/app/model/user';
 import { TownService } from 'src/app/web-service/town/town.service';
 import { UserService } from 'src/app/web-service/user/user.service';
