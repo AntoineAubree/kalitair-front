@@ -48,55 +48,55 @@
                 <div class="form-group row">
                   <label for="streetNumber" class="col-sm-3 col-form-label">Street number *</label>
                   <div class="col-sm-9 ">
-                    <input formControlName="streetNumber" type="text" class="form-control " id="streetNumber"
-                    [ngClass]="{'is-invalid': !form.streetNumber.valid && form.streetNumber.dirty, 'is-valid': form.streetNumber.valid}"                    
+                    <input formControlName="addressNbStreet" type="text" class="form-control " id="streetNumber"
+                    [ngClass]="{'is-invalid': !form.addressNbStreet.valid && form.addressNbStreet.dirty, 'is-valid': form.addressNbStreet.valid}"                    
                     placeholder="28, 1000bis, 1000ter ...." required>
-                    <div *ngIf="form.streetNumber.errors" class="invalid-feedback">
-                      <div *ngIf="form.streetNumber.errors.required">Street number required</div>
-                      <div *ngIf="form.streetNumber.errors.minlength">Street number must be at least 1 characters</div>
-                      <div *ngIf="form.streetNumber.errors.maxlength">Street number can't exceed 8 characters</div>
-                      <div *ngIf="form.streetNumber.errors.pattern">Street number can only been a 4/less digits number or 4 digits number bis/ter </div>
+                    <div *ngIf="form.addressNbStreet.errors" class="invalid-feedback">
+                      <div *ngIf="form.addressNbStreet.errors.required">Street number required</div>
+                      <div *ngIf="form.addressNbStreet.errors.minlength">Street number must be at least 1 characters</div>
+                      <div *ngIf="form.addressNbStreet.errors.maxlength">Street number can't exceed 8 characters</div>
+                      <div *ngIf="form.addressNbStreet.errors.pattern">Street number can only been a 4/less digits number or 4 digits number bis/ter </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="streetName" class="col-sm-3 col-form-label">Street name *</label>
                   <div class="col-sm-9">
-                    <input formControlName="streetName" type="text" class="form-control" id="streetName" 
-                    [ngClass]="{'is-invalid': !form.streetName.valid && form.streetName.dirty, 'is-valid' : form.streetName.valid}"
+                    <input formControlName="addressStreet" type="text" class="form-control" id="streetName" 
+                    [ngClass]="{'is-invalid': !form.addressStreet.valid && form.addressStreet.dirty, 'is-valid' : form.addressStreet.valid}"
                     placeholder="Rue du Maréchal" required>
-                    <div *ngIf="form.streetName.errors" class="invalid-feedback">
-                      <div *ngIf="form.streetName.errors.required">Street name required</div>
-                      <div *ngIf="form.streetName.errors.minlength">Street name must be at least 2 characters</div>
-                      <div *ngIf="form.streetName.errors.maxlength">Street name can't exceed 80 characters</div>
-                      <div *ngIf="form.streetName.errors.pattern">Street name must contains only letters - _ or spaces</div>
+                    <div *ngIf="form.addressStreet.errors" class="invalid-feedback">
+                      <div *ngIf="form.addressStreet.errors.required">Street name required</div>
+                      <div *ngIf="form.addressStreet.errors.minlength">Street name must be at least 2 characters</div>
+                      <div *ngIf="form.addressStreet.errors.maxlength">Street name can't exceed 80 characters</div>
+                      <div *ngIf="form.addressStreet.errors.pattern">Street name must contains only letters - _ or spaces</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="zipCode" class="col-sm-3 col-form-label">Zip Code *</label>
                   <div class="col-sm-9">
-                    <input formControlName="zipCode" type="text" class="form-control" id="zipCode" 
-                    [ngClass]="{'is-invalid': !form.zipCode.valid && form.zipCode.dirty, 'is-valid' : form.zipCode.valid}"
+                    <input formControlName="postCodeCode" type="text" class="form-control" id="zipCode" 
+                    [ngClass]="{'is-invalid': !form.postCodeCode.valid && form.postCodeCode.dirty, 'is-valid' : form.postCodeCode.valid}"
                     placeholder="58947" required>
-                    <div *ngIf="form.zipCode.errors" class="invalid-feedback">
-                      <div *ngIf="form.zipCode.errors.required">zipCode required</div>
-                      <div *ngIf="form.zipCode.errors.minlength">zipCode can't be less than a 5 digits number</div>
-                      <div *ngIf="form.zipCode.errors.maxlength">zipCode can't be more than a 5 digits number</div>
+                    <div *ngIf="form.postCodeCode.errors" class="invalid-feedback">
+                      <div *ngIf="form.postCodeCode.errors.required">zipCode required</div>
+                      <div *ngIf="form.postCodeCode.errors.minlength">zipCode can't be less than a 5 digits number</div>
+                      <div *ngIf="form.postCodeCode.errors.maxlength">zipCode can't be more than a 5 digits number</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="town" class="col-sm-3 col-form-label">Town *</label>
                   <div class="col-sm-9">
-                    <select formControlName="town" (change)="changeCity($event)" class="custom-select mr-sm-2" id="town" 
-                    [ngClass]="{'is-invalid': !form.town.valid && form.town.dirty, 'is-valid' : form.town.valid}"
+                    <select formControlName="townName" (change)="changeCity($event)" class="custom-select mr-sm-2" id="town" 
+                    [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
                     required>
                         <option disabled>Choose your town</option>
                         <option *ngFor="let town of towns" value={{town}}>{{town}}</option>
                     </select>
-                    <div *ngIf="form.town.errors" class="invalid-feedback">
-                      <div *ngIf="form.town.errors.required">Town required</div>
+                    <div *ngIf="form.townName.errors" class="invalid-feedback">
+                      <div *ngIf="form.townName.errors.required">Town required</div>
                     </div>
                   </div>
                 </div>

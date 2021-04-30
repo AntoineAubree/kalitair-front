@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Town } from 'src/app/model/town';
+import { User } from 'src/app/model/user';
 import { TownService } from 'src/app/web-service/town/town.service';
 import { UserService } from 'src/app/web-service/user/user.service';
 import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
@@ -14,6 +15,8 @@ import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
 })
 export class UserCreateComponent implements OnInit {
 
+
+  user = {} as User
   createForm: FormGroup = new FormGroup({});
   submitted : boolean = false;
 
@@ -47,25 +50,25 @@ export class UserCreateComponent implements OnInit {
         Validators.maxLength(50),
         Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
       ]],
-      streetNumber: ['', [
+      addressNbStreet: ['', [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(8),
         Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
       ]],
-      streetName: ['', [
+      addressStreet: ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(80),
         Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
       ]],
-      zipCode: ['', [
+      postCodeCode: ['', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(5),
         Validators.pattern('([0-9])+')
       ]],
-      town: ['', Validators.required],
+      townName: ['', Validators.required],
       email: ['', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -102,7 +105,20 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit() {
     // stop here if form is invalid
-    if (this.createForm.invalid) {
+    console.log(this.createForm.value)
+    if (!this.form.pseudo.errors?.pseudoTaken && !this.form.email.errors?.emailTaken) {
+      this.userService.create(this.createForm.value).subscribe(res => {
+        if (res) {
+          this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 3 sec');
+          setTimeout(() => {
+            this.router.navigate(['home']);
+        }, 5000);  //5s
+        }
+      })
+    } else {
+      this.toastr.error('Your account hasn\'t been created','Please try again');
+    }
+    /* if (this.createForm.invalid) {
       return
     }
     //Check du pseudo
@@ -120,7 +136,7 @@ export class UserCreateComponent implements OnInit {
       this.toastr.error('Your account hasn\'t been created','Please try again');
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value))
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.createForm.value)) */
   }
 
   changeCity(e : any) {
