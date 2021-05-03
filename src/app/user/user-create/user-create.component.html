@@ -8,15 +8,15 @@
                   <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
                   <div class="col-sm-9">
                     <input formControlName='pseudo' type="text" class="form-control" id="pseudo" 
-                    [ngClass]="{'is-invalid': !form.pseudo.valid && form.pseudo.dirty , 'is-valid' : form.pseudo.valid}" 
+                    [ngClass]="{'is-invalid': (!form.pseudo.valid && form.pseudo.dirty) || this.errorHttpMessage , 'is-valid' : form.pseudo.valid}" 
                     placeholder="Pseudo" required>
+                    <div *ngIf="this.errorHttpMessage[0] === '1' " class="invalid-feedback">
+                      <small>{{this.errorHttpMessage[1]}}</small>
+                    </div>
                     <div *ngIf="form.pseudo.errors" class="invalid-feedback">
                       <div *ngIf="form.pseudo.errors.required">Pseudo required</div>
                       <div *ngIf="form.pseudo.errors.minlength">Pseudo must be at least 2 characters</div>
                       <div *ngIf="form.pseudo.errors.maxlength">Pseudo can't exceed 50 characters</div>
-                    </div>
-                    <div *ngIf="errorHttpMessage == '1' " class="invalid-feedback">
-                      <small>This pseudo is already used</small>
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@
                     [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
                     required>
                         <option disabled>Choose your town</option>
-                        <option *ngFor="let town of towns" value={{town}}>{{town.name}}</option>
+                        <option *ngFor="let town of towns" value={{town.name}}>{{town.name}}</option>
                     </select>
                     <div *ngIf="form.townName.errors" class="invalid-feedback">
                       <div *ngIf="form.townName.errors.required">Town required</div>
@@ -107,13 +107,13 @@
                   <label for="email" class="col-sm-3 col-form-label">Email *</label>
                   <div class="col-sm-9">
                       <input formControlName='email' type="email" id="inputEmail" class="form-control" 
-                    [ngClass]="{'is-invalid': !form.email.valid && form.email.dirty, 'is-valid': form.email.valid}"
+                    [ngClass]="{'is-invalid': (!form.email.valid && form.email.dirty) || this.errorHttpMessage}"
                     placeholder="Email address" required>
-                    <small class="invalid-feedback">
+                    <small *ngIf="form.email.errors?.pattern" class="invalid-feedback">
                         xxx@xxx.xxx
                     </small>
-                    <div *ngIf="errorHttpMessage == '2' " class="invalid-feedback">
-                      <small>This pseudo is already used</small>
+                    <div *ngIf="this.errorHttpMessage[0] === '2' " class="invalid-feedback">
+                      <small>{{this.errorHttpMessage[1]}}</small>
                     </div>
                   </div>
                 </div>

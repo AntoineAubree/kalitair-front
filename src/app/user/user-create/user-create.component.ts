@@ -117,7 +117,7 @@ export class UserCreateComponent implements OnInit {
       }, 5000);  //5s
       }
     }, error => {
-      this.errorHttpMessage = error.error.message.split('|').pop();
+      this.errorHttpMessage = error.error.message.split("|");
       this.toastr.error('Your account hasn\'t been created','Please try again');
     })
     if (this.createForm.invalid) {
