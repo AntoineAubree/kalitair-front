@@ -6,9 +6,15 @@
         <!-- Inner sidebar header -->
         <div class="inner-sidebar-header justify-content-center">
          <h1 class ="text-center">FORUM</h1>
-        <h2>Nom de la section</h2>
-         <h3 class='text-center'>All the Discussion Threads</h3>
+         <h2 class="text-center">Discussion threads</h2>
+         <h3 class='text-center'>Welcome to Kalitair's Forum</h3>
         </div>
+        <div class="inner-sidebar-header justify-content-center">
+          <button  (click) = "createDiscussionThread()" class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
+            data-target="#threadModal">
+
+          Create a new discussion thread
+          </button>
 
           <!-- Forum List -->
           <div class="inner-main-body p-2 p-sm-3  forum-content show">
@@ -19,10 +25,11 @@
                       class="mr-3 rounded-circle" width="50" alt="category" /></a>
                   <div class="media-body">
                     <h4> {{discussionThread.title}}</h4>
+                    <button  *ngIf="discussionThread.edit == true"(click)="editDiscussionThread(discussionThread.id)">Edit</button>
+                    <button *ngIf="discussionThread.edit == true"(click)="deleteDiscussionThread(discussionThread.id)">Delete</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-<!-- TODO  créer la carte cliquable +  continuer vers le module message ( faire la modale + méthode CRUD)-->

@@ -23,6 +23,8 @@ export class DeleteSectionComponent implements OnInit {
 
   deleteSection(id : number) {
 
+
+
     this.sectionService.delete(id)
     this.modale.close()
   }

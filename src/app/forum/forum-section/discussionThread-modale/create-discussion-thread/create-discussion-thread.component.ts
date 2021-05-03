@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscussionThreadService } from 'src/app/web-service/discussionThread.service';
 
 @Component({
   selector: 'app-create-discussion-thread',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateDiscussionThreadComponent implements OnInit {
 
-  constructor() { }
+  constructor( private discussionThreadService : DiscussionThreadService, protected modale : NgbActiveModal) { }
 
   ngOnInit(): void {
   }
+  dismiss() {
+    this.modale.dismiss()
+  }
+  createDiscussionThread(form : NgForm) {
+
+    this.discussionThreadService.create(form.value).subscribe()
+    this.modale.close()
+
+  }
+
 
 }
