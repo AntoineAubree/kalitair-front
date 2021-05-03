@@ -10,14 +10,14 @@
                 [ngClass]="{'is-invalid': !loginForm.get('pseudo')?.valid && loginForm.get('pseudo')?.dirty, 'is-valid': loginForm.get('pseudo')?.valid}"
                 placeholder="Pseudo" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
+                <input formControlName="password" type="password" id="inputPassword" class="form-control mt-2" placeholder="Password" required>
                 <div [ngClass]="{'is-invalid': this.errorHttpMessage.length && this.isSubmitted}" class="mt-3">
                   <small class="text-danger">{{this.errorHttpMessage}}</small>
                 </div>
                 <div class="mt-3">
-                  <button class="btn btn-lg btn-primary w-50 " type="submit" (click)="login()">Sign in</button>
-                  <button class="btn btn-lg btn-primary w-50 " type="submit" (click)="createAccount()">Create an account</button>
+                  <button class="btn btn-lg btn-primary w-100" type="submit" (click)="login()">Sign in</button>
+                  <div class="col-lg-2"></div>
+                  <button class="btn btn-lg btn-primary w-100 mt-2 " type="submit" (click)="createAccount()">Create an account</button>
                 </div>
                 
                 <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
