@@ -3,8 +3,8 @@ export interface Town {
     id: number;
     
     //name
-    name: String;
+    name: string;
 
     //zipCode
-    zipCode: String;
+    zipCode: string;
 }
