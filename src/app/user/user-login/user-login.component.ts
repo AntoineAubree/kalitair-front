@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user';
-import { UserService } from 'src/app/web-service/user/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/web-service/authentication/authentication.service';
 
 
 @Component({
@@ -12,21 +12,42 @@ import { UserService } from 'src/app/web-service/user/user.service';
 })
 export class UserLoginComponent implements OnInit {
 
+  isSubmitted: boolean = false;
+
+  errorHttpMessage: String = '';
+
   loginForm = new FormGroup({
-    email: new FormControl('', [
+    pseudo: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.minLength(2),
+      Validators.maxLength(50),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(36),
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
     ]),
   });
 
-  constructor(private userService : UserService, private router : Router) { }
+  constructor(private authenticationService : AuthenticationService, private router : Router, private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
 
   login() {
-    this.userService.login(this.loginForm.value).subscribe(res => {
-      console.log(res)
+    this.authenticationService.login(this.loginForm.value).subscribe(res => {
+      if (res) {
+        localStorage.setItem("token", String(res.id));
+        this.toastr.success('Valid user', 'You will be redirected to the home page in 2 sec');
+        setTimeout(() => {
+          this.router.navigate(['home']);
+        }, 2000);
+      } else {
+        this.toastr.error('Sign in impossible, try again');
+      }
+    }, error => {
+      this.errorHttpMessage = error.error.message
     })
   }
 

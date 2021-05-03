@@ -1,20 +1,20 @@
 export class User {
-	private _token: String =''
+	private _token: string =''
 	private _id: Number = 0
-	private _pseudo : String = ''
-	private _password : String = ''
-	private _firstName : String = ''
-    private _lastName: String = ''
-    private _email: String = ''
-	private _role: String = ''
+	private _pseudo : string = ''
+	private _password : string = ''
+	private _firstName : string = ''
+    private _lastName: string = ''
+    private _email: string = ''
+	private _role: string = ''
     private _banned: boolean = false
-    private _townName: String = ''
-    private _postCodeCode: String = ''
-    private _addressNbStreet: String = ''
-    private _addressStreet: String = ''
-	private _receivedAlerts: Array<String> = [];
+    private _townName: string = ''
+    private _postCodeCode: string = ''
+    private _addressNbStreet: string = ''
+    private _addressStreet: string = ''
+	private _receivedAlerts: Array<string> = [];
 
-	constructor(pseudo: String , password: String , firstName: String , lastName: String , email: String , role: String , banned: boolean , townName: String , postCodeCode: String , addressNbStreet: String , addressStreet: String , receivedAlerts: Array<String> ) {
+	constructor(pseudo: string , password: string , firstName: string , lastName: string , email: string , role: string , banned: boolean , townName: string , postCodeCode: string , addressNbStreet: string , addressStreet: string , receivedAlerts: Array<string> ) {
 		this._pseudo = pseudo;
 		this._password = password;
 		this._firstName = firstName;
@@ -32,9 +32,9 @@ export class User {
 
     /**
      * Getter token
-     * @return {String }
+     * @return {string }
      */
-	public get token(): String  {
+	public get token(): string  {
 		return this._token;
 	}
 
@@ -48,49 +48,49 @@ export class User {
 
     /**
      * Getter pseudo
-     * @return {String }
+     * @return {string }
      */
-	public get pseudo(): String  {
+	public get pseudo(): string  {
 		return this._pseudo;
 	}
 
     /**
      * Getter password
-     * @return {String }
+     * @return {string }
      */
-	public get password(): String  {
+	public get password(): string  {
 		return this._password;
 	}
 
     /**
      * Getter firstName
-     * @return {String }
+     * @return {string }
      */
-	public get firstName(): String  {
+	public get firstName(): string  {
 		return this._firstName;
 	}
 
     /**
      * Getter lastName
-     * @return {String }
+     * @return {string }
      */
-	public get lastName(): String  {
+	public get lastName(): string  {
 		return this._lastName;
 	}
 
     /**
      * Getter email
-     * @return {String }
+     * @return {string }
      */
-	public get email(): String  {
+	public get email(): string  {
 		return this._email;
 	}
 
     /**
      * Getter role
-     * @return {String }
+     * @return {string }
      */
-	public get role(): String  {
+	public get role(): string  {
 		return this._role;
 	}
 
@@ -104,49 +104,49 @@ export class User {
 
     /**
      * Getter townName
-     * @return {String }
+     * @return {string }
      */
-	public get townName(): String  {
+	public get townName(): string  {
 		return this._townName;
 	}
 
     /**
      * Getter postCodeCode
-     * @return {String }
+     * @return {string }
      */
-	public get postCodeCode(): String  {
+	public get postCodeCode(): string  {
 		return this._postCodeCode;
 	}
 
     /**
      * Getter addressNbStreet
-     * @return {String }
+     * @return {string }
      */
-	public get addressNbStreet(): String  {
+	public get addressNbStreet(): string  {
 		return this._addressNbStreet;
 	}
 
     /**
      * Getter addressStreet
-     * @return {String }
+     * @return {string }
      */
-	public get addressStreet(): String  {
+	public get addressStreet(): string  {
 		return this._addressStreet;
 	}
 
     /**
      * Getter receivedAlerts
-     * @return {Array<String> }
+     * @return {Array<string> }
      */
-	public get receivedAlerts(): Array<String>  {
+	public get receivedAlerts(): Array<string>  {
 		return this._receivedAlerts;
 	}
 
     /**
      * Setter token
-     * @param {String } value
+     * @param {string } value
      */
-	public set token(value: String ) {
+	public set token(value: string ) {
 		this._token = value;
 	}
 
@@ -160,49 +160,49 @@ export class User {
 
     /**
      * Setter pseudo
-     * @param {String } value
+     * @param {string } value
      */
-	public set pseudo(value: String ) {
+	public set pseudo(value: string ) {
 		this._pseudo = value;
 	}
 
     /**
      * Setter password
-     * @param {String } value
+     * @param {string } value
      */
-	public set password(value: String ) {
+	public set password(value: string ) {
 		this._password = value;
 	}
 
     /**
      * Setter firstName
-     * @param {String } value
+     * @param {string } value
      */
-	public set firstName(value: String ) {
+	public set firstName(value: string ) {
 		this._firstName = value;
 	}
 
     /**
      * Setter lastName
-     * @param {String } value
+     * @param {string } value
      */
-	public set lastName(value: String ) {
+	public set lastName(value: string ) {
 		this._lastName = value;
 	}
 
     /**
      * Setter email
-     * @param {String } value
+     * @param {string } value
      */
-	public set email(value: String ) {
+	public set email(value: string ) {
 		this._email = value;
 	}
 
     /**
      * Setter role
-     * @param {String } value
+     * @param {string } value
      */
-	public set role(value: String ) {
+	public set role(value: string ) {
 		this._role = value;
 	}
 
@@ -216,41 +216,41 @@ export class User {
 
     /**
      * Setter townName
-     * @param {String } value
+     * @param {string } value
      */
-	public set townName(value: String ) {
+	public set townName(value: string ) {
 		this._townName = value;
 	}
 
     /**
      * Setter postCodeCode
-     * @param {String } value
+     * @param {string } value
      */
-	public set postCodeCode(value: String ) {
+	public set postCodeCode(value: string ) {
 		this._postCodeCode = value;
 	}
 
     /**
      * Setter addressNbStreet
-     * @param {String } value
+     * @param {string } value
      */
-	public set addressNbStreet(value: String ) {
+	public set addressNbStreet(value: string ) {
 		this._addressNbStreet = value;
 	}
 
     /**
      * Setter addressStreet
-     * @param {String } value
+     * @param {string } value
      */
-	public set addressStreet(value: String ) {
+	public set addressStreet(value: string ) {
 		this._addressStreet = value;
 	}
 
     /**
      * Setter receivedAlerts
-     * @param {Array<String> } value
+     * @param {Array<string> } value
      */
-	public set receivedAlerts(value: Array<String> ) {
+	public set receivedAlerts(value: Array<string> ) {
 		this._receivedAlerts = value;
 	}
 

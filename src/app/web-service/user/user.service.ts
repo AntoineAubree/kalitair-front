@@ -23,17 +23,13 @@ export class UserService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + id)
   }
-
-  login(user : User){
-    return this.http.post<User>(this.baseUrl + "login" , user);
-  }
-
+  
   checkPseudo(pseudo: string) {
-    return this.http.get<boolean>(this.baseUrl + "pseudo" + pseudo )
+    return this.http.get<boolean>(this.baseUrl + "/pseudo" + pseudo )
   }
 
   checkEmail(email: string) {
-    return this.http.get<boolean>(this.baseUrl + "email" + email)
+    return this.http.get<boolean>(this.baseUrl + "/email" + email)
   }
 
 
