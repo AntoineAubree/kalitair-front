@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Section } from '../../../../model/section';
 import { SectionService } from '../../../../web-service/section.service';
 
@@ -14,7 +15,7 @@ export class EditSectionComponent implements OnInit {
 
 section = {} as Section
 
-  constructor( private sectionService : SectionService, protected modale : NgbActiveModal) { }
+  constructor( private sectionService : SectionService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,8 +26,11 @@ section = {} as Section
 
   editSection(section : Section){
 
-    this.sectionService.update(this.section).subscribe()
-    this.modale.close()
+    this.sectionService.update(this.section).subscribe( res => {
+      this.toastr.success( ' this section has been coorectly editing')
+      this.modale.close()
+    })
+
   }
 
 }

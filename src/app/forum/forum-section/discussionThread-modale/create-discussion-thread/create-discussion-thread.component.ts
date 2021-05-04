@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { DiscussionThreadService } from 'src/app/web-service/discussionThread.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DiscussionThreadService } from 'src/app/web-service/discussionThread.se
 })
 export class CreateDiscussionThreadComponent implements OnInit {
 
-  constructor( private discussionThreadService : DiscussionThreadService, protected modale : NgbActiveModal) { }
+  constructor( private discussionThreadService : DiscussionThreadService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +20,10 @@ export class CreateDiscussionThreadComponent implements OnInit {
   }
   createDiscussionThread(form : NgForm) {
 
-    this.discussionThreadService.create(form.value).subscribe()
-    this.modale.close()
+    this.discussionThreadService.create(form.value).subscribe( res => {
+      this.toastr.success( ' this Discussion Thread has been correctly created')
+      this.modale.close()
+    })
 
   }
 

@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Message } from 'src/app/model/message';
 import { MessagesService } from 'src/app/web-service/messages.service';
 
@@ -13,7 +14,7 @@ export class EditMessageComponent implements OnInit {
 
   message = {} as Message;
 
-  constructor(protected modale: NgbActiveModal, private messageService : MessagesService) { }
+  constructor(protected modale: NgbActiveModal, private messageService : MessagesService,private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +25,11 @@ export class EditMessageComponent implements OnInit {
 
   editMessage(message : Message) {
 
-    this.messageService.update(this.message).subscribe()
-    this.modale.close()
+    this.messageService.update(this.message).subscribe( res => {
+      this.toastr.success( ' this message has been correctly editing')
+      this.modale.close()
+    })
+
   }
 
 }
