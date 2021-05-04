@@ -3,7 +3,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <h2>Create your account</h2>
-            <form [formGroup]='createForm'>
+            <form [formGroup]='editForm'>
                 <div class="form-group row mt-5">
                   <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
                   <div class="col-sm-9">
@@ -95,7 +95,7 @@
                     <select formControlName="townName" (change)="changeCity($event)" class="custom-select mr-sm-2" id="town" 
                     [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
                     required>
-                        <option disabled>Choose your town</option>
+                        <option selected value={{user.townName}}>{{user.townName}}</option>
                         <option *ngFor="let town of towns" value={{town.name}}>{{town.name}}</option>
                     </select>
                     <div *ngIf="form.townName.errors" class="invalid-feedback">
@@ -135,17 +135,22 @@
                   <label for="confirmPassword" class="col-sm-3 col-form-label">Password Confirmation</label>
                   <div class="col-sm-9 d-flex align-item-center flex-column">
                     <input formControlName="confirmPassword" type='password' class="form-control" id="confirmPassword" 
-                    [ngClass]="{'is-invalid': createForm.errors?.match && form.confirmPassword.dirty, 'is-valid' : form.confirmPassword.valid && !createForm.errors?.match }"
+                    [ngClass]="{'is-invalid': editForm.errors?.match && form.confirmPassword.dirty, 'is-valid' : form.confirmPassword.valid && !editForm.errors?.match }"
                     required>
-                    <div *ngIf="form.confirmPassword.errors || createForm.errors" class="invalid-feedback">
+                    <div *ngIf="form.confirmPassword.errors || editForm.errors" class="invalid-feedback">
                       <div *ngIf="form.confirmPassword.errors?.required" >Confirm Password is required</div>
-                      <div *ngIf="createForm.errors?.match">Password must match</div>
+                      <div *ngIf="editForm.errors?.match">Password must match</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!createForm.valid">Create my account</button>
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!editForm.valid">Edit my account</button>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-danger" (click)="open(content)">Delet my account</button>
                   </div>
                 </div>
               </form>
@@ -153,3 +158,25 @@
         <div class="col-md-3"></div>
     </div>
 </div>
+
+
+<!-- Modal de suppression -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Account Deletion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete your profile?</strong></p>
+    <p>All information associated to this user profile will be permanently deleted.
+    <span class="text-danger">This operation can not be undone.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteAccount(user.id)">Delete my account</button>
+  </div>
+</ng-template>
+
