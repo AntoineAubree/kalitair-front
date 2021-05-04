@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { UserObservableService } from 'src/app/observable/userObservable';
 import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
@@ -11,24 +12,39 @@ import { SectionService } from '../../../../web-service/section.service';
 })
 export class CreateSectionComponent implements OnInit {
 
-  constructor(  private sectionService : SectionService,  protected modale : NgbActiveModal, private toastr : ToastrService) { }
+  userId = 0;
+
+  constructor(
+    private sectionService: SectionService,
+    protected modale: NgbActiveModal,
+    private toastr: ToastrService,
+    private userObservable: UserObservableService
+  ) { }
 
   ngOnInit(): void {
+    this.userObservable.getUserConnectSubject().subscribe(
+      (user) => {
+        this.userId = user.id;
+        console.log(this.userId);
+      }
+    )
   }
 
   dismiss() {
     this.modale.dismiss()
   }
 
-createSection(form : NgForm) {
-  this.toastr.success ('New Section)') // ici pour test
-  this.sectionService.create(form.value).subscribe( res=> {
-    this.modale.close()
+  createSection(form: NgForm) {
+    console.log(form.value);
+    this.sectionService.create(form.value).subscribe(res => {
+      
+      this.toastr.success('New Section)') // ici pour test
+      this.modale.close()
 
-  })
+    })
 
-//remettre ici la ligne 25
-}
+    //remettre ici la ligne 25
+  }
 
 
 }
