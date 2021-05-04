@@ -11,6 +11,10 @@ import { MessageComponent } from './forum-message/message.component';
 import { ForumSectionComponent } from './forum-section/forum-section.component';
 import { ForumRoutingModule } from './forum-routing.module';
 import { FormsModule } from '@angular/forms';
+import { CreateMessageComponent } from './forum-message/create-message/create-message.component';
+import { EditMessageComponent } from './forum-message/edit-message/edit-message.component';
+import { DeleteMessageComponent } from './forum-message/delete-message/delete-message.component';
+
 
 @NgModule({
   declarations: [
@@ -23,14 +27,19 @@ import { FormsModule } from '@angular/forms';
     DeleteSectionComponent,
     EditSectionComponent,
     MessageComponent,
-    ForumSectionComponent
+    ForumSectionComponent,
+    CreateMessageComponent,
+    EditMessageComponent,
+    DeleteMessageComponent,
+    
 
 
   ],
   imports: [
     CommonModule,
     ForumRoutingModule,
-    FormsModule
+    FormsModule,
+   
   ]
 })
 export class ForumModule {}

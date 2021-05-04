@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class DeleteSectionComponent implements OnInit {
 
   @Input() sectionId : number = 0
 
-  constructor( protected modale: NgbActiveModal, private sectionService : SectionService) { }
+  constructor( protected modale: NgbActiveModal, private sectionService : SectionService, private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -22,8 +23,10 @@ export class DeleteSectionComponent implements OnInit {
   }
 
   deleteSection(id : number) {
+    this.sectionService.delete(id).subscribe( res => {
+      this. toastr.success( 'This section has been correctly deleted ')
+      this.modale.close()
+    })
 
-    this.sectionService.delete(id)
-    this.modale.close()
   }
 }

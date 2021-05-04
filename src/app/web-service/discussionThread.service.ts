@@ -32,8 +32,12 @@ export class DiscussionThreadService {
     return this.http.put(this.baseUrl, discussionThread);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete(this.baseUrl + id);
+  }
+  update( discussionThread : DiscussionThread) {
+
+    return this.http.put(this.baseUrl + discussionThread.id, discussionThread)
   }
 }
 

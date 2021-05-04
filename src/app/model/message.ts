@@ -2,10 +2,11 @@ import {User} from './user';
 
 export interface Message{
 
-  id : Number;
+  id : number;
   content : String;
   date : Date;
   user : User;
   idDiscussionThread : Number;
+  edit : boolean;
 
 }

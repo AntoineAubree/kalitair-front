@@ -44,8 +44,13 @@ export class MessagesService {
     return this.http.put(this.baseUrl, message);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete(this.baseUrl + '/' +id);
+  }
+
+  update( message : Message) {
+
+    return this.http.put(this.baseUrl + message.id, message)
   }
 }
 

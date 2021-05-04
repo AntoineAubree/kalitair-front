@@ -5,6 +5,8 @@ import { DeleteSectionComponent } from './section-modale/delete-section/delete-s
 import { EditSectionComponent } from './section-modale/edit-section/edit-section.component';
 import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
+import { CreateSectionComponent } from './section-modale/create-section/create-section.component';
+
 
 @Component({
   selector: 'app-forum-home',
@@ -38,6 +40,21 @@ export class ForumHomeComponent implements OnInit {
 
     let modale = this.modalService.open(EditSectionComponent)
     modale.componentInstance.sectionId = id
+
+  }
+
+  createSection () {
+    let modale = this.modalService.open(CreateSectionComponent)
+    modale.result.then(
+      create=>{
+
+      }
+      ,dismiss=>{
+
+      }
+    )
+
+   
 
   }
 }

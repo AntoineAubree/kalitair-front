@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Section } from '../../../../model/section';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SectionService } from '../../../../web-service/section.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { SectionService } from '../../../../web-service/section.service';
 })
 export class CreateSectionComponent implements OnInit {
 
-  constructor(  private sectionService : SectionService,  protected modale : NgbActiveModal) { }
+  constructor(  private sectionService : SectionService,  protected modale : NgbActiveModal, private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -21,10 +21,14 @@ export class CreateSectionComponent implements OnInit {
   }
 
 createSection(form : NgForm) {
+  this.toastr.success ('New Section)') // ici pour test
+  this.sectionService.create(form.value).subscribe( res=> {
+    this.modale.close()
 
-  this.sectionService.create(form.value).subscribe()
-  this.modale.close()
+  })
 
+//remettre ici la ligne 25
 }
+
 
 }
