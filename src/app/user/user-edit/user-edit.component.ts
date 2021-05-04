@@ -7,9 +7,9 @@ import { User } from 'src/app/model/user';
 import { TownService } from 'src/app/web-service/town/town.service';
 import { UserService } from 'src/app/web-service/user/user.service';
 import { confirmPasswordValidator } from '../user-create/confirmPasswordValidator.directive';
-import * as _ from 'underscore';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { error } from 'protractor';
+import { UserObservableService } from 'src/app/observable/userObservable';
+
 
 @Component({
   selector: 'app-user-edit',
@@ -32,7 +32,8 @@ export class UserEditComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userObservable : UserObservableService,
   ) {
     this.config.backdrop = 'static';
     this.config.keyboard = false;
@@ -41,8 +42,10 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     //populate value
-    this.user = this.getUser();
-    console.log(this.user)
+    this.userObservable.getUserConnectSubject().subscribe(res => {
+      this.user = res
+    })
+    
 
     this.editForm = this.formBuilder.group({
       id: [this.user.id, Validators.required],
@@ -109,15 +112,6 @@ export class UserEditComponent implements OnInit {
     return this.editForm.get('town');
   }
 
-  public getUser(): any {
-    const user = window.localStorage.getItem('User');
-    if (user) {
-      return JSON.parse(user);
-    } else {
-      return {}
-    }
-  }
-
   findByZipCode() {
     if (this.editForm.get('postCodeCode')?.value.length == 5) {
       this.townService.findByZipCode(this.editForm.get('postCodeCode')?.value).subscribe(res => {
@@ -165,7 +159,6 @@ export class UserEditComponent implements OnInit {
     this.userService.delete(id).subscribe(res => {
         this.modalService.dismissAll('Cross Click');
         this.toastr.success('The user have been deleted correctly', 'You will be redirected to the home page in 2 secondes');
-        window.localStorage.removeItem('User');
         setTimeout(() => {
           this.router.navigate(['home']);
       }, 2000);  //5s
