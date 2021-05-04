@@ -7,11 +7,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ForumModule } from './forum/forum.module';
+import { NavigationComponent } from './navigation/navigation.component';
+import { UserRoutingModule } from './user/user-routing.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -20,7 +23,7 @@ import { ForumModule } from './forum/forum.module';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ForumModule
+    ForumModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

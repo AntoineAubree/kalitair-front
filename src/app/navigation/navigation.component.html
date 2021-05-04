@@ -1,0 +1,61 @@
+<header>
+    <nav class="navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+        <div class="row">
+            <div class="col-2 col-lg-1 mt-2 mb-2 pl-4 btn d-flex align-items-center">
+                <a class="h3 mb-0 text-light"><i class="fa fa-home"></i></a>
+            </div>
+
+            <div class="col-8 col-lg-6 mt-2 mb-2 d-flex align-items-center">
+                <input class="form-control w-100" type="search" placeholder="Cummune : Nantes" aria-label="Search">
+            </div>
+
+            <div class="col-2 d-lg-none mt-2 mb-2 pr-4 d-flex justify-content-end">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
+                    aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse col-lg-5 mt-2 mb-2" id="navbarMenu">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <ul class="d-flex flex-column flex-lg-row mb-0 pl-0 align-items-center col-lg-6 col-12 pr-0">
+                            <li class="btn btn-dark col-12 col-lg-4 ">
+                                <a>Forum</a>
+                            </li>
+                            <li class="btn btn-dark col-12 col-lg-4">
+                                <a>Favoris</a>
+                            </li>
+                            <li class="d-none d-lg-inline btn col-lg-4">
+                                <a class="h3 mb-0 text-light dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+                                <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                                    <li class="btn btn-dark col-12" routerLink="/login"><a><i class="fa fa-sign-in"></i><span>Se connecter</span></a></li>
+                                    <li class="btn btn-dark col-12" routerLink="/create"><a><i class="fa fa-user-plus"></i><span>S'inscrire</span></a></li>
+                                    <li class="btn btn-dark col-12"><a><i class="fa fa-user"></i><span>Profil</span></a></li>
+                                    <li class="btn btn-dark col-12"><a><i class="fa fa-sign-out"></i><span>Se déconnecter</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="btn btn-dark d-lg-none col-12" routerLink="/login">
+                                <a>Se connecter</a>
+                            </li>
+                            <li class="btn btn-dark d-lg-none col-12" routerLink="/create">
+                                <a>S'inscrire</a>
+                            </li>
+                            <li class="btn btn-dark d-lg-none col-12">
+                                <a>Profil</a>
+                            </li>
+                            <li class="btn btn-dark d-lg-none col-12">
+                                <a>Se déconnecter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+</header>

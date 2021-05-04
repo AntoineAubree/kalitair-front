@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
 import { ForumSectionComponent } from './forum/forum-section/forum-section.component';
 import { MessageComponent } from './forum/forum-message/message.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
 
 const routes: Routes = [
-
 
 ];
 
