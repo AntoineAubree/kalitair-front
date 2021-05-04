@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 
 
@@ -12,6 +13,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
+  get(token: string): Observable<User> {
+    return this.http.get<User>(this.baseUrl + "/" + token);
+  }
+
   create(user: User) {
     return this.http.post(this.baseUrl, user);
   }

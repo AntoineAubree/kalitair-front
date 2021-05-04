@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserModule } from './user/user.module';
-
-import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ForumModule } from './forum/forum.module';
-import { NavigationComponent } from './navigation/navigation.component';
-import { UserRoutingModule } from './user/user-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
+import { UserModule } from './user/user.module';
 
+import { AppComponent } from './app.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,14 +20,15 @@ import { UserRoutingModule } from './user/user-routing.module';
   ],
   imports: [
     AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
-    UserModule,
-    NgbModule,
-    HttpClientModule,
+    CommonModule,
     FormsModule,
     ForumModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule,
+    NgbModule,
+    ToastrModule.forRoot(),
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

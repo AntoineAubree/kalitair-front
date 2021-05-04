@@ -18,8 +18,9 @@ import { UserObservableService } from 'src/app/observable/userObservable';
 })
 export class UserEditComponent implements OnInit {
 
+  observableReady = true;
   user = {} as User
-  editForm: FormGroup = new FormGroup({});
+  // editForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
   errorHttpMessage: String = '';
 
@@ -39,70 +40,68 @@ export class UserEditComponent implements OnInit {
     this.config.keyboard = false;
   }
 
-
   ngOnInit(): void {
     //populate value
     this.userObservable.getUserConnectSubject().subscribe(res => {
       this.user = res
     })
-    
 
-    this.editForm = this.formBuilder.group({
-      id: [this.user.id, Validators.required],
-      pseudo: [this.user.pseudo, [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-      ]],
-      firstName: [this.user.firstName, [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-      ]],
-      lastName: [this.user.lastName ,[
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-      ]],
-      addressNbStreet: [this.user.addressNbStreet, [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(8),
-        Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
-      ]],
-      addressStreet: [this.user.addressStreet, [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(80),
-        Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-      ]],
-      postCodeCode: [this.user.postCodeCode, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(5),
-        Validators.pattern('([0-9])+')
-      ]],
-      townName: [this.user.townName, Validators.required],
-      email: [this.user.email, [
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]],
-      password: [, [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(36),
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
-      ]],
-      confirmPassword: ['', Validators.required]
-        	
-    },
-      {
-      validators : confirmPasswordValidator
-      });
-    
   }
+
+  editForm = this.formBuilder.group({
+    id: [this.user.id, Validators.required],
+    pseudo: [this.user.pseudo, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+    ]],
+    firstName: [this.user.firstName, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+    ]],
+    lastName: [this.user.lastName ,[
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+    ]],
+    addressNbStreet: [this.user.addressNbStreet, [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(8),
+      Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
+    ]],
+    addressStreet: [this.user.addressStreet, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(80),
+      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+    ]],
+    postCodeCode: [this.user.postCodeCode, [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(5),
+      Validators.pattern('([0-9])+')
+    ]],
+    townName: [this.user.townName, Validators.required],
+    email: [this.user.email, [
+      Validators.required,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]],
+    password: [, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(36),
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
+    ]],
+    confirmPassword: ['', Validators.required]
+        
+  },
+    {
+    validators : confirmPasswordValidator
+    });
 
   get form() {
     return this.editForm.controls;

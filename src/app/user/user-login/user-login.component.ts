@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserObservableService } from 'src/app/observable/userObservable';
@@ -38,21 +38,19 @@ export class UserLoginComponent implements OnInit {
   }
 
   login() {
-    this.authenticationService.login(this.loginForm.value).subscribe(res => {
-      if (res) {
+    this.authenticationService.login(this.loginForm.value).subscribe(
+      res => {
         localStorage.setItem("token", String(res.id));
         this.userObservable.setUserConnectSubject(res);
         this.toastr.success('Valid user', 'You will be redirected to the home page in 2 sec');
         setTimeout(() => {
           this.router.navigate(['my-account/edit']);
         }, 2000);
-      } else {
+      }, error => {
+        console.log(error)
         this.toastr.error('Sign in impossible, try again');
-      }
-    }, error => {
-      console.log(error)
-      this.errorHttpMessage = error.error.message
-    })
+        this.errorHttpMessage = error.error.message
+      })
   }
 
   createAccount() {

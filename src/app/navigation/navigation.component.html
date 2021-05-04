@@ -33,22 +33,22 @@
                                 <a class="h3 mb-0 text-light dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                                 <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                                    <li class="btn btn-dark col-12" routerLink="/login"><a><i class="fa fa-sign-in"></i><span>Se connecter</span></a></li>
-                                    <li class="btn btn-dark col-12" routerLink="/create"><a><i class="fa fa-user-plus"></i><span>S'inscrire</span></a></li>
-                                    <li class="btn btn-dark col-12"><a><i class="fa fa-user"></i><span>Profil</span></a></li>
-                                    <li class="btn btn-dark col-12"><a><i class="fa fa-sign-out"></i><span>Se déconnecter</span></a></li>
+                                    <li *ngIf="!isLog" class="btn btn-dark col-12" routerLink="/login"><a><i class="fa fa-sign-in"></i><span>Se connecter</span></a></li>
+                                    <li *ngIf="!isLog" class="btn btn-dark col-12" routerLink="/create"><a><i class="fa fa-user-plus"></i><span>S'inscrire</span></a></li>
+                                    <li *ngIf="isLog" class="btn btn-dark col-12" routerLink="/my-account/edit"><a><i class="fa fa-user"></i><span>Profil</span></a></li>
+                                    <li *ngIf="isLog" class="btn btn-dark col-12"><a><i class="fa fa-sign-out"></i><span>Se déconnecter</span></a></li>
                                 </ul>
                             </li>
-                            <li class="btn btn-dark d-lg-none col-12" routerLink="/login">
+                            <li *ngIf="!isLog" class="btn btn-dark d-lg-none col-12" routerLink="/login">
                                 <a>Se connecter</a>
                             </li>
-                            <li class="btn btn-dark d-lg-none col-12" routerLink="/create">
+                            <li *ngIf="!isLog" class="btn btn-dark d-lg-none col-12" routerLink="/create">
                                 <a>S'inscrire</a>
                             </li>
-                            <li class="btn btn-dark d-lg-none col-12">
+                            <li *ngIf="isLog" class="btn btn-dark d-lg-none col-12" routerLink="/my-account/edit">
                                 <a>Profil</a>
                             </li>
-                            <li class="btn btn-dark d-lg-none col-12">
+                            <li *ngIf="isLog" class="btn btn-dark d-lg-none col-12">
                                 <a>Se déconnecter</a>
                             </li>
                         </ul>
