@@ -99,7 +99,6 @@ export class UserCreateComponent implements OnInit {
       this.TownService.findByZipCode(this.createForm.get('postCodeCode')?.value).subscribe(res => {
         if (res) {
           this.towns = res;
-          console.log(this.towns);
         }
       })
     }
@@ -107,7 +106,6 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit() {
     // stop here if form is invalid
-    console.log(this.createForm.value)
     this.userService.create(this.createForm.value).subscribe(res => {
       console.log(res)
       if (res) {

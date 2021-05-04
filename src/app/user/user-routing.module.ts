@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path : "sign-up" , component  : UserCreateComponent
+  },
+  {
+    path : "my-account/edit", component : UserEditComponent
   }
 ];
 

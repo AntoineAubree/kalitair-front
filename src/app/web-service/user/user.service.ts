@@ -8,7 +8,7 @@ import { User } from 'src/app/model/user';
 })
 export class UserService {
 
-  baseUrl : string = 'http://localhost:8080/user'
+  baseUrl : string = 'http://localhost:8080/user/'
 
   constructor(private http: HttpClient) { }
   
@@ -25,11 +25,11 @@ export class UserService {
   }
   
   checkPseudo(pseudo: string) {
-    return this.http.get<boolean>(this.baseUrl + "/pseudo" + pseudo )
+    return this.http.get<boolean>(this.baseUrl + "pseudo" + pseudo )
   }
 
   checkEmail(email: string) {
-    return this.http.get<boolean>(this.baseUrl + "/email" + email)
+    return this.http.get<boolean>(this.baseUrl + "email" + email)
   }
 
 

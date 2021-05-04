@@ -39,6 +39,7 @@ export class UserLoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value).subscribe(res => {
       if (res) {
         localStorage.setItem("token", String(res.id));
+        localStorage.setItem("User", JSON.stringify(res))
         this.toastr.success('Valid user', 'You will be redirected to the home page in 2 sec');
         setTimeout(() => {
           this.router.navigate(['home']);
@@ -47,6 +48,7 @@ export class UserLoginComponent implements OnInit {
         this.toastr.error('Sign in impossible, try again');
       }
     }, error => {
+      console.log(error)
       this.errorHttpMessage = error.error.message
     })
   }
