@@ -1,20 +1,20 @@
-<div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">MESSAGES</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
+<div class="model-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">MESSAGES</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
-</div>
-<div class="modal-body">
-  <form (ngSubmit)='createMessage(form)' #form ="ngForm" >
-    <div class="form-group">
-      <label for="MessageTitle">Message</label>
-      <input ngModel #title type="email" class="form-control" id="InputMessageTitle" placeholder="Type you message here">
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
-        <button type="submit" class="btn btn-primary"> POST </button>
-      </div>
     </div>
-  </form>
+    <div class="modal-body">
+        <form (ngSubmit)='createMessage(form)' #form="ngForm">
+            <div class="form-group">
+                <label for="MessageTitle">Message</label>
+                <input ngModel #message="ngModel" name="message" class="form-control" id="InputMessageTitle" placeholder="Type you message here">
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
+                <button type="submit" class="btn btn-primary"> POST </button>
+            </div>
+        </form>
+    </div>
 </div>
-
-

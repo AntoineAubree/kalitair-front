@@ -44,6 +44,14 @@ export class ForumSectionComponent implements OnInit {
 
   createDiscussionThread () {
     let modale = this.modalService.open(CreateDiscussionThreadComponent)
+    modale.result.then(
+      create=>{
+
+      }
+      ,dismiss=>{
+
+      }
+    )
 
   }
 }

@@ -44,6 +44,14 @@ export class MessageComponent implements OnInit {
   createMessage () {
 
     let modale = this.modalService.open(CreateMessageComponent)
+    modale.result.then(
+      create=>{
+
+      }
+      ,dismiss=>{
+
+      }
+    )
 
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Section } from '../../../../model/section';
 import { SectionService } from '../../../../web-service/section.service';
 
@@ -21,7 +21,6 @@ export class CreateSectionComponent implements OnInit {
   }
 
 createSection(form : NgForm) {
-
   this.sectionService.create(form.value).subscribe()
   this.modale.close()
 

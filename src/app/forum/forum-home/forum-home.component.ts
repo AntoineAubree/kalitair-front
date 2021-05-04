@@ -7,6 +7,7 @@ import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
 import { CreateSectionComponent } from './section-modale/create-section/create-section.component';
 
+
 @Component({
   selector: 'app-forum-home',
   templateUrl: './forum-home.component.html',
@@ -44,6 +45,16 @@ export class ForumHomeComponent implements OnInit {
 
   createSection () {
     let modale = this.modalService.open(CreateSectionComponent)
+    modale.result.then(
+      create=>{
+
+      }
+      ,dismiss=>{
+
+      }
+    )
+
+   
 
   }
 }

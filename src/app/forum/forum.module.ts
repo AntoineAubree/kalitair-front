@@ -15,6 +15,7 @@ import { CreateMessageComponent } from './forum-message/create-message/create-me
 import { EditMessageComponent } from './forum-message/edit-message/edit-message.component';
 import { DeleteMessageComponent } from './forum-message/delete-message/delete-message.component';
 
+
 @NgModule({
   declarations: [
 
@@ -29,14 +30,16 @@ import { DeleteMessageComponent } from './forum-message/delete-message/delete-me
     ForumSectionComponent,
     CreateMessageComponent,
     EditMessageComponent,
-    DeleteMessageComponent
+    DeleteMessageComponent,
+    
 
 
   ],
   imports: [
     CommonModule,
     ForumRoutingModule,
-    FormsModule
+    FormsModule,
+   
   ]
 })
 export class ForumModule {}
