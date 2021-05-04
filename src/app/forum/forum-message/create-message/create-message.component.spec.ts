@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForumAcceuilComponent } from './forum-acceuil.component';
+import { CreateMessageComponent } from './create-message.component';
 
-describe('ForumAcceuilComponent', () => {
-  let component: ForumAcceuilComponent;
-  let fixture: ComponentFixture<ForumAcceuilComponent>;
+describe('CreateMessageComponent', () => {
+  let component: CreateMessageComponent;
+  let fixture: ComponentFixture<CreateMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForumAcceuilComponent ]
+      declarations: [ CreateMessageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForumAcceuilComponent);
+    fixture = TestBed.createComponent(CreateMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

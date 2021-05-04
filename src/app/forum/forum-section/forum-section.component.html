@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="main-body p-0">
+    <div class="inner-wrapper">
+      <!-- Inner sidebar -->
+      <div class="inner-sidebar">
+        <!-- Inner sidebar header -->
+        <div class="inner-sidebar-header justify-content-center">
+         <h1 class ="text-center">FORUM</h1>
+         <h2 class="text-center">Discussion threads</h2>
+         <h3 class='text-center'>Welcome to Kalitair's Forum</h3>
+        </div>
+        <div class="inner-sidebar-header justify-content-center">
+          <button  (click) = "createDiscussionThread()" class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
+            data-target="#threadModal">
+
+          Create a new discussion thread
+          </button>
+
+          <!-- Forum List -->
+          <div class="inner-main-body p-2 p-sm-3  forum-content show">
+            <div class="card mb-2" *ngFor =' let discussionThread of discussionThreads' (click)='getDiscussionThreadById()'>
+              <div class="card-body p-2 p-sm-3">
+                <div class="media forum-item">
+                  <a data-target=".forum-content"><img src="https://cdn.icon-icons.com/icons2/936/PNG/512/group-profile-users_icon-icons.com_73540.png"
+                      class="mr-3 rounded-circle" width="50" alt="category" /></a>
+                  <div class="media-body">
+                    <h4> {{discussionThread.title}}</h4>
+                    <button  *ngIf="discussionThread.edit == true"(click)="editDiscussionThread(discussionThread.id)">Edit</button>
+                    <button *ngIf="discussionThread.edit == true"(click)="deleteDiscussionThread(discussionThread.id)">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+

@@ -9,6 +9,8 @@ import { UserModule } from './user/user.module';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { ForumModule } from './forum/forum.module';
 
 
 
@@ -23,8 +25,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
+    ForumModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
