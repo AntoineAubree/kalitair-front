@@ -109,10 +109,10 @@ export class UserCreateComponent implements OnInit {
     this.userService.create(this.createForm.value).subscribe(res => {
       console.log(res)
       if (res) {
-        this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 3 sec');
+        this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 2 sec');
         setTimeout(() => {
           this.router.navigate(['home']);
-      }, 5000);  //5s
+      }, 2000);  //2s
       }
     }, error => {
       this.errorHttpMessage = error.error.message.split("|");
@@ -121,13 +121,6 @@ export class UserCreateComponent implements OnInit {
     if (this.createForm.invalid) {
       return
     }
-  }
-
-  changeCity(e : any) {
-    this.town?.setValue(e.target.value, {
-      onlySelf : true
-    }
-    )
   }
 
 }

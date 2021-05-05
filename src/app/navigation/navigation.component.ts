@@ -36,6 +36,8 @@ export class NavigationComponent implements OnInit {
 
   disconnect(): void {
     localStorage.removeItem('token');
+    this.isLog = false;
+    this.isAdmin = false;
     this.router.navigate(['/login']);
   }
 }

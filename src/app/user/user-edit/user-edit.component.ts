@@ -98,6 +98,9 @@ export class UserEditComponent implements OnInit {
             validators: confirmPasswordValidator
           }
         );
+        const townUser = {} as Town;
+        townUser.name = res.townName;
+        this.towns.push(townUser);
       }
     );
   }
@@ -112,7 +115,6 @@ export class UserEditComponent implements OnInit {
 
   findByZipCode() {
     if (this.editForm.get('postCodeCode')?.value.length == 5) {
-      console.log('tets');
       this.townService.findByZipCode(this.editForm.get('postCodeCode')?.value).subscribe(res => {
         if (res) {
           this.towns = res;

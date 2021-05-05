@@ -6,5 +6,5 @@ export interface Town {
     name: string;
 
     //zipCode
-    zipCode: string;
+    zipCode: string[];
 }

@@ -1,155 +1,166 @@
 <main class="container">
-    <div class="row mt-5">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h2>Create your account</h2>
-            <form [formGroup]='createForm'>
-                <div class="form-group row mt-5">
-                  <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
-                  <div class="col-sm-9">
-                    <input formControlName='pseudo' type="text" class="form-control" id="pseudo" 
-                    [ngClass]="{'is-invalid': (!form.pseudo.valid && form.pseudo.dirty) || this.errorHttpMessage , 'is-valid' : form.pseudo.valid}" 
-                    placeholder="Pseudo" required>
-                    <div *ngIf="this.errorHttpMessage[0] === '1' " class="invalid-feedback">
-                      <small>{{this.errorHttpMessage[1]}}</small>
-                    </div>
-                    <div *ngIf="form.pseudo.errors" class="invalid-feedback">
-                      <div *ngIf="form.pseudo.errors.required">Pseudo required</div>
-                      <div *ngIf="form.pseudo.errors.minlength">Pseudo must be at least 2 characters</div>
-                      <div *ngIf="form.pseudo.errors.maxlength">Pseudo can't exceed 50 characters</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="firstName" class="col-sm-3 col-form-label">FirstName *</label>
-                  <div class="col-sm-9">
-                    <input formControlName="firstName" type="text" class="form-control" id="firstName" 
-                    [ngClass]="{'is-invalid': !form.firstName.valid && form.firstName.dirty, 'is-valid': form.firstName.valid}"
-                    placeholder="FirstName" required>
-                    <div *ngIf="form.firstName.errors" class="invalid-feedback">
-                      <div *ngIf="form.firstName.errors.required">FirstName required</div>
-                      <div *ngIf="form.firstName.errors.minlength">FirstName must be at least 2 characters</div>
-                      <div *ngIf="form.firstName.errors.maxlength">FirstName can't exceed 50 characters</div>
-                      <div *ngIf="form.firstName.errors.pattern">FirstName must contains only letters - _ or spaces </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="lastName" class="col-sm-3 col-form-label">LastName *</label>
-                  <div class="col-sm-9">
-                    <input formControlName="lastName" type="text" class="form-control" id="lastName"
-                    [ngClass]="{'is-invalid': !form.lastName.valid && form.lastName.dirty, 'is-valid': form.lastName.valid}"
-                    placeholder="LastName" required>
-                    <div *ngIf="form.lastName.errors" class="invalid-feedback">
-                      <div *ngIf="form.lastName.errors.required">LastName required</div>
-                      <div *ngIf="form.lastName.errors.minlength">LastName must be at least 2 characters</div>
-                      <div *ngIf="form.lastName.errors.maxlength">LastName can't exceed 50 characters</div>
-                      <div *ngIf="form.lastName.errors.pattern">LastName must contains only letters - _ or spaces </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="streetNumber" class="col-sm-3 col-form-label">Street number *</label>
-                  <div class="col-sm-9 ">
-                    <input formControlName="addressNbStreet" type="text" class="form-control " id="streetNumber"
-                    [ngClass]="{'is-invalid': !form.addressNbStreet.valid && form.addressNbStreet.dirty, 'is-valid': form.addressNbStreet.valid}"                    
-                    placeholder="28, 1000bis, 1000ter ...." required>
-                    <div *ngIf="form.addressNbStreet.errors" class="invalid-feedback">
-                      <div *ngIf="form.addressNbStreet.errors.required">Street number required</div>
-                      <div *ngIf="form.addressNbStreet.errors.minlength">Street number must be at least 1 characters</div>
-                      <div *ngIf="form.addressNbStreet.errors.maxlength">Street number can't exceed 8 characters</div>
-                      <div *ngIf="form.addressNbStreet.errors.pattern">Street number can only been a 4/less digits number or 4 digits number bis/ter </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="streetName" class="col-sm-3 col-form-label">Street name *</label>
-                  <div class="col-sm-9">
-                    <input formControlName="addressStreet" type="text" class="form-control" id="streetName" 
-                    [ngClass]="{'is-invalid': !form.addressStreet.valid && form.addressStreet.dirty, 'is-valid' : form.addressStreet.valid}"
-                    placeholder="Rue du Maréchal" required>
-                    <div *ngIf="form.addressStreet.errors" class="invalid-feedback">
-                      <div *ngIf="form.addressStreet.errors.required">Street name required</div>
-                      <div *ngIf="form.addressStreet.errors.minlength">Street name must be at least 2 characters</div>
-                      <div *ngIf="form.addressStreet.errors.maxlength">Street name can't exceed 80 characters</div>
-                      <div *ngIf="form.addressStreet.errors.pattern">Street name must contains only letters - _ or spaces</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="zipCode" class="col-sm-3 col-form-label">Zip Code *</label>
-                  <div class="col-sm-9">
-                    <input formControlName="postCodeCode" type="text" class="form-control" id="zipCode" 
-                    [ngClass]="{'is-invalid': !form.postCodeCode.valid && form.postCodeCode.dirty, 'is-valid' : form.postCodeCode.valid}"
-                    placeholder="58947" (input)="findByZipCode()" required>
-                    <div *ngIf="form.postCodeCode.errors" class="invalid-feedback">
-                      <div *ngIf="form.postCodeCode.errors.required">zipCode required</div>
-                      <div *ngIf="form.postCodeCode.errors.minlength">zipCode can't be less than a 5 digits number</div>
-                      <div *ngIf="form.postCodeCode.errors.maxlength">zipCode can't be more than a 5 digits number</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="town" class="col-sm-3 col-form-label">Town *</label>
-                  <div class="col-sm-9">
-                    <select formControlName="townName" (change)="changeCity($event)" class="custom-select mr-sm-2" id="town" 
-                    [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
-                    required>
-                        <option disabled>Choose your town</option>
-                        <option *ngFor="let town of towns" value={{town.name}}>{{town.name}}</option>
-                    </select>
-                    <div *ngIf="form.townName.errors" class="invalid-feedback">
-                      <div *ngIf="form.townName.errors.required">Town required</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="email" class="col-sm-3 col-form-label">Email *</label>
-                  <div class="col-sm-9">
-                      <input formControlName='email' type="email" id="inputEmail" class="form-control" 
-                    [ngClass]="{'is-invalid': (!form.email.valid && form.email.dirty) || this.errorHttpMessage}"
-                    placeholder="Email address" required>
-                    <small *ngIf="form.email.errors?.pattern" class="invalid-feedback">
-                        xxx@xxx.xxx
-                    </small>
-                    <div *ngIf="this.errorHttpMessage[0] === '2' " class="invalid-feedback">
-                      <small>{{this.errorHttpMessage[1]}}</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="password" class="col-sm-3 col-form-label">Password *</label>
-                  <div class="col-sm-9">
-                    <input formControlName='password' type="password" class="form-control" id="password"
-                    [ngClass]="{'is-invalid': !form.password.valid && form.password.dirty, 'is-valid': form.password.valid}"
-                    placeholder="Password" required>
-                    <div *ngIf="form.password.errors" class="invalid-feedback">
-                      <div *ngIf="form.password.errors.required">password required</div>
-                      <div *ngIf="form.password.errors.minlength">password must contains at least 8 characters</div>
-                      <div *ngIf="form.password.errors.maxlength">password must contains no more than 36 characters</div>
-                      <div *ngIf="form.password.errors.pattern">password must contains at least one uppercase letter, one lowercase letter, one number and one special character</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="confirmPassword" class="col-sm-3 col-form-label">Password Confirmation</label>
-                  <div class="col-sm-9 d-flex align-item-center flex-column">
-                    <input formControlName="confirmPassword" type='password' class="form-control" id="confirmPassword" 
-                    [ngClass]="{'is-invalid': createForm.errors?.match && form.confirmPassword.dirty, 'is-valid' : form.confirmPassword.valid && !createForm.errors?.match }"
-                    required>
-                    <div *ngIf="form.confirmPassword.errors || createForm.errors" class="invalid-feedback">
-                      <div *ngIf="form.confirmPassword.errors?.required" >Confirm Password is required</div>
-                      <div *ngIf="createForm.errors?.match">Password must match</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!createForm.valid">Create my account</button>
-                  </div>
-                </div>
-              </form>
+  <div class="row mt-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2>Create your account</h2>
+      <form [formGroup]='createForm'>
+        <div class="form-group row mt-5">
+          <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
+          <div class="col-sm-9">
+            <input formControlName='pseudo' type="text" class="form-control" id="pseudo"
+              [ngClass]="{'is-invalid': (!form.pseudo.valid && form.pseudo.dirty) || this.errorHttpMessage , 'is-valid' : form.pseudo.valid}"
+              placeholder="Pseudo" required>
+            <div *ngIf="this.errorHttpMessage[0] === '1' " class="invalid-feedback">
+              <small>{{this.errorHttpMessage[1]}}</small>
+            </div>
+            <div *ngIf="form.pseudo.errors" class="invalid-feedback">
+              <div *ngIf="form.pseudo.errors.required">Pseudo required</div>
+              <div *ngIf="form.pseudo.errors.minlength">Pseudo must be at least 2 characters</div>
+              <div *ngIf="form.pseudo.errors.maxlength">Pseudo can't exceed 50 characters</div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="form-group row">
+          <label for="firstName" class="col-sm-3 col-form-label">FirstName *</label>
+          <div class="col-sm-9">
+            <input formControlName="firstName" type="text" class="form-control" id="firstName"
+              [ngClass]="{'is-invalid': !form.firstName.valid && form.firstName.dirty, 'is-valid': form.firstName.valid}"
+              placeholder="FirstName" required>
+            <div *ngIf="form.firstName.errors" class="invalid-feedback">
+              <div *ngIf="form.firstName.errors.required">FirstName required</div>
+              <div *ngIf="form.firstName.errors.minlength">FirstName must be at least 2 characters</div>
+              <div *ngIf="form.firstName.errors.maxlength">FirstName can't exceed 50 characters</div>
+              <div *ngIf="form.firstName.errors.pattern">FirstName must contains only letters - _ or spaces </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lastName" class="col-sm-3 col-form-label">LastName *</label>
+          <div class="col-sm-9">
+            <input formControlName="lastName" type="text" class="form-control" id="lastName"
+              [ngClass]="{'is-invalid': !form.lastName.valid && form.lastName.dirty, 'is-valid': form.lastName.valid}"
+              placeholder="LastName" required>
+            <div *ngIf="form.lastName.errors" class="invalid-feedback">
+              <div *ngIf="form.lastName.errors.required">LastName required</div>
+              <div *ngIf="form.lastName.errors.minlength">LastName must be at least 2 characters</div>
+              <div *ngIf="form.lastName.errors.maxlength">LastName can't exceed 50 characters</div>
+              <div *ngIf="form.lastName.errors.pattern">LastName must contains only letters - _ or spaces </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="streetNumber" class="col-sm-3 col-form-label">Street number *</label>
+          <div class="col-sm-9 ">
+            <input formControlName="addressNbStreet" type="text" class="form-control " id="streetNumber"
+              [ngClass]="{'is-invalid': !form.addressNbStreet.valid && form.addressNbStreet.dirty, 'is-valid': form.addressNbStreet.valid}"
+              placeholder="28, 1000bis, 1000ter ...." required>
+            <div *ngIf="form.addressNbStreet.errors" class="invalid-feedback">
+              <div *ngIf="form.addressNbStreet.errors.required">Street number required</div>
+              <div *ngIf="form.addressNbStreet.errors.minlength">Street number must be at least 1 characters</div>
+              <div *ngIf="form.addressNbStreet.errors.maxlength">Street number can't exceed 8 characters</div>
+              <div *ngIf="form.addressNbStreet.errors.pattern">Street number can only been a 4/less digits number or 4
+                digits number bis/ter </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="streetName" class="col-sm-3 col-form-label">Street name *</label>
+          <div class="col-sm-9">
+            <input formControlName="addressStreet" type="text" class="form-control" id="streetName"
+              [ngClass]="{'is-invalid': !form.addressStreet.valid && form.addressStreet.dirty, 'is-valid' : form.addressStreet.valid}"
+              placeholder="Rue du Maréchal" required>
+            <div *ngIf="form.addressStreet.errors" class="invalid-feedback">
+              <div *ngIf="form.addressStreet.errors.required">Street name required</div>
+              <div *ngIf="form.addressStreet.errors.minlength">Street name must be at least 2 characters</div>
+              <div *ngIf="form.addressStreet.errors.maxlength">Street name can't exceed 80 characters</div>
+              <div *ngIf="form.addressStreet.errors.pattern">Street name must contains only letters - _ or spaces</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="zipCode" class="col-sm-3 col-form-label">Zip Code *</label>
+          <div class="col-sm-9">
+            <input formControlName="postCodeCode" type="text" class="form-control" id="zipCode"
+              [ngClass]="{'is-invalid': !form.postCodeCode.valid && form.postCodeCode.dirty, 'is-valid' : form.postCodeCode.valid}"
+              placeholder="58947" (input)="findByZipCode()" required>
+            <div *ngIf="form.postCodeCode.errors" class="invalid-feedback">
+              <div *ngIf="form.postCodeCode.errors.required">zipCode required</div>
+              <div *ngIf="form.postCodeCode.errors.minlength">zipCode can't be less than a 5 digits number</div>
+              <div *ngIf="form.postCodeCode.errors.maxlength">zipCode can't be more than a 5 digits number</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="town" class="col-sm-3 col-form-label">Town *</label>
+          <div class="col-sm-9">
+            <select formControlName="townName" class="custom-select mr-sm-2" id="town"
+              [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
+              required>
+              <option *ngFor="let town of towns" [value]=town.name>{{town.name}}</option>
+            </select>
+            <div *ngIf="form.townName.errors" class="invalid-feedback">
+              <div *ngIf="form.townName.errors.required">Town required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label">Email *</label>
+          <div class="col-sm-9">
+            <input formControlName='email' type="email" id="inputEmail" class="form-control"
+              [ngClass]="{'is-invalid': (!form.email.valid && form.email.dirty) || this.errorHttpMessage}"
+              placeholder="Email address" required>
+            <small *ngIf="form.email.errors?.pattern" class="invalid-feedback">
+              xxx@xxx.xxx
+            </small>
+            <div *ngIf="this.errorHttpMessage[0] === '2' " class="invalid-feedback">
+              <small>{{this.errorHttpMessage[1]}}</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-3 col-form-label">Password *</label>
+          <div class="col-sm-9">
+            <input formControlName='password' type="password" class="form-control" id="password"
+              [ngClass]="{'is-invalid': !form.password.valid && form.password.dirty, 'is-valid': form.password.valid}"
+              placeholder="Password" required>
+            <div *ngIf="form.password.errors" class="invalid-feedback">
+              <div *ngIf="form.password.errors.required">password required</div>
+              <div *ngIf="form.password.errors.minlength">password must contains at least 8 characters</div>
+              <div *ngIf="form.password.errors.maxlength">password must contains no more than 36 characters</div>
+              <div *ngIf="form.password.errors.pattern">password must contains at least one uppercase letter, one
+                lowercase letter, one number and one special character</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="confirmPassword" class="col-sm-3 col-form-label">Password Confirmation</label>
+          <div class="col-sm-9 d-flex align-item-center flex-column">
+            <input formControlName="confirmPassword" type='password' class="form-control" id="confirmPassword"
+              [ngClass]="{'is-invalid': createForm.errors?.match && form.confirmPassword.dirty, 'is-valid' : form.confirmPassword.valid && !createForm.errors?.match }"
+              required>
+            <div *ngIf="form.confirmPassword.errors || createForm.errors" class="invalid-feedback">
+              <div *ngIf="form.confirmPassword.errors?.required">Confirm Password is required</div>
+              <div *ngIf="createForm.errors?.match">Password must match</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!createForm.valid">Create my
+              account</button>
+          </div>
+        </div>
+      </form>
     </div>
+    <div class="col-md-3"></div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination d-flex justify-content-center">
+        <li class="page-item" [ngClass]="{'active': true}" 
+            >
+            <a class="page-link">1</a>
+            <a class="page-link">2</a>
+        </li>
+    </ul>
+</nav>
 </main>
