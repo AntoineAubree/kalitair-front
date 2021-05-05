@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/web-service/user/user.service';
 
 @Component({
   selector: 'app-ban-modal',
@@ -13,20 +14,18 @@ export class BanModalComponent implements OnInit {
   @Output() notifyParent = new EventEmitter<boolean>();
   
 
-  constructor(private modalService : NgbModal) { }
+  constructor(private userService : UserService, public activeModal : NgbActiveModal) { }
 
   ngOnInit(): void {
   }
 
-  open(user: User) {
-    const modalRef = this.modalService.open(BanModalComponent)
-    modalRef.componentInstance.user = user
-    console.log(user);
-  }
 
   banUnban() {
-    this.user.banned = this.user.banned ? false : true
-    console.log(this.user)
+    this.user.banned = this.user.banned ? false : true;
+    this.userService.put(this.user).subscribe(res => {
+      
+    })
+
   }
 
 }

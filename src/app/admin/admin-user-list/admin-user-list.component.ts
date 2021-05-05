@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/web-service/user/user.service';
+import { BanModalComponent } from './ban-modal/ban-modal.component';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class AdminUserListComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService, private modalService : NgbModal) { }
 
   ngOnInit(): void {
     this.populate();
@@ -29,6 +31,12 @@ export class AdminUserListComponent implements OnInit {
     if (e) {
       this.populate();
     }
+  }
+
+  openModal(user: User) {
+    const modalRef = this.modalService.open(BanModalComponent)
+    modalRef.componentInstance.user = user
+    console.log(user);
   }
 
 }
