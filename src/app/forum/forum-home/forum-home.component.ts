@@ -6,6 +6,7 @@ import { EditSectionComponent } from './section-modale/edit-section/edit-section
 import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
 import { CreateSectionComponent } from './section-modale/create-section/create-section.component';
+import * as _ from 'underscore';
 
 
 @Component({
@@ -16,18 +17,46 @@ import { CreateSectionComponent } from './section-modale/create-section/create-s
 export class ForumHomeComponent implements OnInit {
 
   sections : Section[] = [];
-
+  pagination : any;
+  pages : number [] = [];
 
 
   constructor(private sectionService : SectionService, private modalService : NgbModal) { }
 
+
   ngOnInit(): void {
+
+    this.pagination = {
+      currentPage : 0,
+      itemsPerPage : 5,
+      totalPages :0,
+      totalElements : 0
+    };
+    this.populateSection();
   }
 
   getSectionById(){
 
     this.sectionService.findById(1)
   }
+
+  populateSection (){
+
+    this.sectionService.get(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((response: any) => {
+    this.pagination.totalElements = response.totalElements;
+    this.pagination.totalPages = response.totalPages;
+    this.pages = _.range(1, this.pagination.totalPages + 1);
+    this.sections = response.content;
+    }
+    );
+  }
+
+
+  paginate(page: number) {
+    this.pagination.currentPage = page;
+    this.populateSection();
+  }
+
 
   deleteSection(id : number) {
 
@@ -53,8 +82,5 @@ export class ForumHomeComponent implements OnInit {
 
       }
     )
-
-   
-
   }
 }

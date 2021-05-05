@@ -5,8 +5,7 @@ export interface Section{
 
   id : number;
   title : string;
-  user : User;
-  discussionThreads : Array <DiscussionThread>;
+  userId : number;
   edit : boolean;
 
 }

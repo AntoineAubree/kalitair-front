@@ -13,12 +13,10 @@ export class DiscussionThreadService {
     this.baseUrl ='http://localhost:8080/discussion_thread';
    }
 
-   get(page: number, limit: number, idSection : Number) {
+   get(page=1,limit=10,query:string) {
+    return this.http.get<DiscussionThread[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, {observe : 'response'})
 
-    let request = this.baseUrl + '/' + idSection + '/' + page + '/' + limit;
-
-    return this.http.get<DiscussionThread>(request);
-   }
+  }
 
    findById( id : number){
     return this.http.get<DiscussionThread>(this.baseUrl + id)
