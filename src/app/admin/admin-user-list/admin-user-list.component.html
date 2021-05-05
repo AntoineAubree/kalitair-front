@@ -6,9 +6,8 @@
 			<div class="table-responsive">
 				<table class="table user-list">
 					<thead>
-						<tr >
+						<tr>
 							<th><span>User</span></th>
-							<th><span>Created</span></th>
 							<th class="text-center"><span>Status</span></th>
 							<th><span>Email</span></th>
 							<th>&nbsp;</th>
@@ -18,32 +17,23 @@
 						<tr *ngFor="let user of users">
 							<td>
 								<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-								<a href="#" class="user-link">Mila Kunis</a>
-								<span class="user-subhead">Admin</span>
-							</td>
-							<td>
-								2013/08/08
+								<a href="#" class="user-link">{{user.firstName}} {{user.lastName}} ({{user.pseudo}})</a>
+								<span class="user-subhead">{{user.role}}</span>
 							</td>
 							<td class="text-center">
-								<span class="label label-default">Inactive</span>
+								<span [ngClass]="user.banned ? 'badge badge-danger' : 'badge badge-success'" class="label label-default">{{user.banned ? "Banned" : "Not banned"}}</span>
 							</td>
 							<td>
-								<a href="#">mila@kunis.com</a>
+								<p>{{user.email}}</p>
 							</td>
 							<td style="width: 20%;">
 								<a href="#" class="table-link">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+										<i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
 									</span>
 								</a>
-								<a href="#" class="table-link">
-									<span class="fa-stack">
-										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-								<a href="#" class="table-link danger">
+								<a (click)="openModal(user)" [ngClass]="user.banned ? 'success' : 'danger'" class="table-link">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
