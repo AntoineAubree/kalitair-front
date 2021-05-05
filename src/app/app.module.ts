@@ -9,8 +9,7 @@ import { UserModule } from './user/user.module';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -20,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    AdminModule,
     UserModule,
     NgbModule,
     HttpClientModule,
