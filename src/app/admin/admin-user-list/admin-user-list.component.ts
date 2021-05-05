@@ -15,14 +15,15 @@ export class AdminUserListComponent implements OnInit {
 
   users: User[] = [];
   pagination: any ;
-  pages: any ;
+  pages: any;
+  query: string = '';
 
   constructor(private userService : UserService, private modalService : NgbModal) { }
 
   ngOnInit(): void {
     this.pagination = {
       currentPage: 0,
-      itemsPerPage: 3,
+      itemsPerPage: 1,
       totalPages: 0,
       totalElement:0
     }
@@ -30,13 +31,12 @@ export class AdminUserListComponent implements OnInit {
   }
 
   populate() {
-    this.userService.getAll(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(res => {
-      this.pagination.totalPages = res.totalPages;
-      this.pagination.totalElement = res.totalElements
-      this.pages = _.range(this.pagination.totalPages)
-      this.users = res.content
-      console.log(this.users);
-    })
+      this.userService.findByPseudo(this.query,this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(res => {
+        this.pagination.totalPages = res.totalPages;
+        this.pagination.totalElement = res.totalElements
+        this.pages = _.range(this.pagination.totalPages)
+        this.users = res.content
+      })  
   }
 
   paginate(page: number) {
@@ -44,10 +44,15 @@ export class AdminUserListComponent implements OnInit {
     this.populate();
   }
 
+  filter(event: Event) {
+    this.query = (event.target as HTMLInputElement).value
+    this.pagination.currentPage = 0;
+    this.populate();
+  }
+
   openModal(user: User) {
-    const modalRef = this.modalService.open(BanModalComponent)
-    modalRef.componentInstance.user = user
-    console.log(user);
+    const modalRef = this.modalService.open(BanModalComponent);
+    modalRef.componentInstance.user = user;
   }
 
 }

@@ -1,7 +1,22 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
 <div class="row">
+	
 	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-5">
+				<form class="form-inline">
+					<div class="input-group rounded mb-2">
+						<input type="search" class="form-control rounded" placeholder="Search Pseudo" aria-label="Search"
+						aria-describedby="search-addon" (input)="filter($event)" />
+						<span class="input-group-text border-0" id="search-addon">
+						<i class="fa fa-search"></i>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		
 		<div class="main-box clearfix">
 			<div class="table-responsive">
 				<table class="table user-list">
@@ -47,10 +62,10 @@
 			<div class="container">
 				<nav aria-label="Page navigation example">
 				  <ul  class="pagination justify-content-center">
-					<li class="page-item" *ngFor="let page of pages" [ngClass]="{'active': pagination.currentPage === page}"><a class="page-link" (click)="paginate(page)">{{page+1}}</a></li>
+					<li class="page-item " *ngFor="let page of pages" [ngClass]="{'active': pagination.currentPage == page}" (click)="paginate(page)"><a class="page-link" >{{page+1}}</a></li>
 				  </ul>
 				</nav>
-			  </div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -12,8 +12,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(page: number, limit: number) {
+  /* getAll(page: number, limit: number) {
     return this.http.get<any>(`${this.baseUrl}/${page}/${limit}` )
+  } */
+
+  findByPseudo(pseudo: string, page: number, limit: number) {
+    return this.http.get<any>(`${this.baseUrl}/${page}/${limit}/${pseudo}`)
   }
   
   create(user: User) {
