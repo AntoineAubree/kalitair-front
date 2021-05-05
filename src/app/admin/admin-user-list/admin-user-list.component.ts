@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/web-service/user/user.service';
 import { BanModalComponent } from './ban-modal/ban-modal.component';
+import * as _ from 'underscore';
 
 
 @Component({
@@ -13,24 +14,34 @@ import { BanModalComponent } from './ban-modal/ban-modal.component';
 export class AdminUserListComponent implements OnInit {
 
   users: User[] = [];
+  pagination: any ;
+  pages: any ;
 
   constructor(private userService : UserService, private modalService : NgbModal) { }
 
   ngOnInit(): void {
+    this.pagination = {
+      currentPage: 0,
+      itemsPerPage: 3,
+      totalPages: 0,
+      totalElement:0
+    }
     this.populate();
   }
 
   populate() {
-    this.userService.getAll(0, 2).subscribe(res => {
+    this.userService.getAll(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(res => {
+      this.pagination.totalPages = res.totalPages;
+      this.pagination.totalElement = res.totalElements
+      this.pages = _.range(this.pagination.totalPages)
       this.users = res.content
       console.log(this.users);
     })
   }
 
-  public updateUserList(e : any) {
-    if (e) {
-      this.populate();
-    }
+  paginate(page: number) {
+    this.pagination.currentPage = page;
+    this.populate();
   }
 
   openModal(user: User) {
