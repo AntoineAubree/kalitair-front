@@ -6,7 +6,7 @@ import { UserService } from '../web-service/user/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class DisconnectedGuard implements CanActivate {
 
   constructor(
     private router: Router,
@@ -19,12 +19,12 @@ export class AuthenticationGuard implements CanActivate {
     if (token) {
       try {
         const result = await this.userService.get(token).toPromise();
-        return true;
+        return this.router.navigate(['/home']);
       } catch (error) {
-        return this.router.navigate(['/login']);
+        return true;
       }
     } 
-    return this.router.navigate(['/login']);
+    return true;
   }
 
 }

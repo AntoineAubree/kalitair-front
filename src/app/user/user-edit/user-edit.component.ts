@@ -19,12 +19,12 @@ import { UserObservableService } from 'src/app/observable/userObservable';
 export class UserEditComponent implements OnInit {
 
   observableReady = true;
-  user = {} as User
-  // editForm: FormGroup = new FormGroup({});
+  user = {} as User;
+  editForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
   errorHttpMessage: String = '';
+  towns: Town[] = [];
 
-  towns: Town[] = []
 
   constructor(
     private townService: TownService,
@@ -34,7 +34,7 @@ export class UserEditComponent implements OnInit {
     private router: Router,
     private config: NgbModalConfig,
     private modalService: NgbModal,
-    private userObservable : UserObservableService,
+    private userObservable: UserObservableService,
   ) {
     this.config.backdrop = 'static';
     this.config.keyboard = false;
@@ -42,66 +42,65 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     //populate value
-    this.userObservable.getUserConnectSubject().subscribe(res => {
-      this.user = res
-    })
-
+    this.userObservable.getUserConnectSubject().subscribe(
+      res => {
+        this.editForm = this.formBuilder.group({
+          id: [res.id, Validators.required],
+          pseudo: [res.pseudo, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(50),
+          ]],
+          firstName: [res.firstName, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(50),
+            Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+          ]],
+          lastName: [res.lastName, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(50),
+            Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+          ]],
+          addressNbStreet: [res.addressNbStreet, [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(8),
+            Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
+          ]],
+          addressStreet: [res.addressStreet, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(80),
+            Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
+          ]],
+          postCodeCode: [res.postCodeCode, [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(5),
+            Validators.pattern('([0-9])+')
+          ]],
+          townName: [res.townName, Validators.required],
+          email: [res.email, [
+            Validators.required,
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          ]],
+          password: [, [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(36),
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
+          ]],
+          confirmPassword: ['', Validators.required]
+        },
+          {
+            validators: confirmPasswordValidator
+          }
+        );
+      }
+    );
   }
-
-  editForm = this.formBuilder.group({
-    id: [this.user.id, Validators.required],
-    pseudo: [this.user.pseudo, [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(50),
-    ]],
-    firstName: [this.user.firstName, [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(50),
-      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-    ]],
-    lastName: [this.user.lastName ,[
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(50),
-      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-    ]],
-    addressNbStreet: [this.user.addressNbStreet, [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(8),
-      Validators.pattern('^([0-9]{1,4})\s?(bis|ter)?$')
-    ]],
-    addressStreet: [this.user.addressStreet, [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(80),
-      Validators.pattern('([a-zA-ZÀ-ÿ-_ ])+')
-    ]],
-    postCodeCode: [this.user.postCodeCode, [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(5),
-      Validators.pattern('([0-9])+')
-    ]],
-    townName: [this.user.townName, Validators.required],
-    email: [this.user.email, [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]],
-    password: [, [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(36),
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
-    ]],
-    confirmPassword: ['', Validators.required]
-        
-  },
-    {
-    validators : confirmPasswordValidator
-    });
 
   get form() {
     return this.editForm.controls;
@@ -113,6 +112,7 @@ export class UserEditComponent implements OnInit {
 
   findByZipCode() {
     if (this.editForm.get('postCodeCode')?.value.length == 5) {
+      console.log('tets');
       this.townService.findByZipCode(this.editForm.get('postCodeCode')?.value).subscribe(res => {
         if (res) {
           this.towns = res;
@@ -125,28 +125,24 @@ export class UserEditComponent implements OnInit {
   onSubmit() {
     // stop here if form is invalid
     console.log(this.editForm.value)
-    this.userService.put(this.editForm.value).subscribe(res => {
-      console.log(res)
-      if (res) {
-        this.toastr.success('Your account have been edited correctly', 'You will be redirected to the home page in 3 sec');
+    this.userService.put(this.editForm.value).subscribe(
+      res => {
+        console.log(res)
+        this.toastr.success('Your account have been edited correctly', 'You will be redirected to the home page in 2 sec');
         setTimeout(() => {
           this.router.navigate(['home']);
-      }, 5000);  //5s
+        }, 2000);  //2s
+      }, error => {
+        this.errorHttpMessage = error.error.message.split("|");
+        this.toastr.error('Your account hasn\'t been edited', 'Please try again');
       }
-    }, error => {
-      this.errorHttpMessage = error.error.message.split("|");
-      this.toastr.error('Your account hasn\'t been edited','Please try again');
-    })
-    if (this.editForm.invalid) {
-      return
-    }
+    )
   }
 
-  changeCity(e : any) {
+  changeCity(e: any) {
     this.town?.setValue(e.target.value, {
-      onlySelf : true
-    }
-    )
+      onlySelf: true
+    })
   }
 
   test() {
@@ -154,16 +150,17 @@ export class UserEditComponent implements OnInit {
   }
 
   deleteAccount(id: number) {
-    
-    this.userService.delete(id).subscribe(res => {
+    this.userService.delete(id).subscribe(
+      res => {
         this.modalService.dismissAll('Cross Click');
         this.toastr.success('The user have been deleted correctly', 'You will be redirected to the home page in 2 secondes');
         setTimeout(() => {
           this.router.navigate(['home']);
-      }, 2000);  //5s
-    }, error => {
-      this.toastr.error(error.error.message);
-    })
+        }, 2000);  //2s
+      }, error => {
+        this.toastr.error(error.error.message);
+      }
+    )
   }
 
   open(content: any) {

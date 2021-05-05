@@ -12,6 +12,7 @@ import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CommonModule } from '@angular/common';
+import { IndicatorModule } from './indicator/indicator.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ForumModule,
     HttpClientModule,
+    IndicatorModule,
     NgbModule,
     ToastrModule.forRoot(),
     UserModule,

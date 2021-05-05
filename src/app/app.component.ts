@@ -21,12 +21,16 @@ export class AppComponent implements OnInit {
     this.putUserInObservable();
   }
 
-  private async putUserInObservable() {
+  private putUserInObservable() {
     this.tokenUser = localStorage.getItem('token') || '';
     if (this.tokenUser) {
-      let user = await this.userService.get(this.tokenUser).toPromise();
-      console.log(user);
-      this.userObservable.setUserConnectSubject(user);
+      this.userService.get(this.tokenUser).subscribe(
+        (user) => {
+          this.userObservable.setUserConnectSubject(user);
+        }, (error) => {
+          console.error('wrong token');
+        }
+      );
     }
   }
 

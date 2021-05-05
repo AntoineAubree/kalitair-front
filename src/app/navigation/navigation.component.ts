@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/web-service/user/user.service';
 import { UserObservableService } from 'src/app/observable/userObservable';
 import { User } from '../model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -15,6 +16,7 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private userObservable: UserObservableService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,5 +32,10 @@ export class NavigationComponent implements OnInit {
           this.isAdmin = true;
       }
     );
+  }
+
+  disconnect(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

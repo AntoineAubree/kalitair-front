@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   get(token: string): Observable<User> {
-    return this.http.get<User>(this.baseUrl + "/" + token);
+    return this.http.get<User>(this.baseUrl + token);
   }
 
   create(user: User) {

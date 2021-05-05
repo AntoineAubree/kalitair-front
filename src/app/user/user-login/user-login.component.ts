@@ -31,7 +31,11 @@ export class UserLoginComponent implements OnInit {
     ]),
   });
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService, private userObservable: UserObservableService
+  constructor(
+    private authenticationService: AuthenticationService, 
+    private router: Router, 
+    private toastr: ToastrService, 
+    private userObservable: UserObservableService
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +46,9 @@ export class UserLoginComponent implements OnInit {
       res => {
         localStorage.setItem("token", String(res.id));
         this.userObservable.setUserConnectSubject(res);
-        this.toastr.success('Valid user', 'You will be redirected to the home page in 2 sec');
+        this.toastr.success('Welcome ' + res.firstName + '. You will be redirected to the home page in 2 sec');
         setTimeout(() => {
-          this.router.navigate(['my-account/edit']);
+          this.router.navigate(['home']);
         }, 2000);
       }, error => {
         console.log(error)
@@ -54,8 +58,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   createAccount() {
-    this.router.navigate(['sign-up'])
+    this.router.navigate(['user/create'])
   }
-
 
 }
