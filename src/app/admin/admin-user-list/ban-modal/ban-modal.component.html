@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{user.banned ? "Unbann : " + user.pseudo : "Ban : " + user.pseudo}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      You will {{user.banned ? "unban " : "ban "}}this user if you confirm your action
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Close cross')">Close</button>
+    <button [ngClass]="user.banned ? 'btn-success' : 'btn-danger'" type="button" class="btn" (click)="banUnban()" >{{user.banned ? "Unbann"  : "Ban"}}</button>
+</div>

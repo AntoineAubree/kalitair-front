@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CommonModule } from '@angular/common';
 import { IndicatorModule } from './indicator/indicator.module';
+import { AdminModule } from './admin/admin.module';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ import { IndicatorModule } from './indicator/indicator.module';
     CommonModule,
     FormsModule,
     ForumModule,
+    AdminModule,
+    UserModule,
+    NgbModule,
     HttpClientModule,
     IndicatorModule,
     NgbModule,

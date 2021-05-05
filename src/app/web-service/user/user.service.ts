@@ -12,6 +12,14 @@ export class UserService {
   baseUrl : string = 'http://localhost:8080/user/'
 
   constructor(private http: HttpClient) { }
+
+  /* getAll(page: number, limit: number) {
+    return this.http.get<any>(`${this.baseUrl}/${page}/${limit}` )
+  } */
+
+  findByPseudo(pseudo: string, page: number, limit: number) {
+    return this.http.get<any>(`${this.baseUrl}/${page}/${limit}/${pseudo}`)
+  }
   
   get(token: string): Observable<User> {
     return this.http.get<User>(this.baseUrl + token);
