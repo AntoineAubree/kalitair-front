@@ -16,8 +16,6 @@ export class MessagesService {
 
    }
 
-
-
    getAllMessagesThread( idDiscussionThread : number){
 
     return this.http.get(this.baseUrl + idDiscussionThread)
@@ -25,12 +23,10 @@ export class MessagesService {
    }
 
 
-   getAllMessages(page: number, limit: number, idDiscussionThread : number ) {
+   getAllMessages(page=1,limit=10,query:string) {
+    return this.http.get<Message[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, {observe : 'response'})
 
-    let request = this.baseUrl + '/' + idDiscussionThread + '/' + page + '/' + limit;
-
-    return this.http.get<any>(request);
-   }
+  }
 
    findById( id : number){
     return this.http.get<Message>(this.baseUrl + id)

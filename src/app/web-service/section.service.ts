@@ -15,13 +15,10 @@ export class SectionService {
     this.baseUrl ='http://localhost:8080/section';
    }
 
-   get(page: number, limit: number ) {
+   get(page=1,limit=10) {
+    return this.http.get<any>(this.baseUrl + '/' + page + '/' +limit)
 
-    let request = this.baseUrl + '/' + page + '/' + limit;
-
-    return this.http.get<any>(request);
-   }
-
+  }
    findById( id : number){
     return this.http.get<Section>(this.baseUrl + id)
   }
