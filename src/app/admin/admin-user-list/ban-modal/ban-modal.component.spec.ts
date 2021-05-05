@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BannModalComponent } from './bann-modal.component';
+import { BanModalComponent } from './ban-modal.component';
 
-describe('BannModalComponent', () => {
-  let component: BannModalComponent;
-  let fixture: ComponentFixture<BannModalComponent>;
+describe('BanModalComponent', () => {
+  let component: BanModalComponent;
+  let fixture: ComponentFixture<BanModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BannModalComponent ]
+      declarations: [ BanModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BannModalComponent);
+    fixture = TestBed.createComponent(BanModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

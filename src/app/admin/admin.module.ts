@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
-import { BannModalComponent } from './admin-user-list/bann-modal/bann-modal.component';
+import { BanModalComponent } from './admin-user-list/ban-modal/ban-modal.component';
+
 
 
 @NgModule({
   declarations: [
     AdminUserListComponent,
-    BannModalComponent,
+    BanModalComponent,
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
   ]
 })
 export class AdminModule { }
