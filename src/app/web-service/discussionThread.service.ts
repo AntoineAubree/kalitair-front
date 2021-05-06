@@ -13,8 +13,8 @@ export class DiscussionThreadService {
     this.baseUrl ='http://localhost:8080/discussion_thread';
    }
 
-   get(page=1,limit=10,query:string) {
-    return this.http.get<DiscussionThread[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, {observe : 'response'})
+   get(page=1,limit=10) {
+    return this.http.get<any>(this.baseUrl + '/' + page + '/' + limit )
 
   }
 

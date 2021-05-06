@@ -65,10 +65,10 @@ export class ForumHomeComponent implements OnInit {
     modale.componentInstance.sectionId = id;
   }
 
-  editSection( id : number){
+  editSection( section : Section){
 
     let modale = this.modalService.open(EditSectionComponent)
-    modale.componentInstance.sectionId = id
+    modale.componentInstance.section= section;
 
   }
 
