@@ -1,13 +1,11 @@
 import { Section } from "./section";
-import { User } from "./user";
 
 export interface DiscussionThread{
 
   id :number;
-  title : String;
+  title : string;
   userId : number;
-  section : Section;
-  messages : Array<String>;
+  sectionId : number;
   edit : boolean;
 
 }

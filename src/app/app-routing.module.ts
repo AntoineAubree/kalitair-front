@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: "user/create", component: UserCreateComponent, canActivate: [DisconnectedGuard] },
   { path: "user/edit", component: UserEditComponent, canActivate: [AuthenticationGuard] },
   { path: "forum/messages", component: MessageComponent },
-  { path: "forum/discussionthreads", component: ForumSectionComponent },
+  { path: "forum/section/:id", component: ForumSectionComponent },
   { path: "forum", component: ForumHomeComponent },
   { path: "**", redirectTo: 'login' }
 ];

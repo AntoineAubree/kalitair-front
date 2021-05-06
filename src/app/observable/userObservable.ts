@@ -19,4 +19,9 @@ export class UserObservableService {
         this.userConnectSubject$.next(user);
     }
 
+    removeUserConnectSubject(): void {
+        let user = {} as User;
+        this.userConnectSubject$.next(user);
+    }
+
 }

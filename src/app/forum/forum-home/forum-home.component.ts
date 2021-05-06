@@ -1,3 +1,5 @@
+import { User } from './../../model/user';
+import { UserObservableService } from './../../observable/userObservable';
 import { ToastrService } from 'ngx-toastr';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
@@ -22,16 +24,22 @@ export class ForumHomeComponent implements OnInit {
   sections: Section[] = [];
   pagination: any;
   pages: number[] = [];
+  user = {} as User;
 
   constructor(
     private sectionService: SectionService,
-    private discussionThreadService: DiscussionThreadService,
     private modalService: NgbModal,
     private toastr: ToastrService,
     private router: Router,
+    private userObservable: UserObservableService
   ) { }
 
   ngOnInit(): void {
+    this.userObservable.getUserConnectSubject().subscribe(
+      (user) => {
+        this.user = user;
+      }
+    )
     this.pagination = {
       currentPage: 1,
       itemsPerPage: 5,
@@ -42,7 +50,7 @@ export class ForumHomeComponent implements OnInit {
   }
 
   getDiscussionThread(idSection: number) {
-    this.router.navigate(['/forum/discussionthreads']);
+    this.router.navigate(['/forum/section/', idSection]);
   }
 
   populateSection() {
@@ -61,12 +69,12 @@ export class ForumHomeComponent implements OnInit {
     this.populateSection();
   }
 
-  deleteSection(id: number) {
+  deleteSection(section: Section) {
     let modale = this.modalService.open(DeleteSectionComponent);
-    modale.componentInstance.sectionId = id;
+    modale.componentInstance.title = section.title;
     modale.result.then(
       close => {
-        this.sectionService.delete(id).subscribe(
+        this.sectionService.delete(section.id).subscribe(
           res => {
             this.toastr.success('This section has been correctly deleted ');
             this.populateSection();

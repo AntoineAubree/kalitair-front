@@ -38,6 +38,7 @@ export class NavigationComponent implements OnInit {
     localStorage.removeItem('token');
     this.isLog = false;
     this.isAdmin = false;
+    this.userObservable.removeUserConnectSubject();
     this.router.navigate(['/login']);
   }
 }

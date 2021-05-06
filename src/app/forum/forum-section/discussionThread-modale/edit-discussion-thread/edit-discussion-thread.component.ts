@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { DiscussionThread } from 'src/app/model/discussionThread';
@@ -11,11 +11,12 @@ import { DiscussionThreadService } from 'src/app/web-service/discussionThread.se
 })
 export class EditDiscussionThreadComponent implements OnInit {
 
+  @Input() discussionThread = {} as DiscussionThread;
 
-
-  discussionThread = {} as DiscussionThread
-
-  constructor( private discussionThreadService : DiscussionThreadService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
+  constructor(
+    private discussionThreadService: DiscussionThreadService,
+    protected modale: NgbActiveModal
+  ) { }
 
   ngOnInit(): void {
   }
@@ -24,14 +25,11 @@ export class EditDiscussionThreadComponent implements OnInit {
     this.modale.dismiss()
   }
 
-  editDiscussionThread( discussionThread : DiscussionThread){
-
-    this.discussionThreadService.update(this.discussionThread).subscribe( res => {
-
-      this.toastr.success ( ' This discussion Thread has been correctly edited')
-    })
-    this.modale.close()
+  editDiscussionThread(discussionThread: DiscussionThread) {
+    this.discussionThreadService.update(discussionThread).subscribe(
+      res => {
+        this.modale.close()
+      }
+    )
   }
-
-
 }

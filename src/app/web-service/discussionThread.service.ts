@@ -14,23 +14,19 @@ export class DiscussionThreadService {
   }
 
   get(id: number, index: number, limit: number) {
-    return this.http.get<DiscussionThread>(this.baseUrl + id + '/' + index + '/' + limit);
+    return this.http.get(this.baseUrl + id + '/' + index + '/' + limit);
   }
 
   create(discussionThread: DiscussionThread) {
     return this.http.post(this.baseUrl, discussionThread);
   }
 
-  put(discussionThread: DiscussionThread) {
+  update(discussionThread: DiscussionThread) {
     return this.http.put(this.baseUrl, discussionThread);
   }
 
   delete(id: number) {
     return this.http.delete(this.baseUrl + id);
-  }
-  update(discussionThread: DiscussionThread) {
-
-    return this.http.put(this.baseUrl + discussionThread.id, discussionThread)
   }
 }
 

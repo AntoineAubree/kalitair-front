@@ -9,7 +9,13 @@
         <form (ngSubmit)='createDiscussionThread(form)' #form="ngForm">
             <div class="form-group">
                 <label for="sectionTitle">Title</label>
-                <input ngModel #title="ngModel" name="title" type="email" class="form-control" id="InputSectionTitle" placeholder="type discussion thread's title">
+                <input ngModel #title="ngModel" name="title" type="text" class="form-control" id="InputSectionTitle" placeholder="type discussion thread's title">
+            </div>
+            <div class="form-group">
+                <input name="userId" type="hidden" [(ngModel)]=userId class="form-control">
+            </div>
+            <div class="form-group">
+                <input name="sectionId" type="hidden" [(ngModel)]=sectionId class="form-control">
             </div>
             <div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>

@@ -10,25 +10,21 @@ import { DiscussionThreadService } from 'src/app/web-service/discussionThread.se
 })
 export class DeleteDiscussionThreadComponent implements OnInit {
 
-  @Input () discussionThreadId : number = 0
+  @Input() title: string = '';
 
-  constructor(protected modale: NgbActiveModal, private discussionThreadService : DiscussionThreadService, private toastr : ToastrService) { }
+  constructor(
+    protected modale: NgbActiveModal,
+  ) { }
 
   ngOnInit(): void {
-
-
   }
 
   dismiss() {
     this.modale.dismiss()
   }
 
-  deleteDiscussionThread(id : number) {
-
-    this.discussionThreadService.delete(id).subscribe ( res => {
-      this.toastr.success ( 'This discussion thread has been deleted')
-      this.modale.close()
-    })
+  deleteDiscussionThread() {
+    this.modale.close()
   }
 
 }

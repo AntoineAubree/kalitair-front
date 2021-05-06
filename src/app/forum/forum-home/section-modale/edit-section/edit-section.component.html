@@ -6,11 +6,11 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Do you really want to edit this section ? ? </p>
+    <p>Do you really want to edit this section ? </p>
     <form #form="ngForm">
       <div class="form-group">
         <label for="sectionTitle">Title</label>
-        <input type="email" name="title" class="form-control" #title="ngModel" [(ngModel)]="section.title"
+        <input type="text" name="title" class="form-control" #title="ngModel" [(ngModel)]="section.title"
           id="InputSectionTitle" placeholder="Enter your modifications">
             <input name="id" type="hidden" [(ngModel)]=section.id class="form-control">
             <input name="userId" type="hidden" [(ngModel)]=section.userId class="form-control">

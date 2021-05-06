@@ -10,11 +10,10 @@ import { SectionService } from '../../../../web-service/section.service';
 })
 export class DeleteSectionComponent implements OnInit {
 
-  @Input() sectionId: number = 0
+  @Input() title: string = '';
 
   constructor(
     protected modale: NgbActiveModal,
-    private sectionService: SectionService,
   ) { }
 
   ngOnInit(): void {

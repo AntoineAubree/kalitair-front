@@ -6,17 +6,18 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Do you really want to edit this section ? ? </p>
+    <p>Do you really want to edit this discussion threaad ? </p>
     <form #form="ngForm">
       <div class="form-group">
         <label for="sectionTitle">Title</label>
-        <input type="email" class="form-control" #title="ngModel" [(ngModel)]="discussionThread.title"
-          id="InputSectionTitle" placeholder="Enter your modifications">
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="editDiscussionThread(discussionThread)">Edit</button>
-        </div>
+        <input type="text" name="title" class="form-control" #title="ngModel" [(ngModel)]="discussionThread.title"
+          id="InputDiscussionThreadTitle" placeholder="Enter your modifications">
+            <input name="id" type="hidden" [(ngModel)]=discussionThread.id class="form-control">
+            <input name="userId" type="hidden" [(ngModel)]=discussionThread.userId class="form-control">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="editDiscussionThread(discussionThread)">Edit</button>
       </div>
     </form>
   </div>
 </div>
+

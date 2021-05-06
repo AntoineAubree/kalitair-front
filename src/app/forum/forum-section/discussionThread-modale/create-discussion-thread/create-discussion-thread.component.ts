@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { UserObservableService } from './../../../../observable/userObservable';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -11,19 +12,33 @@ import { DiscussionThreadService } from 'src/app/web-service/discussionThread.se
 })
 export class CreateDiscussionThreadComponent implements OnInit {
 
-  constructor( private discussionThreadService : DiscussionThreadService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
+  userId = 0;
+  @Input() sectionId: number = 0;
+
+  constructor(
+    private discussionThreadService: DiscussionThreadService,
+    protected modale: NgbActiveModal,
+    private userObservable: UserObservableService
+  ) { }
 
   ngOnInit(): void {
+    this.userObservable.getUserConnectSubject().subscribe(
+      (user) => {
+        this.userId = user.id;
+      }
+    )
   }
+
   dismiss() {
     this.modale.dismiss()
   }
-  createDiscussionThread(form : NgForm) {
 
-    this.discussionThreadService.create(form.value).subscribe( res => {
-      this.toastr.success( ' this Discussion Thread has been correctly created')
-      this.modale.close()
-    })
+  createDiscussionThread(form: NgForm) {
+    this.discussionThreadService.create(form.value).subscribe(
+      res => {
+        this.modale.close()
+      }
+    )
 
   }
 
