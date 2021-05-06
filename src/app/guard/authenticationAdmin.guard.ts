@@ -6,7 +6,7 @@ import { UserService } from '../web-service/user/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class AuthenticationAdminGuard implements CanActivate {
 
   constructor(
     private router: Router,
@@ -19,7 +19,7 @@ export class AuthenticationGuard implements CanActivate {
     if (token) {
       try {
         const result = await this.userService.get(token).toPromise();
-        return true;
+        return result.role === 'ADMIN' ? true : this.router.navigate(['/login']);
       } catch (error) {
         return this.router.navigate(['/login']);
       }

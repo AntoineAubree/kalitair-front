@@ -6,12 +6,6 @@ import { MessageComponent } from './forum-message/message.component';
 
 const routes: Routes = [
 
-  {path:"forum/messages" , component : MessageComponent},
-
-  {path:"forum/discussionthreads/:id" , component : ForumSectionComponent },
-
-  {path:"forum" , component : ForumHomeComponent}
-
 
 ];
 

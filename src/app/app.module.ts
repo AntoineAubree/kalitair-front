@@ -22,20 +22,18 @@ import { AdminModule } from './admin/admin.module';
     NavigationComponent
   ],
   imports: [
+    UserModule,
+    IndicatorModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CommonModule,
     FormsModule,
     ForumModule,
     AdminModule,
-    UserModule,
     NgbModule,
     HttpClientModule,
-    IndicatorModule,
     NgbModule,
     ToastrModule.forRoot(),
-    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

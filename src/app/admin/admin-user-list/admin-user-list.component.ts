@@ -23,7 +23,7 @@ export class AdminUserListComponent implements OnInit {
   ngOnInit(): void {
     this.pagination = {
       currentPage: 0,
-      itemsPerPage: 1,
+      itemsPerPage: 5,
       totalPages: 0,
       totalElement:0
     }

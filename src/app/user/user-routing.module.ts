@@ -7,10 +7,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
-  { path: "login", component: UserLoginComponent, canActivate: [DisconnectedGuard] },
-  { path: "user/create", component: UserCreateComponent, canActivate: [DisconnectedGuard] },
-  { path: "user/edit", component: UserEditComponent, canActivate: [AuthenticationGuard] },
-  { path: "**", redirectTo: 'login' }
+
 ];
 
 @NgModule({

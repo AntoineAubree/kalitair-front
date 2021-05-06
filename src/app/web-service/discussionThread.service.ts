@@ -7,22 +7,21 @@ import { DiscussionThread } from '../model/discussionThread';
 })
 export class DiscussionThreadService {
 
-  baseUrl : string;
+  baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl ='http://localhost:8080/discussion_thread';
-   }
-
-   get(page=1,limit=10,query:string) {
-    return this.http.get<DiscussionThread[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, {observe : 'response'})
-
+    this.baseUrl = 'http://localhost:8080/discussion_thread';
   }
 
-   findById( id : number){
+  get(page = 1, limit = 10, query: string) {
+    return this.http.get<DiscussionThread[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, { observe: 'response' })
+  }
+
+  findById(id: number) {
     return this.http.get<DiscussionThread>(this.baseUrl + id)
   }
 
-  create(discussionThread : DiscussionThread) {
+  create(discussionThread: DiscussionThread) {
     return this.http.post(this.baseUrl, discussionThread);
   }
 
@@ -33,7 +32,7 @@ export class DiscussionThreadService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + id);
   }
-  update( discussionThread : DiscussionThread) {
+  update(discussionThread: DiscussionThread) {
 
     return this.http.put(this.baseUrl + discussionThread.id, discussionThread)
   }

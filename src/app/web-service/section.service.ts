@@ -6,20 +6,20 @@ import { Section } from '../model/section';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SectionService {
 
-  baseUrl : string;
+  baseUrl: string;
 
   constructor(private http: HttpClient) {
-
-    this.baseUrl ='http://localhost:8080/section';
-   }
-
-   get(page=1,limit=10) {
-    return this.http.get<any>(this.baseUrl + '/' + page + '/' +limit)
-
+    this.baseUrl = 'http://localhost:8080/section';
   }
-   findById( id : number){
+
+  get(page = 1, limit = 10) {
+    return this.http.get<any>(this.baseUrl + '/' + page + '/' + limit)
+  }
+
+  findById(id: number) {
     return this.http.get<Section>(this.baseUrl + id)
   }
 
@@ -35,7 +35,7 @@ export class SectionService {
     return this.http.delete(this.baseUrl + id);
   }
 
-  update( section : Section) {
+  update(section: Section) {
 
     return this.http.put(this.baseUrl + section.id, section)
   }

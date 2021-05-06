@@ -36,7 +36,6 @@ export class ForumHomeComponent implements OnInit {
   }
 
   getSectionById(){
-
     this.sectionService.findById(1)
   }
 
