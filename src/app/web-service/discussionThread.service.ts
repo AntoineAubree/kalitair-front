@@ -10,15 +10,11 @@ export class DiscussionThreadService {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = 'http://localhost:8080/discussion_thread';
+    this.baseUrl = 'http://localhost:8080/discussion_thread/';
   }
 
-  get(page = 1, limit = 10, query: string) {
-    return this.http.get<DiscussionThread[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, { observe: 'response' })
-  }
-
-  findById(id: number) {
-    return this.http.get<DiscussionThread>(this.baseUrl + id)
+  get(id: number, index: number, limit: number) {
+    return this.http.get<DiscussionThread>(this.baseUrl + id + '/' + index + '/' + limit);
   }
 
   create(discussionThread: DiscussionThread) {

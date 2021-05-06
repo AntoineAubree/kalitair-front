@@ -11,22 +11,22 @@ export class SectionService {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = 'http://localhost:8080/section';
+    this.baseUrl = 'http://localhost:8080/section/';
   }
 
-  get(page = 1, limit = 10) {
-    return this.http.get<any>(this.baseUrl + '/' + page + '/' + limit)
+  get(page: number, limit: number) {
+    return this.http.get<any>(this.baseUrl + page + '/' + limit)
   }
+
   create(section: Section) {
     return this.http.post(this.baseUrl, section);
   }
 
   delete(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+    return this.http.delete(this.baseUrl + id);
   }
 
   update(section: Section) {
-
     return this.http.put(this.baseUrl, section)
   }
 }

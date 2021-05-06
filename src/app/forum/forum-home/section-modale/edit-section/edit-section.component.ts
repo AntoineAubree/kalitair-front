@@ -13,7 +13,7 @@ export class EditSectionComponent implements OnInit {
 
   @Input() section = {} as Section
 
-  constructor( private sectionService : SectionService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
+  constructor(private sectionService: SectionService, protected modale: NgbActiveModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -23,11 +23,9 @@ export class EditSectionComponent implements OnInit {
     this.modale.dismiss()
   }
 
-  editSection( section : Section){
-
-    this.sectionService.update(this.section).subscribe( res => {
-     this.toastr.success( 'this section has been correctly editing')
-     this.modale.close()
+  editSection(section: Section) {
+    this.sectionService.update(this.section).subscribe(res => {
+      this.modale.close();
     })
 
   }

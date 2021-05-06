@@ -10,9 +10,12 @@ import { SectionService } from '../../../../web-service/section.service';
 })
 export class DeleteSectionComponent implements OnInit {
 
-  @Input() sectionId : number = 0
+  @Input() sectionId: number = 0
 
-  constructor( protected modale: NgbActiveModal, private sectionService : SectionService, private toastr : ToastrService) { }
+  constructor(
+    protected modale: NgbActiveModal,
+    private sectionService: SectionService,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,11 +25,7 @@ export class DeleteSectionComponent implements OnInit {
     this.modale.dismiss()
   }
 
-  deleteSection(id : number) {
-    this.sectionService.delete(id).subscribe( res => {
-      this. toastr.success( 'This section has been correctly deleted ')
-      this.modale.close()
-    })
-
+  deleteSection() {
+    this.modale.close()
   }
 }

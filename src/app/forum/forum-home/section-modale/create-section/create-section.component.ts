@@ -17,7 +17,6 @@ export class CreateSectionComponent implements OnInit {
   constructor(
     private sectionService: SectionService,
     protected modale: NgbActiveModal,
-    private toastr: ToastrService,
     private userObservable: UserObservableService
   ) { }
 
@@ -25,7 +24,6 @@ export class CreateSectionComponent implements OnInit {
     this.userObservable.getUserConnectSubject().subscribe(
       (user) => {
         this.userId = user.id;
-        console.log(this.userId);
       }
     )
   }
@@ -35,15 +33,9 @@ export class CreateSectionComponent implements OnInit {
   }
 
   createSection(form: NgForm) {
-    console.log(form.value);
     this.sectionService.create(form.value).subscribe(res => {
-
-      this.toastr.success('New Section created') // ici pour test
       this.modale.close()
-
     })
-
-    //remettre ici la ligne 25
   }
 
 

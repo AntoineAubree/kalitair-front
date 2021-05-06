@@ -37,7 +37,7 @@ export class ForumSectionComponent implements OnInit {
 
   populateDiscussionThread (){
 
-    this.discussionThreadService.get(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((response: any) => {
+    this.discussionThreadService.get(1, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((response: any) => {
       this.pagination.totalElements = response.totalElements;
       this.pagination.totalPages = response.totalPages;
       this.pages = _.range(1, this.pagination.totalPages + 1);
@@ -54,7 +54,7 @@ export class ForumSectionComponent implements OnInit {
 
   getDiscussionThreadById() {
 
-    this.discussionThreadService.findById(1)
+    // this.discussionThreadService.findById(1)
   }
 
   deleteDiscussionThread(id : number) {
