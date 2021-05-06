@@ -17,7 +17,6 @@ export class MessageComponent implements OnInit {
   messages : Message[] = [];
   pagination : any;
   pages : any;
-  query : any;
 
   constructor(private messageService : MessagesService, private modalService : NgbModal ) { }
 
@@ -30,21 +29,17 @@ export class MessageComponent implements OnInit {
       totalelement : 0
     };
     this.populateMessage();
-    this.query = {q : ''}
+
   }
   populateMessage (){
 
-    this.messageService.getAllMessages(this.pagination.currentPage, this.pagination.itemsPerPage, _.values(this.query).join("")).subscribe((response: any) => {
-      this.pagination.totalElement = response.headers.get('X-Total-Count');
-      this.pagination.totalPages = this.getTotalPage(response.headers.get('X-Total-Count'));
-      this.pages = _.range(1, this.pagination.totalPages + 1);
-      this.messages = response.body;
+    this.messageService.getAllMessages(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((response: any) => {
+      this.pagination.totalElements = response.totalElements;
+    this.pagination.totalPages = response.totalPages;
+    this.pages = _.range(1, this.pagination.totalPages + 1);
+    this.messages = response.content;
     }
     );
-  }
-
-  getTotalPage(totalItems: number): number {
-    return Math.ceil(totalItems / this.pagination.itemsPerPage);
   }
 
   paginate(page: number) {

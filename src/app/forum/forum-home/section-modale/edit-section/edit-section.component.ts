@@ -11,24 +11,23 @@ import { SectionService } from '../../../../web-service/section.service';
 })
 export class EditSectionComponent implements OnInit {
 
-
-
-section = {} as Section
+  @Input() section = {} as Section
 
   constructor( private sectionService : SectionService, protected modale : NgbActiveModal,private toastr : ToastrService) { }
 
   ngOnInit(): void {
+
   }
 
   dismiss() {
     this.modale.dismiss()
   }
 
-  editSection(section : Section){
+  editSection( section : Section){
 
     this.sectionService.update(this.section).subscribe( res => {
-      this.toastr.success( ' this section has been coorectly editing')
-      this.modale.close()
+     this.toastr.success( 'this section has been correctly editing')
+     this.modale.close()
     })
 
   }

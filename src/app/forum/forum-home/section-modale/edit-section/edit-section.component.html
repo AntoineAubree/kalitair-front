@@ -12,6 +12,9 @@
         <label for="sectionTitle">Title</label>
         <input type="email" name="title" class="form-control" #title="ngModel" [(ngModel)]="section.title"
           id="InputSectionTitle" placeholder="Enter your modifications">
+            <input name="id" type="hidden" [(ngModel)]=section.id class="form-control">
+            <input name="userId" type="hidden" [(ngModel)]=section.userId class="form-control">
+
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
         <button type="button" class="btn btn-primary" (click)="editSection(section)">Edit</button>
       </div>

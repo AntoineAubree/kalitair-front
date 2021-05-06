@@ -37,8 +37,8 @@ export class CreateSectionComponent implements OnInit {
   createSection(form: NgForm) {
     console.log(form.value);
     this.sectionService.create(form.value).subscribe(res => {
-      
-      this.toastr.success('New Section)') // ici pour test
+
+      this.toastr.success('New Section created') // ici pour test
       this.modale.close()
 
     })

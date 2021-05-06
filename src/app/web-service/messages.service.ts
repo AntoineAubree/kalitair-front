@@ -22,9 +22,8 @@ export class MessagesService {
 
    }
 
-
-   getAllMessages(page=1,limit=10,query:string) {
-    return this.http.get<Message[]>(this.baseUrl + '?_page=' + page + '&limit=' + limit + query, {observe : 'response'})
+   getAllMessages(page=1,limit=10) {
+    return this.http.get<any>(this.baseUrl + '/' + page + '/' + limit)
 
   }
 

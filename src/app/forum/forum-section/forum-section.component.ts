@@ -17,7 +17,7 @@ export class ForumSectionComponent implements OnInit {
   discussionThreads : DiscussionThread[] = [];
   pagination : any;
   pages : any;
-  query : any;
+
 
 
 
@@ -32,24 +32,18 @@ export class ForumSectionComponent implements OnInit {
       totalelement : 0
     };
     this.populateDiscussionThread();
-    this.query = {q : ''}
+
   }
 
   populateDiscussionThread (){
 
-    this.discussionThreadService.get(this.pagination.currentPage, this.pagination.itemsPerPage, _.values(this.query).join("")).subscribe((response: any) => {
-      this.pagination.totalElement = response.headers.get('X-Total-Count');
-      this.pagination.totalPages = this.getTotalPage(response.headers.get('X-Total-Count'));
+    this.discussionThreadService.get(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((response: any) => {
+      this.pagination.totalElements = response.totalElements;
+      this.pagination.totalPages = response.totalPages;
       this.pages = _.range(1, this.pagination.totalPages + 1);
-      this.discussionThreads = response.body;
+      this.discussionThreads = response.content;
     }
     );
-  }
-
-
-
-  getTotalPage(totalItems: number): number {
-    return Math.ceil(totalItems / this.pagination.itemsPerPage);
   }
 
   paginate(page: number) {
