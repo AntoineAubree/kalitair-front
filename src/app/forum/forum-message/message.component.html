@@ -4,7 +4,7 @@
     <h3 class='text-center'>Welcome to Kalitair's Forum</h3>
   </div>
   <div class="inner-sidebar-header justify-content-center">
-    <button *ngIf="user.role === 'ADMIN'" (click)="createMessage()" class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
+    <button *ngIf="user.role" (click)="createMessage()" class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
       data-target="#threadModal">
       Create a new Message
     </button>
@@ -20,8 +20,8 @@
           <div class="media-body">
             <h6>{{message.content}}</h6>
             <h6>{{message.userPseudo}}</h6>
-            <button *ngIf="user.role === 'ADMIN'" class="btn btn-success " (click)="editMessage(message)">Edit</button>
-            <button *ngIf="user.role === 'ADMIN'" class="btn btn-danger " (click)="deleteMessage(message)">Delete</button>
+            <button *ngIf="user.role === 'ADMIN' || user.id === message.userId" class="btn btn-success " (click)="editMessage(message)">Edit</button>
+            <button *ngIf="user.role === 'ADMIN' || user.id === message.userId" class="btn btn-danger " (click)="deleteMessage(message)">Delete</button>
           </div>
         </div>
       </div>
