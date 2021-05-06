@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Message } from 'src/app/model/message';
 import { MessagesService } from 'src/app/web-service/messages.service';
-import { CreateMessageComponent } from './create-message/create-message.component';
 import { DeleteMessageComponent } from './delete-message/delete-message.component';
 import { EditMessageComponent } from './edit-message/edit-message.component';
 import * as _ from 'underscore';
+import { User } from 'src/app/model/user';
+import { UserObservableService } from 'src/app/observable/userObservable';
 
 @Component({
   selector: 'app-forum-discussion',
@@ -17,10 +18,16 @@ export class MessageComponent implements OnInit {
   messages : Message[] = [];
   pagination : any;
   pages : any;
+  user = {} as User;
 
-  constructor(private messageService : MessagesService, private modalService : NgbModal ) { }
+  constructor(private messageService : MessagesService, private modalService : NgbModal, private  userObservable : UserObservableService ) { }
 
   ngOnInit(): void {
+    this.userObservable.getUserConnectSubject().subscribe(
+      (user) => {
+        this.user = user;
+      }
+    )
 
     this.pagination = {
       currentPage : 1,
@@ -67,17 +74,17 @@ export class MessageComponent implements OnInit {
 
   }
 
-  createMessage () {
-
-    let modale = this.modalService.open(CreateMessageComponent)
+  createMessage() {
+    let modale = this.modalService.open(EditMessageComponent)
+    let message = {} as Message;
+    message.userId = this.user.id;
+    modale.componentInstance.message = message;
     modale.result.then(
-      create=>{
-
-      }
-      ,dismiss=>{
-
+      close => {
+        this.toastr.success('New Section created');
+        this.populateSection();
+      }, dismiss => {
       }
     )
-
   }
 }

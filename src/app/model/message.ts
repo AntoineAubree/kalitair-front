@@ -3,10 +3,10 @@ import {User} from './user';
 export interface Message{
 
   id : number;
-  content : String;
+  content : string;
   date : Date;
-  user : User;
-  idDiscussionThread : Number;
+  userId : number;
+  DiscussionThreadId  : number;
   edit : boolean;
 
 }

@@ -9,7 +9,6 @@ import { MessageComponent } from './forum-message/message.component';
 import { ForumSectionComponent } from './forum-section/forum-section.component';
 import { ForumRoutingModule } from './forum-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateMessageComponent } from './forum-message/create-message/create-message.component';
 import { EditMessageComponent } from './forum-message/edit-message/edit-message.component';
 import { DeleteMessageComponent } from './forum-message/delete-message/delete-message.component';
 
@@ -22,7 +21,6 @@ import { DeleteMessageComponent } from './forum-message/delete-message/delete-me
     EditSectionComponent,
     MessageComponent,
     ForumSectionComponent,
-    CreateMessageComponent,
     EditMessageComponent,
     DeleteMessageComponent,
   ],

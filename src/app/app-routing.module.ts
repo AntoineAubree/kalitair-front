@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: "user/edit", component: UserEditComponent, canActivate: [AuthenticationGuard] },
   { path: "forum/messages", component: MessageComponent },
   { path: "forum/section/:id", component: ForumSectionComponent },
+  { path: "forum/discussionthread/:id", component: MessageComponent },
   { path: "forum", component: ForumHomeComponent },
   { path: "**", redirectTo: 'login' }
 ];
