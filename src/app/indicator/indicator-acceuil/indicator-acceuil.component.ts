@@ -3,7 +3,7 @@ import Map from 'ol/Map';
 import Tile from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import View from 'ol/View';
-import { fromLonLat, toLonLat, transform } from 'ol/proj';
+import { fromLonLat, transform } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import { Feature } from 'ol';
@@ -21,13 +21,22 @@ import Icon from 'ol/style/Icon'
 export class IndicatorAcceuilComponent implements OnInit {
 
 
-  map: any;
+  map : Map = new Map({});
   markerSource: VectorSource = new VectorSource({});
   
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit(): void {
     this.initilizeMap();
+    this.map.on('singleclick', (event: any) => {
+      let lonlat = transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
+      const lon = lonlat[0];
+      const lat = lonlat[1];
+      console.log(lonlat)
+      this.addMarker(lon, lat);
+    });
   }
 
   initilizeMap() {
@@ -57,7 +66,7 @@ export class IndicatorAcceuilComponent implements OnInit {
 
   }
 
-  getCoord(event: any) {
+ /*  getCoord(event: any) {
     const coordinate = this.map.getEventCoordinate(event);
     let lonlat = transform(coordinate, 'EPSG:3857', 'EPSG:4326');
     const lon = lonlat[0];
@@ -65,16 +74,18 @@ export class IndicatorAcceuilComponent implements OnInit {
     console.log(lonlat)
 
     this.addMarker(lon, lat);
-  }
+  } */
 
   addMarker(lon: number, lat: number) {
     this.markerSource.clear();
     let marker = new Feature({
-      geometry: new Point(fromLonLat([lon,lat])) // dont worry about coordinate type 0,0 will be in west coast of africa
+      geometry: new Point(fromLonLat([lon, lat]))
     });
-    this.markerSource.addFeature(marker)
+    this.markerSource.addFeature(marker);
     
   }
 
 }
+
+
 
