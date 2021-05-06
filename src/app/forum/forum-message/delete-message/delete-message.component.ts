@@ -12,9 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeleteMessageComponent implements OnInit {
 
-@Input() messageId : number = 0
-
-  constructor(protected modale: NgbActiveModal, private messageService : MessagesService,private toastr : ToastrService) { }
+  constructor(
+    protected modale: NgbActiveModal,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,13 +23,8 @@ export class DeleteMessageComponent implements OnInit {
     this.modale.dismiss()
   }
 
-  deleteMessage(id : number) {
-
-    this.messageService.delete(id).subscribe( res => {
-      this. toastr.success( 'This message has been correctly deleted ')
-      this.modale.close()
+  deleteMessage() {
     this.modale.close()
-  })
+  }
 
-}
 }

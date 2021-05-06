@@ -6,7 +6,8 @@ export interface Message{
   content : string;
   date : Date;
   userId : number;
-  DiscussionThreadId  : number;
+  userPseudo : string;
+  discussionThreadId : number;
   edit : boolean;
 
 }

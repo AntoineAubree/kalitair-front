@@ -8,44 +8,26 @@ import { Message } from '../model/message';
 })
 export class MessagesService {
 
-  baseUrl : string;
+  baseUrl: string;
 
   constructor(private http: HttpClient) {
-
-    this.baseUrl ='http://localhost:8080/message';
-
-   }
-
-   getAllMessagesThread( idDiscussionThread : number){
-
-    return this.http.get(this.baseUrl + idDiscussionThread)
-
-   }
-
-   getAllMessages(page=1,limit=10) {
-    return this.http.get<any>(this.baseUrl + '/' + page + '/' + limit)
-
+    this.baseUrl = 'http://localhost:8080/message/';
   }
 
-   findById( id : number){
-    return this.http.get<Message>(this.baseUrl + id)
+  getAllMessages(discussionThreadId: number, page : number, limit : number) {
+    return this.http.get<any>(this.baseUrl + discussionThreadId + '/' + page + '/' + limit)
   }
 
-  create(message : Message) {
+  create(message: Message) {
     return this.http.post(this.baseUrl, message);
   }
 
-  put(message: Message) {
-    return this.http.put(this.baseUrl, message);
-  }
-
   delete(id: number) {
-    return this.http.delete(this.baseUrl + '/' +id);
+    return this.http.delete(this.baseUrl + '/' + id);
   }
 
-  update( message : Message) {
-
-    return this.http.put(this.baseUrl + message.id, message)
+  update(message: Message) {
+    return this.http.put(this.baseUrl, message)
   }
 }
 

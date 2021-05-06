@@ -1,19 +1,30 @@
 <div class="model-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">EDIT MESSAGE</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+      <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
+          <span aria-hidden="true">&times;</span>
+      </button>
   </div>
   <div class="modal-body">
-    <p>Do you really want to edit this message ? ?</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">
-      Close
-    </button>
-    <button type="button" class="btn btn-primary" (click)="editMessage(message)">
-      Delete
-    </button>
+      <form [formGroup]='createForm'>
+          <div class="form-group">
+              <label for="messageContent">Content</label>
+              <input formControlName='content' type="text" class="form-control" id="messageContent"
+                  placeholder="My message"
+                  [ngClass]="{'is-invalid': (!form.content.valid && form.content.dirty) || this.errorHttpMessage , 'is-valid' : form.content.valid}">
+              <div *ngIf="this.errorHttpMessage" class="invalid-feedback">
+                  <small>{{this.errorHttpMessage}}</small>
+              </div>
+              <div *ngIf="form.content.errors" class="invalid-feedback">
+                  <div *ngIf="form.content.errors?.required"><small>Message required</small></div>
+                  <div *ngIf="form.content.errors?.minlength"><small>must be at least 2 characters</small></div>
+                  <div *ngIf="form.content.errors?.maxlength"><small>can't exceed 800 characters</small></div>
+                </div>
+          </div>
+          <div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" (click)="editMessage()"> POST </button>
+          </div>
+      </form>
   </div>
 </div>

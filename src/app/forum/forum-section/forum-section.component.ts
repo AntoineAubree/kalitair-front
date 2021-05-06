@@ -51,10 +51,7 @@ export class ForumSectionComponent implements OnInit {
   }
 
   getMessage(idDiscussionThread : number) {
-
     this.router.navigate(['/forum/discussionthread/', idDiscussionThread])
-
-
   }
 
   populateDiscussionThread() {
