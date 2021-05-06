@@ -1,23 +1,31 @@
 <div class="model-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">EDIT SECTION</h5>
+    <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Do you really want to edit this discussion threaad ? </p>
-    <form #form="ngForm">
+    <form [formGroup]='createForm'>
       <div class="form-group">
         <label for="sectionTitle">Title</label>
-        <input type="text" name="title" class="form-control" #title="ngModel" [(ngModel)]="discussionThread.title"
-          id="InputDiscussionThreadTitle" placeholder="Enter your modifications">
-            <input name="id" type="hidden" [(ngModel)]=discussionThread.id class="form-control">
-            <input name="userId" type="hidden" [(ngModel)]=discussionThread.userId class="form-control">
+        <input formControlName='title' type="text" class="form-control" id="sectionTitle"
+          placeholder="Enter Section's title"
+          [ngClass]="{'is-invalid': (!form.title.valid && form.title.dirty) || this.errorHttpMessage , 'is-valid' : form.title.valid}">
+        <div *ngIf="this.errorHttpMessage" class="invalid-feedback">
+          <small>{{this.errorHttpMessage}}</small>
+        </div>
+        <div *ngIf="form.title.errors" class="invalid-feedback">
+          <div *ngIf="form.title.errors?.required"><small>Title required</small></div>
+          <div *ngIf="form.title.errors?.minlength"><small>must be at least 2 characters</small></div>
+          <div *ngIf="form.title.errors?.maxlength"><small>can't exceed 80 characters</small></div>
+        </div>
+      </div>
+      <div>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="editDiscussionThread(discussionThread)">Edit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" (click)="editDiscussionThread()"> POST
+        </button>
       </div>
     </form>
   </div>
 </div>
-

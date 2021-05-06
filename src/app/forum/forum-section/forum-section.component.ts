@@ -1,3 +1,5 @@
+import { UserObservableService } from 'src/app/observable/userObservable';
+import { User } from './../../model/user';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { DiscussionThreadService } from '../../web-service/discussionThread.service';
@@ -5,7 +7,6 @@ import { DiscussionThread } from '../../model/discussionThread';
 import { DeleteDiscussionThreadComponent } from './discussionThread-modale/delete-discussion-thread/delete-discussion-thread.component';
 import { EditDiscussionThreadComponent } from './discussionThread-modale/edit-discussion-thread/edit-discussion-thread.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateDiscussionThreadComponent } from './discussionThread-modale/create-discussion-thread/create-discussion-thread.component';
 import * as _ from 'underscore';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,7 +20,8 @@ export class ForumSectionComponent implements OnInit {
   discussionThreads: DiscussionThread[] = [];
   pagination: any;
   pages: number[] = [];
-  sectionId = 0;
+  user = {} as User;
+  sectionId: number = 0;
 
   constructor(
     private discussionThreadService: DiscussionThreadService,
@@ -27,12 +29,18 @@ export class ForumSectionComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
+    private userObservable: UserObservableService
 
   ) {
     this.sectionId = parseInt(this.route.snapshot.paramMap.get('id') || '');
   }
 
   ngOnInit(): void {
+    this.userObservable.getUserConnectSubject().subscribe(
+      (user) => {
+        this.user = user;
+      }
+    )
     this.pagination = {
       currentPage: 1,
       itemsPerPage: 5,
@@ -40,6 +48,9 @@ export class ForumSectionComponent implements OnInit {
       totalelement: 0
     };
     this.populateDiscussionThread();
+  }
+
+  getMessage() {
   }
 
   populateDiscussionThread() {
@@ -58,20 +69,16 @@ export class ForumSectionComponent implements OnInit {
     this.populateDiscussionThread();
   }
 
-  getDiscussionThreadById() {
-    // this.discussionThreadService.findById(1)
-  }
-
-  deleteDiscussionThread(discussionThread: DiscussionThread) {
-    let modale = this.modalService.open(DeleteDiscussionThreadComponent);
-    modale.componentInstance.title = discussionThread.title;
+  createDiscussionThread() {
+    let modale = this.modalService.open(EditDiscussionThreadComponent);
+    let discussionThread = {} as DiscussionThread;
+    discussionThread.userId = this.user.id;
+    discussionThread.sectionId = this.sectionId;
+    modale.componentInstance.discussionThread = discussionThread;
     modale.result.then(
       close => {
-        this.discussionThreadService.delete(discussionThread.id).subscribe(
-          res => {
-            this.toastr.success('This Discussion Thread has been correctly deleted ');
-            this.populateDiscussionThread();
-          })
+        this.toastr.success('this Discussion Thread has been correctly created')
+        this.populateDiscussionThread();
       }
       , dismiss => {
       }
@@ -91,17 +98,23 @@ export class ForumSectionComponent implements OnInit {
     )
   }
 
-  createDiscussionThread() {
-    let modale = this.modalService.open(CreateDiscussionThreadComponent)
-    modale.componentInstance.sectionId = this.sectionId;
+  deleteDiscussionThread(discussionThread: DiscussionThread) {
+    let modale = this.modalService.open(DeleteDiscussionThreadComponent);
+    modale.componentInstance.title = discussionThread.title;
     modale.result.then(
       close => {
-        this.toastr.success('this Discussion Thread has been correctly created')
-        this.populateDiscussionThread();
+        this.discussionThreadService.delete(discussionThread.id).subscribe(
+          res => {
+            this.toastr.success('This Discussion Thread has been correctly deleted ');
+            this.populateDiscussionThread();
+          })
       }
       , dismiss => {
       }
     )
-
   }
+
+ 
+
+
 }

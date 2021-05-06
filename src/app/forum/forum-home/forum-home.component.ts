@@ -1,16 +1,13 @@
 import { User } from './../../model/user';
 import { UserObservableService } from './../../observable/userObservable';
 import { ToastrService } from 'ngx-toastr';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteSectionComponent } from './section-modale/delete-section/delete-section.component';
 import { EditSectionComponent } from './section-modale/edit-section/edit-section.component';
 import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
-import { CreateSectionComponent } from './section-modale/create-section/create-section.component';
 import * as _ from 'underscore';
-import { DiscussionThreadService } from 'src/app/web-service/discussionThread.service';
 import { Router } from '@angular/router';
 
 
@@ -69,16 +66,15 @@ export class ForumHomeComponent implements OnInit {
     this.populateSection();
   }
 
-  deleteSection(section: Section) {
-    let modale = this.modalService.open(DeleteSectionComponent);
-    modale.componentInstance.title = section.title;
+  createSection() {
+    let modale = this.modalService.open(EditSectionComponent)
+    let section = {} as Section;
+    section.userId = this.user.id;
+    modale.componentInstance.section = section;
     modale.result.then(
       close => {
-        this.sectionService.delete(section.id).subscribe(
-          res => {
-            this.toastr.success('This section has been correctly deleted ');
-            this.populateSection();
-          })
+        this.toastr.success('New Section created');
+        this.populateSection();
       }, dismiss => {
       }
     )
@@ -96,14 +92,19 @@ export class ForumHomeComponent implements OnInit {
     )
   }
 
-  createSection() {
-    let modale = this.modalService.open(CreateSectionComponent)
+  deleteSection(section: Section) {
+    let modale = this.modalService.open(DeleteSectionComponent);
+    modale.componentInstance.title = section.title;
     modale.result.then(
       close => {
-        this.toastr.success('New Section created');
-        this.populateSection();
+        this.sectionService.delete(section.id).subscribe(
+          res => {
+            this.toastr.success('This section has been correctly deleted ');
+            this.populateSection();
+          })
       }, dismiss => {
       }
     )
   }
+
 }

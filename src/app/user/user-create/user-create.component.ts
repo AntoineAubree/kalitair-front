@@ -27,7 +27,7 @@ export class UserCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
-    private router : Router,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -79,11 +79,11 @@ export class UserCreateComponent implements OnInit {
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
       ]],
       confirmPassword: ['', Validators.required]
-        	
+
     },
       {
-      validators : confirmPasswordValidator
-    });
+        validators: confirmPasswordValidator
+      });
   }
 
   get form() {
@@ -106,21 +106,17 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit() {
     // stop here if form is invalid
-    this.userService.create(this.createForm.value).subscribe(res => {
-      console.log(res)
-      if (res) {
+    this.userService.create(this.createForm.value).subscribe(
+      res => {
         this.toastr.success('Your account have been created correctly', 'You will be redirected to the home page in 2 sec');
         setTimeout(() => {
           this.router.navigate(['home']);
-      }, 2000);  //2s
+        }, 2000);  //2s
+      }, error => {
+        this.errorHttpMessage = error.error.message.split("|");
+        this.toastr.error('Your account hasn\'t been created', 'Please try again');
       }
-    }, error => {
-      this.errorHttpMessage = error.error.message.split("|");
-      this.toastr.error('Your account hasn\'t been created','Please try again');
-    })
-    if (this.createForm.invalid) {
-      return
-    }
+    )
   }
 
 }
