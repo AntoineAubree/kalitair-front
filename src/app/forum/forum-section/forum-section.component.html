@@ -4,23 +4,23 @@
     <h3 class='text-center'>Welcome to Kalitair's Forum</h3>
   </div>
   <div class="inner-sidebar-header justify-content-center">
-    <button *ngIf="user.role" (click)="createDiscussionThread()" class="btn btn-primary has-icon btn-block" type="button"
-      data-toggle="modal" data-target="#threadModal">
+    <button *ngIf="user.role === 'ADMIN'" (click)="createSection()" class="btn btn-primary has-icon btn-block" type="button" data-toggle="modal"
+      data-target="#threadModal">
       Create a new Section
     </button>
   </div>
   <!-- Forum List -->
   <div class="inner-main-body p-2 p-sm-3  forum-content show">
-    <div class="card mb-2" *ngFor=' let discussionThread of discussionThreads'>
+    <div class="card mb-2" *ngFor=' let section of sections' >
       <div class="card-body p-2 p-sm-3">
         <div class="media forum-item">
           <a data-target=".forum-content"><img
               src="https://img2.freepng.fr/20180401/gcq/kisspng-royalty-free-clip-art-sun-vector-5ac0e38e43bc15.7460223415225906062775.jpg"
               class="mr-3 rounded-circle" width="50" alt="category" /></a>
           <div class="media-body">
-            <h6 (click)='getMessage(discussionThread.id)'>{{discussionThread.title}}</h6>
-            <button *ngIf="user.role === 'ADMIN' || user.id === discussionThread.userId" class="btn btn-success " (click)="editDiscussionThread(discussionThread)">Edit</button>
-            <button *ngIf="user.role === 'ADMIN' || user.id === discussionThread.userId" class="btn btn-danger " (click)="deleteDiscussionThread(discussionThread)">Delete</button>
+            <h6 (click)='getDiscussionThread(section.id)'>{{section.title}}</h6>
+            <button *ngIf="user.role === 'ADMIN'" class="btn btn-success " (click)="editSection(section)">Edit</button>
+            <button *ngIf="user.role === 'ADMIN'" class="btn btn-danger " (click)="deleteSection(section)">Delete</button>
           </div>
         </div>
       </div>

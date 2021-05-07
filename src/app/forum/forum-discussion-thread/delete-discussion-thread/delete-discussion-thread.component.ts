@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { DiscussionThreadService } from 'src/app/web-service/discussionThread.service';
 
 @Component({
   selector: 'app-delete-discussion-thread',
