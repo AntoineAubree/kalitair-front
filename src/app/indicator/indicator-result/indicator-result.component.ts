@@ -14,6 +14,7 @@ export class IndicatorResultComponent implements OnInit {
   constructor(private dataIndicatorService: DataIndicatorService) {
     this.dataIndicatorService.indicator$.subscribe(x => {
       this.indicator = x;
+      console.log(this.indicator)
     })
    }
 
