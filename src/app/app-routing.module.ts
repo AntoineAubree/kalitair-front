@@ -10,9 +10,10 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { DisconnectedGuard } from './guard/disconnected.guard';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { MessageComponent } from './forum/forum-message/message.component';
+import { IndicatorResultComponent } from './indicator/indicator-result/indicator-result.component';
 
 const routes: Routes = [
-  { path: "home", component: IndicatorAcceuilComponent },
+  { path: "home", component: IndicatorAcceuilComponent, children: [{ path: "result", component : IndicatorResultComponent}] },
   { path: 'user/list', component: AdminUserListComponent },
   { path: "login", component: UserLoginComponent, canActivate: [DisconnectedGuard] },
   { path: "user/create", component: UserCreateComponent, canActivate: [DisconnectedGuard] },
