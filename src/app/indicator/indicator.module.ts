@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { IndicatorRoutingModule } from './indicator-routing.module';
 import { IndicatorAcceuilComponent } from './indicator-acceuil/indicator-acceuil.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -10,8 +10,9 @@ import { IndicatorAcceuilComponent } from './indicator-acceuil/indicator-acceuil
     IndicatorAcceuilComponent
   ],
   imports: [
-    CommonModule,
-    IndicatorRoutingModule
-  ]
+    IndicatorRoutingModule,
+    CommonModule
+  ],
+  providers: [DatePipe]
 })
 export class IndicatorModule { }
