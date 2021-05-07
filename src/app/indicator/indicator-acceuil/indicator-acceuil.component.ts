@@ -13,6 +13,7 @@ import Icon from 'ol/style/Icon'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Indicator } from 'src/app/model/indicator';
 import { IndicatorService } from 'src/app/web-service/indicateur/indicator.service';
+import { DataIndicatorService } from '../data-indicator.service';
 
 @Component({
   selector: 'app-indicator-acceuil',
@@ -25,9 +26,14 @@ export class IndicatorAcceuilComponent implements OnInit {
   markerSource: VectorSource = new VectorSource({});
   indicator = {} as Indicator;
   
-  constructor(private router: Router, private route: ActivatedRoute, private indicatorService : IndicatorService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private indicatorService: IndicatorService,
+    private dataIndicatorService: DataIndicatorService
+  ) {
     
-   }
+    }
 
   ngOnInit(): void {
     this.initilizeMap();
@@ -66,8 +72,6 @@ export class IndicatorAcceuilComponent implements OnInit {
         zoom: 6
       }),
     });
-    this.router.navigate(['result'], { relativeTo: this.route })
-
   }
 
  /*  getCoord(event: any) {
@@ -90,9 +94,12 @@ export class IndicatorAcceuilComponent implements OnInit {
 
   getCityIndicator(indicator: Indicator) {
     this.indicatorService.getByCoordinate(indicator).subscribe(res => {
-      console.log(res);
+      this.dataIndicatorService.sendData(res);
+      this.router.navigate(['result/'+ res.townName], { relativeTo: this.route })
     })
   }
+
+  
 
 }
 

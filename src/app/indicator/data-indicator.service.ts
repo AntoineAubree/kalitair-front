@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Indicator } from '../model/indicator';
 
 @Injectable({
@@ -7,17 +7,15 @@ import { Indicator } from '../model/indicator';
 })
 export class DataIndicatorService {
 
-  private subject = new Subject<any>();
+  indicator = {} as Indicator;
+
+  indicatorSubject$ = new BehaviorSubject<Indicator>(this.indicator);
 
   sendData(dataIndicator: Indicator) {
-    this.subject.next(dataIndicator)
+    this.indicatorSubject$.next(dataIndicator)
   }
 
-  getData() : Observable<any> {
-    return this.subject.asObservable();
+  get indicator$() {
+    return this.indicatorSubject$.asObservable();
   }
-
-  constructor() { }
-
-  
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Indicator } from 'src/app/model/indicator';
+import { DataIndicatorService } from '../data-indicator.service';
 
 @Component({
   selector: 'app-indicator-result',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndicatorResultComponent implements OnInit {
 
-  constructor() { }
+  indicator = {} as Indicator;
+
+  constructor(private dataIndicatorService: DataIndicatorService) {
+    this.dataIndicatorService.indicator$.subscribe(x => {
+      this.indicator = x;
+    })
+   }
 
   ngOnInit(): void {
+    
+    
   }
 
 }
