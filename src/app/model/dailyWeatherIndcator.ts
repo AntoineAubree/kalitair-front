@@ -1,5 +1,6 @@
 export interface DailyWeatherIndicator{
-    date: string;
+    temperature: number;
+    date: Date;
     weatherConditions: string;
     baliseIcon: string;
 }

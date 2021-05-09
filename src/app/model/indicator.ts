@@ -8,5 +8,5 @@ export interface Indicator{
     population: number;
     dailyQualityIndicator: Array<DailyQualityIndicator>;
     dailyWeatherIndicators: Array<DailyWeatherIndicator>;
-    date: string | null
+    date: Date
 }
