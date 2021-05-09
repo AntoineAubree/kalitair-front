@@ -1,4 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DailyWeatherIndicator } from 'src/app/model/dailyWeatherIndcator';
+import { Indicator } from 'src/app/model/indicator';
+import { DataIndicatorService } from '../data-indicator.service';
+
 
 @Component({
   selector: 'app-indicator-result',
@@ -7,9 +12,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndicatorResultComponent implements OnInit {
 
-  constructor() { }
+  indicator = {} as Indicator;
+  dailyWeather: DailyWeatherIndicator[] = [];
+  date: Date[] = [];
+  dateJour: Date[] = [];
+  dateDisplayed: Date = new Date();
+
+  constructor(private dataIndicatorService: DataIndicatorService, private datePipe : DatePipe) {
+    this.dataIndicatorService.indicator$.subscribe(x => {
+      console.log(x);
+      this.indicator = x;
+      this.indicator.dailyWeatherIndicators.forEach(dateX => dateX.date = new Date(dateX.date));
+      //this.date.forEach(x => console.log(typeof x));
+    })
+   }
 
   ngOnInit(): void {
+    /* this.dateDisplayed = this.datePipe.transform(this.indicator.date, 'dd-MM-yyyy'); */
+    this.indicator.date = new Date(this.indicator.date);
+    //console.log(typeof this.indicator.date)
+    this.sortWeatherIndicator(0);
+    console.log(this.dailyWeather);
+    
+  }
+
+  sortWeatherIndicator(day: number) {
+    this.dailyWeather = [];
+    this.indicator.dailyWeatherIndicators.forEach(daily => {
+      if (daily.date.getDate() === this.indicator.date.getDate() + day) {
+        this.dailyWeather.push(daily);
+        this.dateDisplayed.setDate(this.indicator.date.getDate() + day)
+    }
+  })
+  }
+
+  closestWeather() {
+    
   }
 
 }

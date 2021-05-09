@@ -1,1 +1,42 @@
-<p>indicator-result works!</p>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <button class="btn btn-primary" (click)="sortWeatherIndicator(0)">Today</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" (click)="sortWeatherIndicator(1)">Tomorrow</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" (click)="sortWeatherIndicator(2)">J+1</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary" (click)="sortWeatherIndicator(3)">J+2</button>
+                    </div>
+                </div>
+            </div>
+            <div class="conntainer">
+                <div class="row">
+                    <p class="col-6 p-4">{{indicator.townName}}</p>
+                    <p class="col-6 p-4">{{dateDisplayed.toLocaleString() | date : 'dd-MM-yyyy'}}</p>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-3 col-lg-3" *ngFor="let daily of dailyWeather">
+                        <p>{{daily.date | date : 'HH:mm'}}</p>
+                        <p>{{daily.temperature}} °C</p>
+                        <p>{{daily.weatherConditions}}</p>
+                        <i class="wi {{daily.baliseIcon}}"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+

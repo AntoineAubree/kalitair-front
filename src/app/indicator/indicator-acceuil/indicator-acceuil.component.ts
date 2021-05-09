@@ -10,8 +10,10 @@ import { Feature } from 'ol';
 import Point from 'ol/geom/Point';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon'
-
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Indicator } from 'src/app/model/indicator';
+import { IndicatorService } from 'src/app/web-service/indicateur/indicator.service';
+import { DataIndicatorService } from '../data-indicator.service';
 
 @Component({
   selector: 'app-indicator-acceuil',
@@ -20,13 +22,18 @@ import Icon from 'ol/style/Icon'
 })
 export class IndicatorAcceuilComponent implements OnInit {
 
-
   map : Map = new Map({});
   markerSource: VectorSource = new VectorSource({});
+  indicator = {} as Indicator;
   
-  constructor() {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private indicatorService: IndicatorService,
+    private dataIndicatorService: DataIndicatorService
+  ) {
     
-   }
+    }
 
   ngOnInit(): void {
     this.initilizeMap();
@@ -36,6 +43,8 @@ export class IndicatorAcceuilComponent implements OnInit {
       const lat = lonlat[1];
       console.log(lonlat)
       this.addMarker(lon, lat);
+      this.indicator.coordinate = { longitude: lon, latitude: lat };
+      this.getCityIndicator(this.indicator);
     });
   }
 
@@ -63,7 +72,6 @@ export class IndicatorAcceuilComponent implements OnInit {
         zoom: 6
       }),
     });
-
   }
 
  /*  getCoord(event: any) {
@@ -82,8 +90,16 @@ export class IndicatorAcceuilComponent implements OnInit {
       geometry: new Point(fromLonLat([lon, lat]))
     });
     this.markerSource.addFeature(marker);
-    
   }
+
+  getCityIndicator(indicator: Indicator) {
+    this.indicatorService.getByCoordinate(indicator).subscribe(res => {
+      this.dataIndicatorService.sendData(res);
+      this.router.navigate(['result/'+ res.townName], { relativeTo: this.route })
+    })
+  }
+
+  
 
 }
 
