@@ -16,7 +16,7 @@ export class ForumListComponent implements OnInit {
 
   user = {} as User;
   @Input() forumUrl = '';
-  sectionId = 0;
+  sectionId = '';
   forumObject = {} as any;
   pagination = {} as Pagination;
   typeOfItem = '';
@@ -33,12 +33,13 @@ export class ForumListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sectionId = localStorage.getItem('idSection') || '';
+    console.log(this.sectionId);
     this.userObservable.getUserConnectSubject().subscribe(
       (user) => {
         this.user = user;
       }
     )
-    this.sectionId = Number(localStorage.getItem('idSection'));
     if (this.forumUrl === 'section') {
       this.typeOfItem = 'Section';
     } else if (this.forumUrl === 'discussionThread') {
