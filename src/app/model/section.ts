@@ -1,11 +1,13 @@
+import { ForumObject } from './forumObject';
 import { DiscussionThread } from "./discussionThread";
 import {User} from './user';
 
-export interface Section{
+export interface Section {
 
   id : number;
   title : string;
   userId : number;
   edit : boolean;
+  userPseudo : string;
 
 }

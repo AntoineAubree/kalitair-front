@@ -1,15 +1,14 @@
 import { User } from './../../model/user';
-import { UserObservableService } from './../../observable/userObservable';
-import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteSectionComponent } from './delete-section/delete-section.component';
-import { EditSectionComponent } from './edit-section/edit-section.component';
+import { ForumObject } from './../../model/forumObject';
 import { Section } from '../../model/section';
 import { SectionService } from '../../web-service/section.service';
-import * as _ from 'underscore';
+import { DeleteSectionComponent } from './delete-section/delete-section.component';
+import { EditSectionComponent } from './edit-section/edit-section.component';
 import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-forum-section',
@@ -18,81 +17,60 @@ import { Router } from '@angular/router';
 })
 export class ForumSectionComponent implements OnInit {
 
-  sections: Section[] = [];
-  pagination: any;
-  pages: number[] = [];
-  user = {} as User;
+  forumUrl = 'section';
 
   constructor(
     private sectionService: SectionService,
     private modalService: NgbModal,
     private toastr: ToastrService,
     private router: Router,
-    private userObservable: UserObservableService
   ) { }
 
   ngOnInit(): void {
-    this.userObservable.getUserConnectSubject().subscribe(
-      (user) => {
-        this.user = user;
-      }
-    )
-    this.pagination = {
-      currentPage: 1,
-      itemsPerPage: 5,
-      totalPages: 0,
-      totalElements: 0
-    };
-    this.populateSection();
   }
 
-  getDiscussionThread(idSection: number) {
-    this.router.navigate(['/forum/section/', idSection]);
-  }
-
-  populateSection() {
-    this.sectionService.get(this.pagination.currentPage - 1, this.pagination.itemsPerPage).subscribe(
+  populateSection(forumObject: ForumObject<Section>): void {
+    this.sectionService.get(forumObject.pagination.currentPage - 1, forumObject.pagination.itemsPerPage).subscribe(
       (response: any) => {
-        this.pagination.totalElements = response.totalElements;
-        this.pagination.totalPages = response.totalPages;
-        this.pages = _.range(1, this.pagination.totalPages + 1);
-        this.sections = response.content;
+        forumObject.pagination.totalElements = response.totalElements;
+        forumObject.pagination.totalPages = response.totalPages;
+        forumObject.pages = _.range(1, forumObject.pagination.totalPages + 1);
+        forumObject.items = response.content;
       }
     );
   }
 
-  paginate(page: number) {
-    this.pagination.currentPage = page;
-    this.populateSection();
+  getDiscussionThread(idSection: number): void {
+    this.router.navigate(['/forum/section/', idSection]);
   }
 
-  createSection() {
+  createSection(forumObject: ForumObject<Section>, user: User) {
     let modale = this.modalService.open(EditSectionComponent)
     let section = {} as Section;
-    section.userId = this.user.id;
+    section.userId = user.id;
     modale.componentInstance.section = section;
     modale.result.then(
       close => {
         this.toastr.success('New Section created');
-        this.populateSection();
+        this.populateSection(forumObject);
       }, dismiss => {
       }
     )
   }
 
-  editSection(section: Section) {
+  editSection(forumObject: ForumObject<Section>, section: Section) {
     let modale = this.modalService.open(EditSectionComponent)
     modale.componentInstance.section = section;
     modale.result.then(
       close => {
         this.toastr.success('this section has been correctly editing');
-        this.populateSection();
+        this.populateSection(forumObject);
       }, dismiss => {
       }
     )
   }
 
-  deleteSection(section: Section) {
+  deleteSection(forumObject: ForumObject<Section>, section: Section) {
     let modale = this.modalService.open(DeleteSectionComponent);
     modale.componentInstance.title = section.title;
     modale.result.then(
@@ -100,7 +78,7 @@ export class ForumSectionComponent implements OnInit {
         this.sectionService.delete(section.id).subscribe(
           res => {
             this.toastr.success('This section has been correctly deleted ');
-            this.populateSection();
+            this.populateSection(forumObject);
           })
       }, dismiss => {
       }

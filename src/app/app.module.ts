@@ -11,7 +11,6 @@ import { UserModule } from './user/user.module';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { CommonModule } from '@angular/common';
 import { IndicatorModule } from './indicator/indicator.module';
 import { AdminModule } from './admin/admin.module';
 
@@ -35,7 +34,8 @@ import { AdminModule } from './admin/admin.module';
     NgbModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

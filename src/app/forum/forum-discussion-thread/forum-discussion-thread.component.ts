@@ -1,14 +1,17 @@
-import { UserObservableService } from 'src/app/observable/userObservable';
-import { User } from '../../model/user';
-import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
-import { DiscussionThreadService } from '../../web-service/discussionThread.service';
+import { ForumObject } from './../../model/forumObject';
 import { DiscussionThread } from '../../model/discussionThread';
+import { DiscussionThreadService } from '../../web-service/discussionThread.service';
 import { DeleteDiscussionThreadComponent } from './delete-discussion-thread/delete-discussion-thread.component';
 import { EditDiscussionThreadComponent } from './edit-discussion-thread/edit-discussion-thread.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'underscore';
+
+import { User } from '../../model/user';
+import { UserObservableService } from 'src/app/observable/userObservable';
+
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-forum-discussion-thread',
@@ -17,11 +20,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ForumDiscussionThreadComponent implements OnInit {
 
-  discussionThreads: DiscussionThread[] = [];
-  pagination: any;
-  pages: number[] = [];
-  user = {} as User;
   sectionId: number = 0;
+  forumUrl = 'discussionThread';
 
   constructor(
     private discussionThreadService: DiscussionThreadService,
@@ -29,77 +29,58 @@ export class ForumDiscussionThreadComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-    private userObservable: UserObservableService
-
   ) {
     this.sectionId = parseInt(this.route.snapshot.paramMap.get('id') || '');
   }
 
   ngOnInit(): void {
-    this.userObservable.getUserConnectSubject().subscribe(
-      (user) => {
-        this.user = user;
-      }
-    )
-    this.pagination = {
-      currentPage: 1,
-      itemsPerPage: 5,
-      totalPages: 0,
-      totalelement: 0
-    };
-    this.populateDiscussionThread();
   }
 
-  getMessage(idDiscussionThread : number) {
-    this.router.navigate(['/forum/discussionthread/', idDiscussionThread])
-  }
-
-  populateDiscussionThread() {
-    this.discussionThreadService.get(this.sectionId, this.pagination.currentPage - 1, this.pagination.itemsPerPage).subscribe(
+  populateDiscussionThread(forumObject: ForumObject<DiscussionThread>): void {
+    this.discussionThreadService.get(this.sectionId, forumObject.pagination.currentPage - 1, forumObject.pagination.itemsPerPage).subscribe(
       (response: any) => {
-        this.pagination.totalElements = response.totalElements;
-        this.pagination.totalPages = response.totalPages;
-        this.pages = _.range(1, this.pagination.totalPages + 1);
-        this.discussionThreads = response.content;
+        forumObject.pagination.totalElements = response.totalElements;
+        forumObject.pagination.totalPages = response.totalPages;
+        forumObject.pages = _.range(1, forumObject.pagination.totalPages + 1);
+        forumObject.items = response.content;
       }
     );
   }
 
-  paginate(page: number) {
-    this.pagination.currentPage = page;
-    this.populateDiscussionThread();
+  getMessage(idDiscussionThread: number) {
+    this.router.navigate(['/forum/discussionthread/', idDiscussionThread])
   }
 
-  createDiscussionThread() {
+  createDiscussionThread(forumObject: ForumObject<DiscussionThread>, user: User) {
     let modale = this.modalService.open(EditDiscussionThreadComponent);
     let discussionThread = {} as DiscussionThread;
-    discussionThread.userId = this.user.id;
+    discussionThread.userId = user.id;
     discussionThread.sectionId = this.sectionId;
     modale.componentInstance.discussionThread = discussionThread;
     modale.result.then(
       close => {
         this.toastr.success('this Discussion Thread has been correctly created')
-        this.populateDiscussionThread();
+        this.populateDiscussionThread(forumObject);
       }
       , dismiss => {
       }
     )
   }
 
-  editDiscussionThread(discussionThread: DiscussionThread) {
+  editDiscussionThread(forumObject: ForumObject<DiscussionThread>, discussionThread: DiscussionThread) {
     let modale = this.modalService.open(EditDiscussionThreadComponent)
     modale.componentInstance.discussionThread = discussionThread
     modale.result.then(
       close => {
         this.toastr.success('this Discussion Thread has been correctly updated')
-        this.populateDiscussionThread();
+        this.populateDiscussionThread(forumObject);
       }
       , dismiss => {
       }
     )
   }
 
-  deleteDiscussionThread(discussionThread: DiscussionThread) {
+  deleteDiscussionThread(forumObject: ForumObject<DiscussionThread>, discussionThread: DiscussionThread) {
     let modale = this.modalService.open(DeleteDiscussionThreadComponent);
     modale.componentInstance.title = discussionThread.title;
     modale.result.then(
@@ -107,15 +88,11 @@ export class ForumDiscussionThreadComponent implements OnInit {
         this.discussionThreadService.delete(discussionThread.id).subscribe(
           res => {
             this.toastr.success('This Discussion Thread has been correctly deleted ');
-            this.populateDiscussionThread();
+            this.populateDiscussionThread(forumObject);
           })
       }
       , dismiss => {
       }
     )
   }
-
-
-
-
 }
