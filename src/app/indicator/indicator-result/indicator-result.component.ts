@@ -20,6 +20,7 @@ export class IndicatorResultComponent implements OnInit {
 
   constructor(private dataIndicatorService: DataIndicatorService) {
     this.dataIndicatorService.indicator$.subscribe(x => {
+      console.log(x);
       this.indicator = x;
       this.indicator.dailyWeatherIndicators.forEach(dateX => dateX.date = new Date(dateX.date));
       //this.date.forEach(x => console.log(typeof x));

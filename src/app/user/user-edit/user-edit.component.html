@@ -1,4 +1,4 @@
-<div *ngIf="observableReady" class="container">
+<main *ngIf="observableReady" class="container">
   <div class="row mt-5">
     <div class="col-md-3"></div>
     <div class="col-md-6">
@@ -93,10 +93,10 @@
         <div class="form-group row">
           <label for="town" class="col-sm-3 col-form-label">Town *</label>
           <div class="col-sm-9">
-            <select formControlName="townName" (change)="changeCity($event)" class="custom-select mr-sm-2" id="town"
+            <select formControlName="townName" class="custom-select mr-sm-2" id="town"
               [ngClass]="{'is-invalid': !form.townName.valid && form.townName.dirty, 'is-valid' : form.townName.valid}"
               required>
-              <option *ngFor="let town of towns" value={{town.name}}>{{town.name}}</option>
+              <option *ngFor="let town of towns" [value]=town.name>{{town.name}}</option>
             </select>
             <div *ngIf="form.townName.errors" class="invalid-feedback">
               <div *ngIf="form.townName.errors.required">Town required</div>
@@ -159,7 +159,7 @@
     </div>
     <div class="col-md-3"></div>
   </div>
-</div>
+</main>
 
 
 <!-- Modal de suppression -->

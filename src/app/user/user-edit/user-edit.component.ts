@@ -88,19 +88,9 @@ export class UserEditComponent implements OnInit {
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ]],
-          password: [, [
-            // Validators.required,
-            // Validators.minLength(8),
-            // Validators.maxLength(36),
-            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
+          password: [res.password, [
           ]],
-          confirmPassword: ['',
-            // Validators.required
-          ]
-        },
-          {
-            // validators: confirmPasswordValidator
-          }
+        }
         );
         const townUser = {} as Town;
         townUser.name = res.townName;
@@ -113,9 +103,9 @@ export class UserEditComponent implements OnInit {
     return this.editForm.controls;
   }
 
-  get town() {
-    return this.editForm.get('town');
-  }
+  // get town() {
+  //   return this.editForm.get('town');
+  // }
 
   findByZipCode() {
     if (this.editForm.get('postCodeCode')?.value.length == 5) {
@@ -135,6 +125,7 @@ export class UserEditComponent implements OnInit {
       res => {
         console.log(res)
         this.toastr.success('Your account have been edited correctly', 'You will be redirected to the home page in 2 sec');
+        this.userObservable.setUserConnectSubject(res);
         setTimeout(() => {
           this.router.navigate(['home']);
         }, 2000);  //2s
@@ -143,12 +134,6 @@ export class UserEditComponent implements OnInit {
         this.toastr.error('Your account hasn\'t been edited', 'Please try again');
       }
     )
-  }
-
-  changeCity(e: any) {
-    this.town?.setValue(e.target.value, {
-      onlySelf: true
-    })
   }
 
   test() {

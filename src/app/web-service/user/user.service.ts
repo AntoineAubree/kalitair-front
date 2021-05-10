@@ -29,8 +29,8 @@ export class UserService {
     return this.http.post(this.baseUrl, user);
   }
 
-  put(user: User) {
-    return this.http.put(this.baseUrl , user);
+  put(user: User): Observable<User> {
+    return this.http.put<User>(this.baseUrl , user);
   }
 
   delete(id: number) {
