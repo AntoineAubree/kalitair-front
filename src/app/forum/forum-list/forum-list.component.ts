@@ -38,6 +38,7 @@ export class ForumListComponent implements OnInit {
         this.user = user;
       }
     )
+    this.sectionId = Number(localStorage.getItem('idSection'));
     if (this.forumUrl === 'section') {
       this.typeOfItem = 'Section';
     } else if (this.forumUrl === 'discussionThread') {

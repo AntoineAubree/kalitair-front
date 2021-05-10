@@ -6,6 +6,8 @@
   <div>
     <p>
       <span *ngIf="forumUrl != 'section'"><a [routerLink]="['/forum']">Sections</a></span>
+      <span *ngIf="forumUrl === 'message'"> > <a [routerLink]="['/forum/section', sectionId]"
+      >Fil</a></span>
     </p>
     <h3 *ngIf="user.role === 'ADMIN' || (typeOfItem != 'Section' && user.role === 'USER' && !user.banned)">
       <button (click)="create()" class="btn btn-primary btn-block" type="button">
