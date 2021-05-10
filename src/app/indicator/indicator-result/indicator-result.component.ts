@@ -18,22 +18,17 @@ export class IndicatorResultComponent implements OnInit {
   dateJour: Date[] = [];
   dateDisplayed: Date = new Date();
 
-  constructor(private dataIndicatorService: DataIndicatorService, private datePipe : DatePipe) {
+  constructor(private dataIndicatorService: DataIndicatorService) {
     this.dataIndicatorService.indicator$.subscribe(x => {
-      console.log(x);
       this.indicator = x;
       this.indicator.dailyWeatherIndicators.forEach(dateX => dateX.date = new Date(dateX.date));
       //this.date.forEach(x => console.log(typeof x));
+      this.indicator.date = new Date(this.indicator.date);
+      this.sortWeatherIndicator(0);
     })
    }
 
   ngOnInit(): void {
-    /* this.dateDisplayed = this.datePipe.transform(this.indicator.date, 'dd-MM-yyyy'); */
-    this.indicator.date = new Date(this.indicator.date);
-    //console.log(typeof this.indicator.date)
-    this.sortWeatherIndicator(0);
-    console.log(this.dailyWeather);
-    
   }
 
   sortWeatherIndicator(day: number) {
@@ -44,10 +39,6 @@ export class IndicatorResultComponent implements OnInit {
         this.dateDisplayed.setDate(this.indicator.date.getDate() + day)
     }
   })
-  }
-
-  closestWeather() {
-    
   }
 
 }

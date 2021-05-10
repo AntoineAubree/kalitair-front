@@ -21,7 +21,7 @@
             <div class="conntainer">
                 <div class="row">
                     <p class="col-6 p-4">{{indicator.townName}}</p>
-                    <p class="col-6 p-4">{{dateDisplayed.toLocaleString() | date : 'dd-MM-yyyy'}}</p>
+                    <p class="col-6 p-4">{{dateDisplayed.toISOString()| date : 'dd-MM-yyyy'}}</p>
                 </div>
             </div>
             <div class="container mt-5">
