@@ -41,6 +41,7 @@ export class ForumSectionComponent implements OnInit {
   }
 
   getDiscussionThread(idSection: number): void {
+    localStorage.setItem('idSection', idSection.toString());
     this.router.navigate(['/forum/section/', idSection]);
   }
 

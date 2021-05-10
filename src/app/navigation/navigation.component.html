@@ -20,16 +20,23 @@
             <div class="collapse navbar-collapse col-lg-5 mt-2 mb-2" id="navbarMenu">
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div [ngClass]="{'col-lg-4': isAdmin, 'col-lg-6': !isAdmin}">
                         </div>
-                        <ul class="d-flex flex-column flex-lg-row mb-0 pl-0 align-items-center col-lg-6 col-12 pr-0">
-                            <li routerLink="/forum" class="btn btn-dark col-12 col-lg-4 ">
+                        <ul [ngClass]="{'col-lg-8': isAdmin, 'col-lg-6': !isAdmin}" class="d-flex flex-column flex-lg-row mb-0 pl-0 align-items-center col-12 pr-0">
+                            <li [ngClass]="{'col-lg-3': isAdmin, 'col-lg-4': !isAdmin}" routerLink="/forum" class="btn btn-dark col-12">
                                 <a>Forum</a>
                             </li>
-                            <li class="btn btn-dark col-12 col-lg-4">
+                            <li [ngClass]="{'col-lg-3': isAdmin, 'col-lg-4': !isAdmin}" class="btn btn-dark col-12">
                                 <a>Favoris</a>
                             </li>
-                            <li class="d-none d-lg-inline btn col-lg-4">
+                            <li *ngIf="isAdmin" class="col-lg-3 d-none d-lg-inline btn">
+                                <a class="h3 mb-0 text-light dropdown-toggle" id="dropdownAdminButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+                                <ul class="dropdown-menu p-0" aria-labelledby="dropdownAdminButton">
+                                    <li class="btn btn-dark col-12" routerLink="/user/list"><a><i class="fa fa-users"></i><span>Liste utilisateurs</span></a></li>
+                                </ul>
+                            </li>
+                            <li [ngClass]="{'col-lg-3': isAdmin, 'col-lg-4': !isAdmin}" class="d-none d-lg-inline btn">
                                 <a class="h3 mb-0 text-light dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                                 <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -38,6 +45,9 @@
                                     <li *ngIf="isLog" class="btn btn-dark col-12" routerLink="/user/edit"><a><i class="fa fa-user"></i><span>Profil</span></a></li>
                                     <li *ngIf="isLog" class="btn btn-dark col-12" (click)="disconnect()"><a><i class="fa fa-sign-out"></i><span>Se déconnecter</span></a></li>
                                 </ul>
+                            </li>
+                            <li *ngIf="isAdmin" class="btn btn-dark d-lg-none col-12" routerLink="/user/list">
+                                <a>Liste utilisateurs</a>
                             </li>
                             <li *ngIf="!isLog" class="btn btn-dark d-lg-none col-12" routerLink="/login">
                                 <a>Se connecter</a>

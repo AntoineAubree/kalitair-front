@@ -6,6 +6,7 @@
   <div>
     <p>
       <span *ngIf="forumUrl != 'section'"><a [routerLink]="['/forum']">Sections</a></span>
+      <span *ngIf="forumUrl === 'message'"> > <a [routerLink]="['/forum/section', sectionId]">Fil</a></span>
     </p>
     <h3 *ngIf="user.role === 'ADMIN' || (typeOfItem != 'Section' && user.role === 'USER' && !user.banned)">
       <button (click)="create()" class="btn btn-primary btn-block" type="button">
@@ -29,8 +30,10 @@
         </div>
       </div>
       <div class="card-footer p-2 p-sm-3 d-flex justify-content-end">
-        <button *ngIf="user.role === 'ADMIN' || user.id === item.userId && !user.banned" class="btn btn-success" (click)="edit(item)"><i class="fa fa-edit"></i></button>
-        <button *ngIf="user.role === 'ADMIN' || user.id === item.userId && !user.banned" class="btn btn-danger ml-2" (click)="_delete(item)"><i class="fa fa-trash"></i></button>
+        <button *ngIf="user.role === 'ADMIN' || user.id === item.userId && !user.banned" class="btn btn-success"
+          (click)="edit(item)"><i class="fa fa-edit"></i></button>
+        <button *ngIf="user.role === 'ADMIN' || user.id === item.userId && !user.banned" class="btn btn-danger ml-2"
+          (click)="_delete(item)"><i class="fa fa-trash"></i></button>
       </div>
     </div>
   </section>
@@ -38,8 +41,9 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <li class="page-item" *ngFor="let page of forumObject.pages"
-          [ngClass]="{'active': forumObject.pagination.currentPage === page, 'pointer': forumObject.pagination.currentPage !== page}"><a class="page-link"
-            (click)="paginate(page)">{{page}}</a></li>
+          [ngClass]="{'active': forumObject.pagination.currentPage === page, 'pointer': forumObject.pagination.currentPage !== page}">
+          <a class="page-link" (click)="paginate(page)">{{page}}</a>
+        </li>
       </ul>
     </nav>
   </div>
