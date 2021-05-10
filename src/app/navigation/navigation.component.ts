@@ -26,10 +26,9 @@ export class NavigationComponent implements OnInit {
   private updateUserBooleanValues() {
     this.userObservable.getUserConnectSubject().subscribe(
       (user: User) => {
-        if (user.id)
-          this.isLog = true;
-        if (user.role === 'ADMIN')
-          this.isAdmin = true;
+        console.log('user' , user);
+        user.id ? this.isLog = true : this.isLog = false;
+        user.role === 'ADMIN' ? this.isAdmin = true : this.isAdmin = false;
       }
     );
   }

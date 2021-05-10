@@ -8,7 +8,7 @@
           <label for="pseudo" class="col-sm-3 col-form-label">Pseudo *</label>
           <div class="col-sm-9">
             <input formControlName='pseudo' type="text" class="form-control" id="pseudo"
-              [ngClass]="{'is-invalid': (!form.pseudo.valid && form.pseudo.dirty) || this.errorHttpMessage , 'is-valid' : form.pseudo.valid}"
+              [ngClass]="{'is-invalid': (!form.pseudo.valid && form.pseudo.dirty) || this.errorHttpMessage[0] === '1' , 'is-valid' : form.pseudo.valid}"
               placeholder="Pseudo" required>
             <div *ngIf="this.errorHttpMessage[0] === '1' " class="invalid-feedback">
               <small>{{this.errorHttpMessage[1]}}</small>
@@ -107,7 +107,7 @@
           <label for="email" class="col-sm-3 col-form-label">Email *</label>
           <div class="col-sm-9">
             <input formControlName='email' type="email" id="inputEmail" class="form-control"
-              [ngClass]="{'is-invalid': (!form.email.valid && form.email.dirty) || this.errorHttpMessage}"
+              [ngClass]="{'is-invalid': (!form.email.valid && form.email.dirty) || this.errorHttpMessage[0] === '2', 'is-valid': form.email.valid}"
               placeholder="Email address" required>
             <small *ngIf="form.email.errors?.pattern" class="invalid-feedback">
               xxx@xxx.xxx
@@ -117,7 +117,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <label for="password" class="col-sm-3 col-form-label">Password *</label>
           <div class="col-sm-9">
             <input formControlName='password' type="password" class="form-control" id="password"
@@ -143,7 +143,7 @@
               <div *ngIf="editForm.errors?.match">Password must match</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="form-group row">
           <div class="col-sm-10">
             <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!editForm.valid">Edit my

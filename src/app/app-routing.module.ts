@@ -1,3 +1,4 @@
+import { AuthenticationAdminGuard } from './guard/authenticationAdmin.guard';
 import { ForumDiscussionThreadComponent } from './forum/forum-discussion-thread/forum-discussion-thread.component';
 import { ForumSectionComponent } from './forum/forum-section/forum-section.component';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,7 @@ import { ForumMessageComponent } from './forum/forum-message/message.component';
 
 const routes: Routes = [
   { path: "home", component: IndicatorAcceuilComponent, children: [{ path: "result/:name", component : IndicatorResultComponent}] },
-  { path: 'user/list', component: AdminUserListComponent },
+  { path: 'user/list', component: AdminUserListComponent, canActivate: [AuthenticationAdminGuard] },
   { path: "login", component: UserLoginComponent, canActivate: [DisconnectedGuard] },
   { path: "user/create", component: UserCreateComponent, canActivate: [DisconnectedGuard] },
   { path: "user/edit", component: UserEditComponent, canActivate: [AuthenticationGuard] },

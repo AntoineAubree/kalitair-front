@@ -1,3 +1,4 @@
+import { NavigationComponent } from './../../navigation/navigation.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -44,6 +45,7 @@ export class UserEditComponent implements OnInit {
     //populate value
     this.userObservable.getUserConnectSubject().subscribe(
       res => {
+        this.user = res;
         this.editForm = this.formBuilder.group({
           id: [res.id, Validators.required],
           pseudo: [res.pseudo, [
@@ -87,15 +89,17 @@ export class UserEditComponent implements OnInit {
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ]],
           password: [, [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(36),
-            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
+            // Validators.required,
+            // Validators.minLength(8),
+            // Validators.maxLength(36),
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')
           ]],
-          confirmPassword: ['', Validators.required]
+          confirmPassword: ['',
+            // Validators.required
+          ]
         },
           {
-            validators: confirmPasswordValidator
+            // validators: confirmPasswordValidator
           }
         );
         const townUser = {} as Town;
@@ -157,7 +161,7 @@ export class UserEditComponent implements OnInit {
         this.modalService.dismissAll('Cross Click');
         this.toastr.success('The user have been deleted correctly', 'You will be redirected to the home page in 2 secondes');
         setTimeout(() => {
-          this.router.navigate(['home']);
+          this.disconnect();
         }, 2000);  //2s
       }, error => {
         this.toastr.error(error.error.message);
@@ -167,6 +171,12 @@ export class UserEditComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content)
+  }
+
+  disconnect(): void {
+    localStorage.removeItem('token');
+    this.userObservable.removeUserConnectSubject();
+    this.router.navigate(['/login']);
   }
 
 }
