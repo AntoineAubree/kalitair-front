@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ForumSectionComponent } from './forum-section.component';
+
+import { ForumDiscussionThreadComponent } from './forum-discussion-thread.component';
 
 describe('ForumSectionComponent', () => {
-  let component: ForumSectionComponent;
-  let fixture: ComponentFixture<ForumSectionComponent>;
+  let component: ForumDiscussionThreadComponent;
+  let fixture: ComponentFixture<ForumDiscussionThreadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForumSectionComponent ]
+      declarations: [ ForumDiscussionThreadComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForumSectionComponent);
+    fixture = TestBed.createComponent(ForumDiscussionThreadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

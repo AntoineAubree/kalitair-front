@@ -1,8 +1,6 @@
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
 import { Message } from 'src/app/model/message';
 import { MessagesService } from 'src/app/web-service/messages.service';
 

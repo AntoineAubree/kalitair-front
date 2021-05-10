@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { SectionService } from '../../../../web-service/section.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-delete-section',
@@ -18,7 +16,6 @@ export class DeleteSectionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 
   dismiss() {
     this.modale.dismiss()

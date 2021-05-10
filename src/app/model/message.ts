@@ -9,5 +9,6 @@ export interface Message{
   userPseudo : string;
   discussionThreadId : number;
   edit : boolean;
+  discussionThreaaTitle : string;
 
 }

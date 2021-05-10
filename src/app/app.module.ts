@@ -35,7 +35,8 @@ import { AdminModule } from './admin/admin.module';
     NgbModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

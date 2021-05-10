@@ -1,9 +1,5 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MessagesService } from 'src/app/web-service/messages.service';
-import { Message } from 'src/app/model/message'
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-message',

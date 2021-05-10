@@ -23,7 +23,7 @@ export class MessagesService {
   }
 
   delete(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+    return this.http.delete(this.baseUrl + id);
   }
 
   update(message: Message) {

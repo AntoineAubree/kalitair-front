@@ -1,14 +1,14 @@
-import { UserObservableService } from 'src/app/observable/userObservable';
 import { User } from './../../model/user';
-import { ToastrService } from 'ngx-toastr';
+import { ForumObject } from './../../model/forumObject';
+import { Section } from '../../model/section';
+import { SectionService } from '../../web-service/section.service';
+import { DeleteSectionComponent } from './delete-section/delete-section.component';
+import { EditSectionComponent } from './edit-section/edit-section.component';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { DiscussionThreadService } from '../../web-service/discussionThread.service';
-import { DiscussionThread } from '../../model/discussionThread';
-import { DeleteDiscussionThreadComponent } from './discussionThread-modale/delete-discussion-thread/delete-discussion-thread.component';
-import { EditDiscussionThreadComponent } from './discussionThread-modale/edit-discussion-thread/edit-discussion-thread.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import * as _ from 'underscore';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-forum-section',
@@ -17,105 +17,72 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ForumSectionComponent implements OnInit {
 
-  discussionThreads: DiscussionThread[] = [];
-  pagination: any;
-  pages: number[] = [];
-  user = {} as User;
-  sectionId: number = 0;
+  forumUrl = 'section';
 
   constructor(
-    private discussionThreadService: DiscussionThreadService,
+    private sectionService: SectionService,
     private modalService: NgbModal,
-    private route: ActivatedRoute,
-    private router: Router,
     private toastr: ToastrService,
-    private userObservable: UserObservableService
-
-  ) {
-    this.sectionId = parseInt(this.route.snapshot.paramMap.get('id') || '');
-  }
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-    this.userObservable.getUserConnectSubject().subscribe(
-      (user) => {
-        this.user = user;
-      }
-    )
-    this.pagination = {
-      currentPage: 1,
-      itemsPerPage: 5,
-      totalPages: 0,
-      totalelement: 0
-    };
-    this.populateDiscussionThread();
   }
 
-  getMessage(idDiscussionThread : number) {
-    this.router.navigate(['/forum/discussionthread/', idDiscussionThread])
-  }
-
-  populateDiscussionThread() {
-    this.discussionThreadService.get(this.sectionId, this.pagination.currentPage - 1, this.pagination.itemsPerPage).subscribe(
+  populateSection(forumObject: ForumObject<Section>): void {
+    this.sectionService.get(forumObject.pagination.currentPage - 1, forumObject.pagination.itemsPerPage).subscribe(
       (response: any) => {
-        this.pagination.totalElements = response.totalElements;
-        this.pagination.totalPages = response.totalPages;
-        this.pages = _.range(1, this.pagination.totalPages + 1);
-        this.discussionThreads = response.content;
+        forumObject.pagination.totalElements = response.totalElements;
+        forumObject.pagination.totalPages = response.totalPages;
+        forumObject.pages = _.range(1, forumObject.pagination.totalPages + 1);
+        forumObject.items = response.content;
       }
     );
   }
 
-  paginate(page: number) {
-    this.pagination.currentPage = page;
-    this.populateDiscussionThread();
+  getDiscussionThread(idSection: number): void {
+    this.router.navigate(['/forum/section/', idSection]);
   }
 
-  createDiscussionThread() {
-    let modale = this.modalService.open(EditDiscussionThreadComponent);
-    let discussionThread = {} as DiscussionThread;
-    discussionThread.userId = this.user.id;
-    discussionThread.sectionId = this.sectionId;
-    modale.componentInstance.discussionThread = discussionThread;
+  createSection(forumObject: ForumObject<Section>, user: User) {
+    let modale = this.modalService.open(EditSectionComponent)
+    let section = {} as Section;
+    section.userId = user.id;
+    modale.componentInstance.section = section;
     modale.result.then(
       close => {
-        this.toastr.success('this Discussion Thread has been correctly created')
-        this.populateDiscussionThread();
-      }
-      , dismiss => {
+        this.toastr.success('New Section created');
+        this.populateSection(forumObject);
+      }, dismiss => {
       }
     )
   }
 
-  editDiscussionThread(discussionThread: DiscussionThread) {
-    let modale = this.modalService.open(EditDiscussionThreadComponent)
-    modale.componentInstance.discussionThread = discussionThread
+  editSection(forumObject: ForumObject<Section>, section: Section) {
+    let modale = this.modalService.open(EditSectionComponent)
+    modale.componentInstance.section = section;
     modale.result.then(
       close => {
-        this.toastr.success('this Discussion Thread has been correctly updated')
-        this.populateDiscussionThread();
-      }
-      , dismiss => {
+        this.toastr.success('this section has been correctly editing');
+        this.populateSection(forumObject);
+      }, dismiss => {
       }
     )
   }
 
-  deleteDiscussionThread(discussionThread: DiscussionThread) {
-    let modale = this.modalService.open(DeleteDiscussionThreadComponent);
-    modale.componentInstance.title = discussionThread.title;
+  deleteSection(forumObject: ForumObject<Section>, section: Section) {
+    let modale = this.modalService.open(DeleteSectionComponent);
+    modale.componentInstance.title = section.title;
     modale.result.then(
       close => {
-        this.discussionThreadService.delete(discussionThread.id).subscribe(
+        this.sectionService.delete(section.id).subscribe(
           res => {
-            this.toastr.success('This Discussion Thread has been correctly deleted ');
-            this.populateDiscussionThread();
+            this.toastr.success('This section has been correctly deleted ');
+            this.populateSection(forumObject);
           })
-      }
-      , dismiss => {
+      }, dismiss => {
       }
     )
   }
-
-
-
 
 }
